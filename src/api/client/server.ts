@@ -3,6 +3,8 @@ import {GenericResponse} from "@/api/base/types";
 import {Server, ServerStats} from "@/api/common/types/server";
 import {ServerDatabase} from "@/api/client/server_database";
 import {ServerFiles} from "@/api/client/server_files";
+import {ServerSchedules} from "@/api/client/server_schedules";
+import {ServerAllocations} from "@/api/client/server_allocations";
 
 
 export class ServerClient {
@@ -11,6 +13,8 @@ export class ServerClient {
 
     databases: ServerDatabase
     files: ServerFiles
+    schedules: ServerSchedules
+    allocations: ServerAllocations
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester
@@ -18,6 +22,8 @@ export class ServerClient {
 
         this.databases = new ServerDatabase(requester, id)
         this.files = new ServerFiles(requester, id)
+        this.schedules = new ServerSchedules(requester, id)
+        this.allocations = new ServerAllocations(requester, id)
     }
 
     info = async (include?: ("egg" | "subusers")[]): Promise<Server> => {

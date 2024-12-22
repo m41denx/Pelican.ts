@@ -34,7 +34,7 @@ What's done:
     - [X] Databases
     - [X] File Manager
     - [X] Schedules
-    - [ ] Network
+    - [X] Network
     - [ ] Users
     - [ ] Backups
     - [ ] Startup

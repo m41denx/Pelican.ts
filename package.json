@@ -1,0 +1,22 @@
+{
+  "name": "pterodactyl.ts",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/pterodactyl.js",
+  "types": "dist/pterodactyl.d.ts",
+  "scripts": {
+    "build": "tsc . && tsc-alias"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "tsc-alias": "^1.8.10",
+    "tsx": "^4.19.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "zod": "^3.24.1"
+  }
+}

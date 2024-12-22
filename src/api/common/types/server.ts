@@ -1,6 +1,6 @@
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {EggVariable} from "@/api/common/types/egg";
-import {ServerSubuser} from "@/api/common/types/user";
+import {ServerSubuser} from "@/api/common/types/server_subuser";
 
 export type Server = {
     server_owner: string,

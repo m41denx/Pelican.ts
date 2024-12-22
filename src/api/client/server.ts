@@ -5,6 +5,7 @@ import {ServerDatabase} from "@/api/client/server_database";
 import {ServerFiles} from "@/api/client/server_files";
 import {ServerSchedules} from "@/api/client/server_schedules";
 import {ServerAllocations} from "@/api/client/server_allocations";
+import {ServerUsers} from "@/api/client/server_users";
 
 
 export class ServerClient {
@@ -15,6 +16,7 @@ export class ServerClient {
     files: ServerFiles
     schedules: ServerSchedules
     allocations: ServerAllocations
+    users: ServerUsers
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester
@@ -24,6 +26,7 @@ export class ServerClient {
         this.files = new ServerFiles(requester, id)
         this.schedules = new ServerSchedules(requester, id)
         this.allocations = new ServerAllocations(requester, id)
+        this.users = new ServerUsers(requester, id)
     }
 
     info = async (include?: ("egg" | "subusers")[]): Promise<Server> => {

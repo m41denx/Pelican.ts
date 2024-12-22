@@ -35,7 +35,7 @@ What's done:
     - [X] File Manager
     - [X] Schedules
     - [X] Network
-    - [ ] Users
+    - [X] Users
     - [ ] Backups
     - [ ] Startup
     - [ ] Settings

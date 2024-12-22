@@ -5,5 +5,5 @@ export type ServerSubuser = {
     image: string,
     "2fa_enabled": boolean,
     created_at: string,
-    permissions: string[],
+    permissions: string[]
 }

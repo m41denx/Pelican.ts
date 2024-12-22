@@ -33,7 +33,7 @@ What's done:
   - [ ] Server
     - [X] Databases
     - [X] File Manager
-    - [ ] Schedules
+    - [X] Schedules
     - [ ] Network
     - [ ] Users
     - [ ] Backups

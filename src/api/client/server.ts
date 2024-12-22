@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {GenericResponse} from "@/api/base/types";
-import {Server, ServerStats} from "@/api/common/types_server";
+import {Server, ServerStats} from "@/api/common/types/server";
 import {ServerDatabase} from "@/api/client/server_database";
 import {ServerFiles} from "@/api/client/server_files";
 

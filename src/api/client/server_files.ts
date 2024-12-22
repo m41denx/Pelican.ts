@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 import {string} from "zod";
-import {FileObject} from "@/api/common/types_file";
+import {FileObject} from "@/api/common/types/server_files";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 
 

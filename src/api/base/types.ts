@@ -1,6 +1,6 @@
 export type GenericResponse<T, N = string, M = undefined> = {
     object: N,
-    attributes: T
+    attributes: T,
     meta?: M
 }
 
@@ -34,7 +34,7 @@ export class PterodactylException extends Error {
 export type PterodactylError = {
     code: string,
     status?: number,
-    detail: string
+    detail: string,
     source?: {
         [key: string]: string
     }

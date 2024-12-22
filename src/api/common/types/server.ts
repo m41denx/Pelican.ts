@@ -1,9 +1,9 @@
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {EggVariable} from "@/api/common/types_egg";
-import {ServerSubuser} from "@/api/common/types_user";
+import {EggVariable} from "@/api/common/types/egg";
+import {ServerSubuser} from "@/api/common/types/user";
 
 export type Server = {
-    server_owner: string
+    server_owner: string,
     identifier: string,
     internal_id?: number,
     uuid: string,
@@ -14,7 +14,7 @@ export type Server = {
     egg_id: number,
     sftp_details: {
         ip: string,
-        port: number,
+        port: number
     },
     description: string,
     limits: ServerLimits,
@@ -53,7 +53,6 @@ type FeatureLimits = {
     backups: number
 }
 
-
 export type Allocation = {
     id?: number,
     ip: string,
@@ -63,14 +62,12 @@ export type Allocation = {
     is_default: boolean
 }
 
-
 export type ServerStats = {
     current_state: "installing" | "install_failed" | "reinstall_failed" | "suspended"
         | "restoring_backup" | "running" | "stopped",
     is_suspended: boolean,
     resources: ServerResources
 }
-
 
 type ServerResources = {
     memory_bytes: number,
@@ -82,17 +79,3 @@ type ServerResources = {
 }
 
 
-type ServerDatabase = {
-    id: string,
-    host: {
-        address: string,
-        port: number
-    },
-    name: string,
-    username: string,
-    connections_from: string,
-    max_connections: number
-    relationships?: {
-        password: GenericResponse<{ password: string }, "database_password">
-    }
-}

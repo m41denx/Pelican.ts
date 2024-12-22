@@ -2,7 +2,7 @@ import {Account} from "@/api/client/account";
 import {AxiosInstance} from "axios";
 import {Permission} from "@/api/client/types";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Server} from "@/api/common/types_server";
+import {Server} from "@/api/common/types/server";
 import z from "zod";
 import {ServerClient} from "@/api/client/server";
 

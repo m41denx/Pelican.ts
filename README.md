@@ -9,7 +9,13 @@
 
 ## Installation
 > [!WARNING]
-> **This library is still in development and is not ready for production use**
+> **I ran into a goofy ahh situation when publishing this package because "pterodactyl.ts" was taken by another one.
+> Namely, [pterodactyl.ts by BothimTV](https://github.com/BothimTV/pterodactyl.ts).**
+> 
+> It's 1000x better, production-ready, supports commands over websocket, has almost full test coverage and an active maintainer.
+> So please use it instead and don't forget to give it a star. 
+> 
+> As for this repo, I'll continue to update it sometimes to get more experience with TypeScript.
 
 ## Usage
 ```ts

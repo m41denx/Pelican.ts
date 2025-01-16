@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {Allocation} from "@/api/common/types/server";
+import {Allocation} from "@/api/client/types/server";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 
 export class ServerAllocations {

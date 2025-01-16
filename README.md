@@ -35,20 +35,10 @@ main()
 
 What's done:
 - [X] Client
-  - [X] Account
-  - [X] Server
-    - [X] Databases
-    - [X] File Manager
-    - [X] Schedules
-    - [X] Network
-    - [X] Users
-    - [X] Backups
-    - [X] Startup
-    - [X] Settings
 - [ ] Application
-  - [ ] Users
-  - [ ] Nodes
-    - [ ] Allocations
+  - [X] Users
+  - [X] Nodes
+    - [X] Allocations
   - [ ] Locations
   - [ ] Servers
     - [ ] Databases

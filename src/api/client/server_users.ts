@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {ServerSubuser, SubuserPermission} from "@/api/common/types/server_subuser";
+import {ServerSubuser, SubuserPermission} from "@/api/client/types/server_subuser";
 
 
 export class ServerUsers {

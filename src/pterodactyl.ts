@@ -7,3 +7,10 @@ export class PterodactylClient extends Client{
         super(ax.requester)
     }
 }
+
+export class PterodactylApplication extends Client{
+    constructor(url: string, token: string) {
+        const ax = new Agent(url, token, "applications")
+        super(ax.requester)
+    }
+}

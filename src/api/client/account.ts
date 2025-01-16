@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {APIKey, User} from "@/api/client/types";
+import {APIKey, User} from "@/api/client/types/user";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import z from "zod";
 

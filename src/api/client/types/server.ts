@@ -1,6 +1,8 @@
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {EggVariable} from "@/api/common/types/egg";
-import {ServerSubuser} from "@/api/common/types/server_subuser";
+import {ServerSubuser} from "@/api/client/types/server_subuser";
+import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits";
+import {Allocation} from "@/api/common/types/server_allocations";
 
 export type Server = {
     server_owner: string,
@@ -37,30 +39,6 @@ export type Server = {
     }
 }
 
-type ServerLimits = {
-    memory: number,
-    swap: number,
-    disk: number,
-    io: number,
-    cpu: number,
-    threads: number | null,
-    oom_disabled: boolean
-}
-
-type FeatureLimits = {
-    databases: number,
-    allocations: number,
-    backups: number
-}
-
-export type Allocation = {
-    id?: number,
-    ip: string,
-    ip_alias: string,
-    port: number,
-    notes: string | null,
-    is_default: boolean
-}
 
 export type ServerStats = {
     current_state: "installing" | "install_failed" | "reinstall_failed" | "suspended"

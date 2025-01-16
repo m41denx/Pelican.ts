@@ -5,7 +5,7 @@ import z from "zod";
 
 
 export class Account {
-    r: AxiosInstance
+    private readonly r: AxiosInstance
 
     constructor(requester: AxiosInstance) {
         this.r = requester

@@ -19,6 +19,12 @@ export type GenericListResponse<T> = {
     meta?: { pagination: PaginationMeta }
 }
 
+export type CustomListResponse<T, M> = {
+    object: "list",
+    data: T[],
+    meta?: M
+}
+
 
 export class PterodactylException extends Error {
     data: PterodactylError[]

@@ -10,7 +10,7 @@ import {ServerClient} from "@/api/client/server";
 export class Client {
     account: Account
 
-    private r: AxiosInstance
+    private readonly r: AxiosInstance
 
     constructor(requester: AxiosInstance) {
         this.r = requester

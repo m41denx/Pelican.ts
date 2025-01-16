@@ -5,8 +5,8 @@ import {GenericListResponse, GenericResponse} from "@/api/base/types";
 
 
 export class ServerFiles {
-    r: AxiosInstance
-    id: string
+    private readonly r: AxiosInstance
+    private readonly id: string
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester

@@ -4,8 +4,8 @@ import {ServerSubuser, SubuserPermission} from "@/api/common/types/server_subuse
 
 
 export class ServerUsers {
-    r: AxiosInstance
-    id: string
+    private readonly r: AxiosInstance
+    private readonly id: string
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester

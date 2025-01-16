@@ -4,9 +4,9 @@ import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {Database} from "@/api/common/types/server_database";
 
 
-export class ServerDatabase {
-    r: AxiosInstance
-    id: string
+export class ServerDatabases {
+    private readonly r: AxiosInstance
+    private readonly id: string
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester

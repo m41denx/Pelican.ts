@@ -1,12 +1,10 @@
 import {AxiosInstance} from "axios";
-import {ServerDatabase} from "@/api/client/server_database";
-import {ServerFiles} from "@/api/client/server_files";
 import {Schedule, ScheduleTask} from "@/api/common/types/server_schedule";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 
 export class ServerSchedules {
-    private r: AxiosInstance
-    private id: string
+    private readonly r: AxiosInstance
+    private readonly id: string
 
     constructor(requester: AxiosInstance, id: string) {
         this.r = requester

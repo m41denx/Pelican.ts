@@ -5,7 +5,7 @@ import {PterodactylError, PterodactylException} from "@/api/base/types";
 export class Agent {
     private readonly base_url: string
     private readonly token: string
-    requester: AxiosInstance
+    readonly requester: AxiosInstance
 
     constructor(url: string, token: string, type: "client" | "applications") {
         this.base_url = z.string().url("Invalid URL Schema").parse(url)

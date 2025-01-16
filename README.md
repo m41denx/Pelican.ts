@@ -25,7 +25,7 @@ const client = new PterodactylClient("https://pterodactyl.io", "token")
 const main = async () => {
     const servers = await client.listServers()
     const serverID = servers[0].identifier // babcaed0 for example
-    const db = await client.server(serverID).databases.list(["password"]) // including password
+    const db = await client.server(serverID).databases.list(["password"])[0] // including password
     console.log(`Well isn't this the mighty ${db.name} from ${db.host.address}!`)
     await client.server(serverID).databases.rotatePassword(db.id)
 }
@@ -34,17 +34,17 @@ main()
 ```
 
 What's done:
-- [ ] Client
+- [X] Client
   - [X] Account
-  - [ ] Server
+  - [X] Server
     - [X] Databases
     - [X] File Manager
     - [X] Schedules
     - [X] Network
     - [X] Users
-    - [ ] Backups
-    - [ ] Startup
-    - [ ] Settings
+    - [X] Backups
+    - [X] Startup
+    - [X] Settings
 - [ ] Application
   - [ ] Users
   - [ ] Nodes

@@ -16,7 +16,7 @@ export class ServerStartup {
         const {data} = await this.r.get<
             CustomListResponse<GenericResponse<StartupParams, "egg_variable">, StartupMeta>
         >(
-            `/client/servers/${this.id}/startup`
+            `/servers/${this.id}/startup`
         )
 
         return {
@@ -30,7 +30,7 @@ export class ServerStartup {
         const {data} = await this.r.put<
             GenericResponse<StartupParams, "egg_variable">
         >(
-            `/client/servers/${this.id}/startup/variable`,
+            `/servers/${this.id}/startup/variable`,
             {key, value}
         )
         return data.attributes

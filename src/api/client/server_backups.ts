@@ -17,7 +17,7 @@ export class ServerBackups {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Backup, "backup">>
-        >(`/client/servers/${this.id}/backups`, {
+        >(`/servers/${this.id}/backups`, {
             params: {page}
         })
 
@@ -27,21 +27,21 @@ export class ServerBackups {
     create = async (): Promise<Backup> => {
         const {data} = await this.r.post<
             GenericResponse<Backup, "backup">
-        >(`/client/servers/${this.id}/backups`)
+        >(`/servers/${this.id}/backups`)
         return data.attributes
     }
 
     info = async (backup_uuid: string): Promise<Backup> => {
         const {data} = await this.r.get<
             GenericResponse<Backup, "backup">
-        >(`/client/servers/${this.id}/backups/${backup_uuid}`)
+        >(`/servers/${this.id}/backups/${backup_uuid}`)
         return data.attributes
     }
 
     downloadGetUrl = async (backup_uuid: string): Promise<string> => {
         const {data} = await this.r.get<
             GenericResponse<{ url: string }, "signed_url">
-        >(`/client/servers/${this.id}/backups/${backup_uuid}/download`)
+        >(`/servers/${this.id}/backups/${backup_uuid}/download`)
         return data.attributes.url
     }
 
@@ -52,7 +52,7 @@ export class ServerBackups {
     }
 
     delete = async (backup_uuid: string): Promise<void> => {
-        await this.r.delete(`/client/servers/${this.id}/backups/${backup_uuid}`)
+        await this.r.delete(`/servers/${this.id}/backups/${backup_uuid}`)
     }
 
 }

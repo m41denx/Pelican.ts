@@ -20,7 +20,7 @@ export class Users {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<User, "user">>
-        >("/application/users", {
+        >("/users", {
             params: {
                 include: opts.include?.join(","),
                 page,
@@ -41,7 +41,7 @@ export class Users {
         z.number().positive().parse(id)
         const {data} = await this.r.get<
             GenericResponse<User, "user">
-        >(`/application/users/${id}`, {
+        >(`/users/${id}`, {
             params: {include: include?.join(",")}
         })
         return data.attributes
@@ -53,14 +53,14 @@ export class Users {
         ): Promise<User> => {
         const {data} = await this.r.get<
             GenericResponse<User, "user">
-        >(`/application/users/external/${external_id}`)
+        >(`/users/external/${external_id}`)
         return data.attributes
     }
 
     create = async (user: CreateType): Promise<User> => {
         const {data} = await this.r.post<
             GenericResponse<User, "user">
-        >("/application/users", user)
+        >("/users", user)
         return data.attributes
     }
 
@@ -68,13 +68,13 @@ export class Users {
         z.number().positive().parse(id)
         const {data} = await this.r.put<
             GenericResponse<User, "user">
-        >(`/application/users/${id}`, user)
+        >(`/users/${id}`, user)
         return data.attributes
     }
 
     delete = async (id: number): Promise<void> => {
         z.number().positive().parse(id)
-        await this.r.delete(`/application/users/${id}`)
+        await this.r.delete(`/users/${id}`)
     }
 
 }

@@ -11,10 +11,10 @@ export class ServerSettings {
     }
 
     rename = async (name: string): Promise<void> => {
-        await this.r.post(`/client/servers/${this.id}/settings/rename`, {name})
+        await this.r.post(`/servers/${this.id}/settings/rename`, {name})
     }
 
     reinstall = async (): Promise<void> => {
-        await this.r.post(`/client/servers/${this.id}/settings/reinstall`)
+        await this.r.post(`/servers/${this.id}/settings/reinstall`)
     }
 }

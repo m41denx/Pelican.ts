@@ -16,7 +16,7 @@ export class NodesAllocations {
     list = async (include?: ("node" | "server")[]): Promise<AllocationRel[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<AllocationRel, "allocation">>
-        >(`/application/nodes/${this.id}/allocations`, {
+        >(`/nodes/${this.id}/allocations`, {
             params: {include: include?.join(",")}
         })
 
@@ -32,7 +32,7 @@ export class NodesAllocations {
         z.string().ip().or(z.string().url()).optional().parse(alias)
         z.array(z.number()).or(z.string().regex(/\d+-\d+/)).parse(ports)
 
-        await this.r.post(`/application/nodes/${this.id}/allocations`, {
+        await this.r.post(`/nodes/${this.id}/allocations`, {
             ip,
             ports,
             alias
@@ -40,6 +40,6 @@ export class NodesAllocations {
     }
 
     delete = async (alloc_id: number): Promise<void> => {
-        await this.r.delete(`/application/nodes/${this.id}/allocations/${alloc_id}`)
+        await this.r.delete(`/nodes/${this.id}/allocations/${alloc_id}`)
     }
 }

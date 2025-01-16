@@ -20,7 +20,7 @@ export class Client {
     listPermissions = async (): Promise<Permission[]> => {
         const {data} = await this.r.get<
             GenericResponse<{ permissions: Permission[] }, "system_permissions">
-        >("/client/permissions")
+        >("/permissions")
 
         return data.attributes.permissions
     }
@@ -32,7 +32,7 @@ export class Client {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Server, "server">>
-        >("/client/servers", {
+        >("/servers", {
             params: {include: include?.join(","), page}
         })
         return data.data.map(s => s.attributes)

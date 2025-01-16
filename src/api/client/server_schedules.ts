@@ -14,14 +14,14 @@ export class ServerSchedules {
     list = async (): Promise<Schedule[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Schedule, "server_schedule">>
-        >(`/client/servers/${this.id}/schedules`)
+        >(`/servers/${this.id}/schedules`)
         return data.data.map(d => d.attributes)
     }
 
     create = async (params: ScheduleCreateParams): Promise<Schedule> => {
         const {data} = await this.r.post<
             GenericResponse<Schedule, "server_schedule">
-        >(`/client/servers/${this.id}/schedules`, params)
+        >(`/servers/${this.id}/schedules`, params)
         return data.attributes
     }
 
@@ -51,19 +51,19 @@ class ScheduleControl {
     info = async (): Promise<Schedule> => {
         const {data} = await this.r.get<
             GenericResponse<Schedule, "server_schedule">
-        >(`/client/servers/${this.id}/schedules/${this.sched_id}`)
+        >(`/servers/${this.id}/schedules/${this.sched_id}`)
         return data.attributes
     }
 
     update = async (params: ScheduleCreateParams): Promise<Schedule> => {
         const {data} = await this.r.post<
             GenericResponse<Schedule, "server_schedule">
-        >(`/client/servers/${this.id}/schedules/${this.sched_id}`, params)
+        >(`/servers/${this.id}/schedules/${this.sched_id}`, params)
         return data.attributes
     }
 
     delete = async (): Promise<void> => {
-        await this.r.delete(`/client/servers/${this.id}/schedules/${this.sched_id}`)
+        await this.r.delete(`/servers/${this.id}/schedules/${this.sched_id}`)
     }
 
     tasks = {
@@ -72,7 +72,7 @@ class ScheduleControl {
         ): Promise<ScheduleTask> => {
             const {data} = await this.r.post<
                 GenericResponse<ScheduleTask, "server_schedule_task">
-            >(`/client/servers/${this.id}/schedules/${this.sched_id}/tasks`, {
+            >(`/servers/${this.id}/schedules/${this.sched_id}/tasks`, {
                 action,
                 payload,
                 time_offset
@@ -85,7 +85,7 @@ class ScheduleControl {
         ): Promise<ScheduleTask> => {
             const {data} = await this.r.post<
                 GenericResponse<ScheduleTask, "server_schedule_task">
-            >(`/client/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`, {
+            >(`/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`, {
                 action,
                 payload,
                 time_offset
@@ -94,7 +94,7 @@ class ScheduleControl {
         },
 
         delete: async (task_id: number): Promise<void> => {
-            await this.r.delete(`/client/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`)
+            await this.r.delete(`/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`)
         }
     }
 }

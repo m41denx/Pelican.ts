@@ -20,7 +20,7 @@ export class Nodes {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Node, "node">>
-        >("/application/nodes", {
+        >("/nodes", {
             params: {include: include?.join(","), page}
         })
         return data.data.map(s => s.attributes)
@@ -32,7 +32,7 @@ export class Nodes {
         ): Promise<Node> => {
         z.number().positive().parse(id)
         const {data} = await this.r.get<GenericResponse<Node, "node">>(
-            `/application/nodes/${id}`,
+            `/nodes/${id}`,
             {params: {include: include?.join(",")}}
         )
         return data.attributes
@@ -40,7 +40,7 @@ export class Nodes {
 
     show_configuration = async (id: number): Promise<any> => {
         z.number().positive().parse(id)
-        const {data} = await this.r.get(`/application/nodes/${id}/configuration`)
+        const {data} = await this.r.get(`/nodes/${id}/configuration`)
         return data
     }
 
@@ -48,7 +48,7 @@ export class Nodes {
         const {data} = await this.r.post<
             GenericResponse<NodeUpdated, "node">
         >(
-            "/application/nodes",
+            "/nodes",
             node
         )
         return data.attributes
@@ -59,7 +59,7 @@ export class Nodes {
         const {data} = await this.r.put<
             GenericResponse<NodeUpdated, "node">
         >(
-            `/application/nodes/${id}`,
+            `/nodes/${id}`,
             node
         )
         return data.attributes
@@ -67,7 +67,7 @@ export class Nodes {
 
     delete = async (id: number): Promise<void> => {
         z.number().positive().parse(id)
-        await this.r.delete(`/application/nodes/${id}`)
+        await this.r.delete(`/nodes/${id}`)
     }
 
     allocations = (server_id: number): NodesAllocations => (

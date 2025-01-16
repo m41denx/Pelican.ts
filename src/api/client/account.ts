@@ -12,17 +12,17 @@ export class Account {
     }
 
     info = async (): Promise<User> => {
-        const {data} = await this.r.get<GenericResponse<User, "user">>("/client/account")
+        const {data} = await this.r.get<GenericResponse<User, "user">>("/account")
         return data.attributes
     }
 
     updateEmail = async (newEmail: string, password: string): Promise<void> => {
         newEmail = z.string().email().parse(newEmail)
-        await this.r.put("/client/account/email", {email: newEmail, password})
+        await this.r.put("/account/email", {email: newEmail, password})
     }
 
     updatePassword = async (password: string, newPassword: string): Promise<void> => {
-        await this.r.put("/client/account/password", {
+        await this.r.put("/account/password", {
             current_password: password,
             password: newPassword,
             password_confirmation: newPassword
@@ -35,7 +35,7 @@ export class Account {
         list: async (): Promise<APIKey[]> => {
             const {data} = await this.r.get<
                 GenericListResponse<GenericResponse<APIKey, "api_key">>
-            >("/client/account/api-keys")
+            >("/account/api-keys")
             return data.data.map(k => k.attributes)
         },
 
@@ -43,12 +43,12 @@ export class Account {
             allowed_ips = z.array(z.string().ip()).optional().parse(allowed_ips)
             const {data} = await this.r.post<
                 GenericResponse<APIKey, "api_key", { secret_token: string }>
-            >("/client/account/api-keys", {description, allowed_ips})
+            >("/account/api-keys", {description, allowed_ips})
             return {...data.attributes, secret_token: data.meta!.secret_token}
         },
 
         delete: async (identifier: string): Promise<void> => {
-            await this.r.delete(`/client/account/api-keys/${identifier}`)
+            await this.r.delete(`/account/api-keys/${identifier}`)
         }
     }
 
@@ -56,19 +56,19 @@ export class Account {
         info: async (): Promise<{ image_url_data: string }> => {
             const {data} = await this.r.get<
                 Awaited<ReturnType<typeof this.twoFactor.info>>
-            >("/client/account/two-factor")
+            >("/account/two-factor")
             return data
         },
 
         enable: async (code: string): Promise<{ tokens: string[] }> => {
             const {data} = await this.r.post<
                 Awaited<ReturnType<typeof this.twoFactor.enable>>
-            >("/client/account/two-factor", {code})
+            >("/account/two-factor", {code})
             return data
         },
 
         disable: async (password: string): Promise<void> => {
-            await this.r.delete("/client/account/two-factor", {data: {password}})
+            await this.r.delete("/account/two-factor", {data: {password}})
         }
     }
 }

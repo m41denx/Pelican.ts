@@ -41,7 +41,7 @@ export class ServerClient {
     }
 
     info = async (include?: ("egg" | "subusers")[]): Promise<Server> => {
-        const {data} = await this.r.get<GenericResponse<Server, "server">>(`/client/servers/${this.id}`, {
+        const {data} = await this.r.get<GenericResponse<Server, "server">>(`/servers/${this.id}`, {
             params: {include: include?.join(",")}
         })
         return data.attributes
@@ -53,15 +53,15 @@ export class ServerClient {
     }
 
     resources = async (): Promise<ServerStats> => {
-        const {data} = await this.r.get<GenericResponse<ServerStats, "stats">>(`/client/servers/${this.id}/resources`)
+        const {data} = await this.r.get<GenericResponse<ServerStats, "stats">>(`/servers/${this.id}/resources`)
         return data.attributes
     }
 
     command = async (command: string): Promise<void> => {
-        await this.r.post(`/client/servers/${this.id}/command`, {command})
+        await this.r.post(`/servers/${this.id}/command`, {command})
     }
 
     power = async (signal: "start" | "stop" | "restart" | "kill"): Promise<void> => {
-        await this.r.post(`/client/servers/${this.id}/power`, {signal})
+        await this.r.post(`/servers/${this.id}/power`, {signal})
     }
 }

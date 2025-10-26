@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {APIKey, User} from "@/api/client/types/user";
+import {APIKey, SSHKey, User} from "@/api/client/types/user";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import z from "zod";
 
@@ -17,19 +17,17 @@ export class Account {
     }
 
     updateEmail = async (newEmail: string, password: string): Promise<void> => {
-        newEmail = z.string().email().parse(newEmail)
+        newEmail = z.email().parse(newEmail)
         await this.r.put("/account/email", {email: newEmail, password})
     }
 
-    updatePassword = async (password: string, newPassword: string): Promise<void> => {
+    updatePassword = async (newPassword: string): Promise<void> => {
+        newPassword = z.string().min(8).parse(newPassword)
         await this.r.put("/account/password", {
-            current_password: password,
             password: newPassword,
             password_confirmation: newPassword
         })
     }
-
-    // Yes, I am mentally insane
 
     apiKeys = {
         list: async (): Promise<APIKey[]> => {
@@ -40,7 +38,7 @@ export class Account {
         },
 
         create: async (description: string, allowed_ips?: string[]): Promise<APIKey & { secret_token: string }> => {
-            allowed_ips = z.array(z.string().ip()).optional().parse(allowed_ips)
+            allowed_ips = z.array(z.ipv4()).optional().parse(allowed_ips)
             const {data} = await this.r.post<
                 GenericResponse<APIKey, "api_key", { secret_token: string }>
             >("/account/api-keys", {description, allowed_ips})
@@ -49,6 +47,26 @@ export class Account {
 
         delete: async (identifier: string): Promise<void> => {
             await this.r.delete(`/account/api-keys/${identifier}`)
+        }
+    }
+
+    sshKeys = {
+        list: async (): Promise<SSHKey[]> => {
+            const {data} = await this.r.get<
+                GenericListResponse<GenericResponse<SSHKey, "ssh_key">>
+            >("/account/ssh-keys")
+            return data.data.map(k => k.attributes)
+        },
+
+        create: async (name: string, public_key: string): Promise<SSHKey> => {
+            const {data} = await this.r.post<
+                GenericResponse<SSHKey, "ssh_key">
+            >("/account/ssh-keys", {name, public_key})
+            return data.attributes
+        },
+
+        delete: async (fingerprint: string): Promise<void> => {
+            await this.r.post(`/account/ssh-keys/remove`, {fingerprint})
         }
     }
 

@@ -1,4 +1,4 @@
-export type GenericResponse<T, N = string, M = undefined> = {
+export type GenericResponse<T, N extends string = string, M = undefined> = {
     object: N,
     attributes: T,
     meta?: M

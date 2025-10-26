@@ -1,4 +1,4 @@
-
+import {Nullable} from "@/utils/types";
 
 
 export type ServerLimits = {
@@ -7,8 +7,9 @@ export type ServerLimits = {
     disk: number,
     io: number,
     cpu: number,
-    threads: number | null,
-    oom_disabled: boolean
+    threads: Nullable<number|string>,
+    oom_disabled: boolean,
+    oom_killer: boolean
 }
 
 export type FeatureLimits = {

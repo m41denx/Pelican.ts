@@ -17,28 +17,30 @@ export class Client {
         this.account = new Account(requester)
     }
 
-    listPermissions = async (): Promise<Permission[]> => {
+    listPermissions = async (): Promise<Record<string, Permission>> => {
         const {data} = await this.r.get<
-            GenericResponse<{ permissions: Permission[] }, "system_permissions">
+            GenericResponse<{ permissions: Record<string, Permission> }, "system_permissions">
         >("/permissions")
 
         return data.attributes.permissions
     }
 
     listServers = async (
+        type: "accessible" | "mine" | "admin" | "admin-all" = "accessible",
+        page: number = 1,
+        per_page: number = 50,
         include?: ("egg" | "subusers")[],
-        page: number = 1
     ): Promise<Server[]> => {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Server, "server">>
         >("/servers", {
-            params: {include: include?.join(","), page}
+            params: {type, page, include: include?.join(",")}
         })
         return data.data.map(s => s.attributes)
     }
 
-    server = (id: string): ServerClient => new ServerClient(this.r, id)
+    server = (uuid: string): ServerClient => new ServerClient(this.r, uuid)
 
 }
 

@@ -17,7 +17,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "paths": {
-      "@/*": ["./src/*", "./dist/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],

@@ -6,3 +6,4 @@ export type ExactlyOneKey<K extends keyof any, V, KK extends keyof any = K> =
     }[K];
 
 export type Maybe<T> = T | null | undefined
+export type Nullable<T> = T | null

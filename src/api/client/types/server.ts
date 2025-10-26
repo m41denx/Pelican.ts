@@ -3,19 +3,19 @@ import {EggVariable} from "@/api/common/types/egg";
 import {ServerSubuser} from "@/api/client/types/server_subuser";
 import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits";
 import {Allocation} from "@/api/common/types/server_allocations";
+import {Nullable} from "@/utils/types";
 
 export type Server = {
-    server_owner: string,
+    server_owner: boolean,
     identifier: string,
     internal_id?: number,
     uuid: string,
     name: string,
     node: string,
-    is_node_under_maintance: boolean,
-    nest_id: number,
-    egg_id: number,
+    is_node_under_maintenance: boolean,
     sftp_details: {
         ip: string,
+        alias: Nullable<string>,
         port: number
     },
     description: string,
@@ -24,7 +24,7 @@ export type Server = {
     docker_image: string,
     egg_features: string[] | null,
     feature_limits: FeatureLimits,
-    status: unknown,
+    status: Nullable<unknown>,
     is_suspended: boolean,
     is_installing: boolean,
     is_transferring: boolean,
@@ -42,7 +42,7 @@ export type Server = {
 
 export type ServerStats = {
     current_state: "installing" | "install_failed" | "reinstall_failed" | "suspended"
-        | "restoring_backup" | "running" | "stopped",
+        | "restoring_backup" | "running" | "stopped" | "offline",
     is_suspended: boolean,
     resources: ServerResources
 }

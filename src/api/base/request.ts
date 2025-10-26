@@ -8,8 +8,8 @@ export class Agent {
     readonly requester: AxiosInstance
 
     constructor(url: string, token: string, type: "client" | "applications") {
-        this.base_url = z.string().url("Invalid URL Schema").parse(url)
-        this.token = z.string().regex(/^ptl[ac]_.+$/, "Invalid token type, expected 'ptla_... or ptlc_...'").parse(token)
+        this.base_url = z.url("Invalid URL Schema").parse(url)
+        this.token = z.string().regex(/^(ptl[ac]|pacc|papp)_.+$/, "Invalid token type").parse(token)
 
         this.requester = axios.create({
             baseURL: this.base_url.replace(/\/+$/, "")+`/api/${type}`,

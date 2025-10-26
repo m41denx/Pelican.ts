@@ -1,24 +1,35 @@
+import {Nullable} from "@/utils/types";
+
 export type User = {
-    id: number,
-    admin: boolean,
+    uuid: string,
     username: string,
     email: string,
-    first_name: string,
-    last_name: string,
     language: string
+    image: string,
+    admin: boolean,
+    root_admin: boolean,
+    "2fa_enabled": number,
+    created_at: string,
+    updated_at: string
+
 }
 
 export type APIKey = {
     identifier: string,
     description: string,
     allowed_ips: string[],
-    last_used_at: string,
+    last_used_at: Nullable<string>,
+    created_at: string
+}
+
+export type SSHKey = {
+    name: string,
+    fingerprint: string,
+    pubic_key: string,
     created_at: string
 }
 
 export type Permission = {
     description: string,
-    keys: {
-        [key: string]: string
-    }
+    keys: Record<string, string>
 }

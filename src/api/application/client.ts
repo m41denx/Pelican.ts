@@ -3,19 +3,22 @@ import {Users} from "@/api/application/users";
 import {Nodes} from "@/api/application/nodes";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {Server} from "@/api/application/types/server";
-import {CreateServerShema, Servers} from "@/api/application/servers";
+import {CreateServerSchema, Servers} from "@/api/application/servers";
 import z from "zod";
+import {DatabaseHosts} from "@/api/application/database_hosts";
 
 export class Client {
     private readonly r: AxiosInstance
     users: Users
     nodes: Nodes
+    databaseHosts: DatabaseHosts
 
     constructor(requester: AxiosInstance) {
         this.r = requester
 
         this.users = new Users(requester)
         this.nodes = new Nodes(requester)
+        this.databaseHosts = new DatabaseHosts(requester)
     }
 
     listServers = async (
@@ -30,8 +33,8 @@ export class Client {
         return data.data.map(s => s.attributes)
     }
 
-    createServer = async (opts: z.infer<typeof CreateServerShema>): Promise<Server> => {
-        opts = CreateServerShema.parse(opts)
+    createServer = async (opts: z.infer<typeof CreateServerSchema>): Promise<Server> => {
+        opts = CreateServerSchema.parse(opts)
         const {data} = await this.r.post<GenericResponse<Server, "server">>("/servers", opts)
         return data.attributes
     }

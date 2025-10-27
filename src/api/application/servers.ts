@@ -72,7 +72,7 @@ export class Servers {
 }
 
 
-export const CreateServerShema = z.object({
+export const CreateServerSchema = z.object({
     external_id: z.string().min(1).max(255).optional(),
     name: z.string().min(1).max(255),
     description: z.string().optional(),
@@ -108,14 +108,14 @@ export const CreateServerShema = z.object({
     }).optional()
 })
 
-const UpdateDetailsSchema = CreateServerShema.pick({
+const UpdateDetailsSchema = CreateServerSchema.pick({
     external_id: true,
     name: true,
     user: true,
     description: true
 })
 
-const UpdateBuildSchema = CreateServerShema.pick({
+const UpdateBuildSchema = CreateServerSchema.pick({
     oom_killer: true,
     limits: true,
     feature_limits: true,
@@ -125,7 +125,7 @@ const UpdateBuildSchema = CreateServerShema.pick({
     remove_allocations: z.array(z.string()).optional(),
 })
 
-const UpdateStartupSchema = CreateServerShema.pick({
+const UpdateStartupSchema = CreateServerSchema.pick({
     startup: true,
     environment: true,
     egg: true,

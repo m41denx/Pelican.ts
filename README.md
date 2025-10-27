@@ -5,10 +5,13 @@
 # Pelican.ts Typescript Client for Pelican panel
 
 ## Installation
+```shell
+npm install @pelican.ts/sdk
+```
 
 ## Usage
 ```ts
-import { PelicanClient } from "pelican.ts"
+import { PelicanClient } from "@pelican.ts/sdk"
 const client = new PelicanClient("https://pterodactyl.io", "token")
 
 const main = async () => {

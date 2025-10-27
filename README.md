@@ -12,7 +12,7 @@ npm install @pelican.ts/sdk
 ## Usage
 ```ts
 import { PelicanClient } from "@pelican.ts/sdk"
-const client = new PelicanClient("https://pterodactyl.io", "token")
+const client = new PelicanClient("https://demo.pelican.dev", "token")
 
 const main = async () => {
     const servers = await client.listServers()

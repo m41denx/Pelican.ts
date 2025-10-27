@@ -1,13 +1,13 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . && tsc-alias",
-    "publish": "npm publish --access=public"
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --target esnext",
+    "pub": "npm publish --access=public"
   },
   "keywords": ["pterodactyl", "pterodactyl.ts", "pterodactyl.js", "pelican", "pelican.ts", "pelican.js"],
   "author": "M41den",

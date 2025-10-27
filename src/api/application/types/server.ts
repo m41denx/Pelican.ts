@@ -3,7 +3,7 @@ import {Container} from "@/api/application/types/container";
 import {Nullable} from "@/utils/types";
 
 
-export type Server = {
+export type ApplicationServer = {
     id: number,
     external_id: Nullable<string>,
     uuid: string,

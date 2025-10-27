@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Allocation} from "@/api/client/types/server_allocation";
+import {ServerAllocation} from "@/api/client/types/server_allocation";
 
 export class ServerAllocations {
     private readonly r: AxiosInstance
@@ -11,30 +11,30 @@ export class ServerAllocations {
         this.id = id
     }
 
-    list = async (): Promise<Allocation[]> => {
+    list = async (): Promise<ServerAllocation[]> => {
         const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<Allocation, "allocation">>
+            GenericListResponse<GenericResponse<ServerAllocation, "allocation">>
         >(`/servers/${this.id}/network/allocations`)
         return data.data.map(r => r.attributes)
     }
 
-    autoAssign = async (): Promise<Allocation> => {
+    autoAssign = async (): Promise<ServerAllocation> => {
         const {data} = await this.r.post<
-            GenericResponse<Allocation, "allocation">
+            GenericResponse<ServerAllocation, "allocation">
         >(`/servers/${this.id}/network/allocations`)
         return data.attributes
     }
 
-    setNotes = async (alloc_id: number, notes: string): Promise<Allocation> => {
+    setNotes = async (alloc_id: number, notes: string): Promise<ServerAllocation> => {
         const {data} = await this.r.post<
-            GenericResponse<Allocation, "allocation">
+            GenericResponse<ServerAllocation, "allocation">
         >(`/servers/${this.id}/network/allocations/${alloc_id}`, {notes})
         return data.attributes
     }
 
-    setPrimary = async (alloc_id: number): Promise<Allocation> => {
+    setPrimary = async (alloc_id: number): Promise<ServerAllocation> => {
         const {data} = await this.r.post<
-            GenericResponse<Allocation, "allocation">
+            GenericResponse<ServerAllocation, "allocation">
         >(`/servers/${this.id}/network/allocations/${alloc_id}/primary`)
         return data.attributes
     }

@@ -1,7 +1,7 @@
 import {Nullable} from "@/utils/types";
 
 
-export type Backup = {
+export type ServerBackup = {
     uuid: string
     is_successful: boolean,
     is_locked: boolean,

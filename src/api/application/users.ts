@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import z from "zod";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {User} from "@/api/application/types/user";
+import {ApplicationUser} from "@/api/application/types/user";
 import {ArrayQueryParams, SortParam} from "@/utils/transform";
 import {ExactlyOneKey} from "@/utils/types";
 import {languagesSchema, timezonesSchema} from "@/api/common/types/enums";
@@ -17,10 +17,10 @@ export class Users {
     list = async (
         opts: ListType,
         page: number = 1
-    ): Promise<User[]> => {
+    ): Promise<ApplicationUser[]> => {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<User, "user">>
+            GenericListResponse<GenericResponse<ApplicationUser, "user">>
         >("/users", {
             params: {
                 include: opts.include?.join(","),
@@ -38,10 +38,10 @@ export class Users {
     info = async (
         id: number,
         {include}: { include?: ("servers")[] }
-    ): Promise<User> => {
+    ): Promise<ApplicationUser> => {
         z.number().positive().parse(id)
         const {data} = await this.r.get<
-            GenericResponse<User, "user">
+            GenericResponse<ApplicationUser, "user">
         >(`/users/${id}`, {
             params: {include: include?.join(",")}
         })
@@ -51,27 +51,27 @@ export class Users {
     infoByExternal = async (
         external_id: string,
         {include}: { include?: ("servers")[] }
-    ): Promise<User> => {
+    ): Promise<ApplicationUser> => {
         const {data} = await this.r.get<
-            GenericResponse<User, "user">
+            GenericResponse<ApplicationUser, "user">
         >(`/users/external/${external_id}`, {
             params: {include: include?.join(",")}
         })
         return data.attributes
     }
 
-    create = async (user: z.infer<typeof CreateSchema>): Promise<User> => {
+    create = async (user: z.infer<typeof CreateSchema>): Promise<ApplicationUser> => {
         user = CreateSchema.parse(user)
         const {data} = await this.r.post<
-            GenericResponse<User, "user">
+            GenericResponse<ApplicationUser, "user">
         >("/users", user)
         return data.attributes
     }
 
-    update = async (id: number, user: z.infer<typeof CreateSchema>): Promise<User> => {
+    update = async (id: number, user: z.infer<typeof CreateSchema>): Promise<ApplicationUser> => {
         user = CreateSchema.parse(user)
         const {data} = await this.r.patch<
-            GenericResponse<User, "user">
+            GenericResponse<ApplicationUser, "user">
         >(`/users/${id}`, user)
         return data.attributes
     }

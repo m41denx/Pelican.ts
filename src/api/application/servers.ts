@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import z from "zod";
 import {GenericResponse} from "@/api/base/types";
-import {Server} from "@/api/application/types/server";
+import {ApplicationServer} from "@/api/application/types/server";
 import {ServersDatabases} from "@/api/application/servers_databases";
 
 export class Servers {
@@ -16,8 +16,8 @@ export class Servers {
         this.databases = new ServersDatabases(this.r, this.id)
     }
 
-    info = async (include?: ("egg" | "subusers")[]): Promise<Server> => {
-        const {data} = await this.r.get<GenericResponse<Server, "server">>(`/servers/${this.id}`, {
+    info = async (include?: ("egg" | "subusers")[]): Promise<ApplicationServer> => {
+        const {data} = await this.r.get<GenericResponse<ApplicationServer, "server">>(`/servers/${this.id}`, {
             params: {include: include?.join(",")}
         })
         return data.attributes

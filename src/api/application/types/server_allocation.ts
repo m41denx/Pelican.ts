@@ -1,5 +1,5 @@
 import {GenericResponse} from "@/api/base/types";
-import {Server} from "@/api/application/types/server";
+import {ApplicationServer} from "@/api/application/types/server";
 import {Node} from "@/api/application/types/node";
 import {Nullable} from "@/utils/types";
 
@@ -16,6 +16,6 @@ export type Allocation = {
 export type AllocationRel = Allocation & {
     relationships?: {
         node?: GenericResponse<Node, "node">,
-        server?: GenericResponse<Server, "server">
+        server?: GenericResponse<ApplicationServer, "server">
     }
 }

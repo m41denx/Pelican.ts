@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {NodesAllocations} from "@/api/application/nodes_allocations";
-import {Server} from "@/api/application/types/server";
+import {ApplicationServer} from "@/api/application/types/server";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import z from "zod";
 import {Node, NodeConfiguration} from "@/api/application/types/node";

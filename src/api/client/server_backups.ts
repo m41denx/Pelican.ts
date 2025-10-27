@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from "axios";
-import {Backup} from "@/api/common/types/server_backup";
+import {ServerBackup} from "@/api/common/types/server_backup";
 import z, {string} from "zod";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 
@@ -13,10 +13,10 @@ export class ServerBackups {
         this.id = id
     }
 
-    list = async (page: number = 1): Promise<Backup[]> => {
+    list = async (page: number = 1): Promise<ServerBackup[]> => {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<Backup, "backup">>
+            GenericListResponse<GenericResponse<ServerBackup, "backup">>
         >(`/servers/${this.id}/backups`, {
             params: {page}
         })
@@ -28,10 +28,10 @@ export class ServerBackups {
         name?: string,
         is_locked: boolean,
         ignored_files: string[],
-    }): Promise<Backup> => {
+    }): Promise<ServerBackup> => {
         args.name = z.string().max(255).optional().parse(args.name)
         const {data} = await this.r.post<
-            GenericResponse<Backup, "backup">
+            GenericResponse<ServerBackup, "backup">
         >(`/servers/${this.id}/backups`, {
             name: args.name,
             is_locked: args.is_locked,
@@ -40,9 +40,9 @@ export class ServerBackups {
         return data.attributes
     }
 
-    info = async (backup_uuid: string): Promise<Backup> => {
+    info = async (backup_uuid: string): Promise<ServerBackup> => {
         const {data} = await this.r.get<
-            GenericResponse<Backup, "backup">
+            GenericResponse<ServerBackup, "backup">
         >(`/servers/${this.id}/backups/${backup_uuid}`)
         return data.attributes
     }

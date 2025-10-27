@@ -1,8 +1,8 @@
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Server} from "@/api/application/types/server";
+import {ApplicationServer} from "@/api/application/types/server";
 import {Nullable} from "@/utils/types";
 
-export type User = {
+export type ApplicationUser = {
     id: number,
     external_id: Nullable<string>,
     uuid: string,
@@ -15,6 +15,6 @@ export type User = {
     created_at: string,
     updated_at: Nullable<string>,
     relationships?: {
-        servers: GenericListResponse<GenericResponse<Server>>
+        servers: GenericListResponse<GenericResponse<ApplicationServer>>
     }
 }

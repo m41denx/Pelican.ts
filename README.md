@@ -45,8 +45,11 @@ What's done:
 ## Copyright Notice
 [Pterodactyl®](https://github.com/pterodactyl) is a registered trademark of Dane Everitt and contributors.
 
-Pterodactyl.ts is Open Source under the [GNU v3.0 License](LICENSE) and is the copyright
-of its contributors stated below. Pelican.ts is not endorsed by or affiliated with Pterodactyl® team.
+[Pelican®](https://github.com/pelican-dev) is a registered trademark of Pelican contributors.
+
+Pelican.ts is Open Source under the [MIT License](LICENSE) and is the copyright
+of its contributors stated below. Pelican.ts is not endorsed by or affiliated with Pterodactyl® nor Pelican® team.
+
 
 ## Contributors
 [M41den](https://github.com/m41denx) © 2024-2025

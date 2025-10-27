@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {Allocation, AllocationRel} from "@/api/common/types/server_allocations";
+import {Allocation, AllocationRel} from "@/api/application/types/server_allocation";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import z from "zod";
 
@@ -25,17 +25,15 @@ export class NodesAllocations {
 
     create = async (
         ip: string,
-        ports: number[] | string,
+        ports: string[],
         alias?: string
     ): Promise<void> => {
         z.ipv4().parse(ip)
-        z.ipv4().or(z.url()).optional().parse(alias)
+        z.ipv4().or(z.url().max(255)).optional().parse(alias)
         z.array(z.number()).or(z.string().regex(/\d+-\d+/)).parse(ports)
 
         await this.r.post(`/nodes/${this.id}/allocations`, {
-            ip,
-            ports,
-            alias
+            ip, ports, alias
         })
     }
 

@@ -1,15 +1,16 @@
 import {GenericResponse} from "@/api/base/types";
 import {Server} from "@/api/application/types/server";
+import {Node} from "@/api/application/types/node";
 import {Nullable} from "@/utils/types";
 
 
 export type Allocation = {
     id: number,
     ip: string,
-    ip_alias: Nullable<string>,
+    alias: Nullable<string>,
     port: number,
     notes: Nullable<string>,
-    is_default: boolean
+    assigned: boolean
 }
 
 export type AllocationRel = Allocation & {

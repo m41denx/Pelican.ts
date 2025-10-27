@@ -30,7 +30,6 @@ What's done:
 - [ ] Application
   - [X] Users
   - [X] Nodes
-    - [X] Allocations
   - [ ] Locations
   - [ ] Servers
     - [ ] Databases

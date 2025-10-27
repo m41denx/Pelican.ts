@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Allocation} from "@/api/common/types/server_allocations";
+import {Allocation} from "@/api/client/types/server_allocation";
 
 export class ServerAllocations {
     private readonly r: AxiosInstance

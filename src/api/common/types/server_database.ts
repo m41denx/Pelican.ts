@@ -1,6 +1,6 @@
 import {GenericResponse} from "@/api/base/types";
 
-export type Database = {
+export type ServerDatabase = {
     id: string,
     host: {
         address: string,

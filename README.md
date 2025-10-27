@@ -31,8 +31,11 @@ What's done:
   - [X] Users
   - [X] Nodes
   - [X] Servers
-    - [ ] Databases
+    - [X] Databases (TODO: Check if server database type is valid)
+  - [ ] Database Hosts
   - [ ] Roles
+  - [ ] Eggs
+  - [ ] Mounts
 - [ ] TSDoc
 - [ ] Examples
 - [ ] Tests

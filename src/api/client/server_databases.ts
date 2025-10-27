@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import z from "zod";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Database} from "@/api/common/types/server_database";
+import {ServerDatabase} from "@/api/common/types/server_database";
 // TODO: Check for validity
 
 export class ServerDatabases {
@@ -15,26 +15,26 @@ export class ServerDatabases {
 
     list = async (
         include?: ("password")[], page: number = 1
-    ): Promise<Database[]> => {
+    ): Promise<ServerDatabase[]> => {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<Database, "server_database">>
+            GenericListResponse<GenericResponse<ServerDatabase, "server_database">>
         >(`/servers/${this.id}/databases`, {
             params: {include: include?.join(","), page}
         })
         return data.data.map(d => d.attributes)
     }
 
-    create = async (database: string, remote: string): Promise<Database> => {
+    create = async (database: string, remote: string): Promise<ServerDatabase> => {
         const {data} = await this.r.post<
-            GenericResponse<Database, "server_database">
+            GenericResponse<ServerDatabase, "server_database">
         >(`/servers/${this.id}/databases`, {database, remote})
         return data.attributes
     }
 
-    rotatePassword = async (database_id: string): Promise<Database> => {
+    rotatePassword = async (database_id: string): Promise<ServerDatabase> => {
         const {data} = await this.r.post<
-            GenericResponse<Database, "server_database">
+            GenericResponse<ServerDatabase, "server_database">
         >(`/servers/${this.id}/databases/${database_id}/rotate-password`)
         return data.attributes
     }

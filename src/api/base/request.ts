@@ -7,12 +7,12 @@ export class Agent {
     private readonly token: string
     readonly requester: AxiosInstance
 
-    constructor(url: string, token: string, type: "client" | "application") {
-        this.base_url = z.url("Invalid URL Schema").parse(url)
+    constructor(url: string, token: string, type: "client" | "application", suffix: string = "/api") {
+        this.base_url = z.url("Invalid URL Schema").transform(url => new URL(url).href).parse(url)
         this.token = z.string().regex(/^(ptl[ac]|pacc|papp)_.+$/, "Invalid token type").parse(token)
 
         this.requester = axios.create({
-            baseURL: this.base_url.replace(/\/+$/, "")+`/api/${type}`,
+            baseURL: this.base_url.replace(/\/+$/, "")+`${suffix}/${type}`,
             timeout: 3000,
             headers: {
                 Authorization: `Bearer ${this.token}`

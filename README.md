@@ -32,8 +32,8 @@ What's done:
   - [X] Nodes
   - [X] Servers
     - [X] Databases (TODO: Check if server database type is valid)
-  - [ ] Database Hosts
-  - [ ] Roles
+  - [X] Database Hosts (TODO: find out why create API returns 500 No Route)
+  - [X] Roles
   - [ ] Eggs
   - [ ] Mounts
 - [ ] TSDoc

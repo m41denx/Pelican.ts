@@ -6,12 +6,14 @@ import {Server} from "@/api/application/types/server";
 import {CreateServerSchema, Servers} from "@/api/application/servers";
 import z from "zod";
 import {DatabaseHosts} from "@/api/application/database_hosts";
+import {Roles} from "@/api/application/roles";
 
 export class Client {
     private readonly r: AxiosInstance
     users: Users
     nodes: Nodes
     databaseHosts: DatabaseHosts
+    roles: Roles
 
     constructor(requester: AxiosInstance) {
         this.r = requester
@@ -19,6 +21,7 @@ export class Client {
         this.users = new Users(requester)
         this.nodes = new Nodes(requester)
         this.databaseHosts = new DatabaseHosts(requester)
+        this.roles = new Roles(requester)
     }
 
     listServers = async (

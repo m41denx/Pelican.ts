@@ -9,12 +9,15 @@ import {ServerUsers} from "@/api/client/server_users";
 import {ServerBackups} from "@/api/client/server_backups";
 import {ServerStartup} from "@/api/client/server_startup";
 import {ServerSettings} from "@/api/client/server_settings";
+import {ServerWebsocket} from "@/api/client/server_websocket";
+import {ServerActivity} from "@/api/client/server_activity";
 
 
 export class ServerClient {
     private readonly r: AxiosInstance
     private readonly id: string
 
+    activity: ServerActivity
     databases: ServerDatabases
     files: ServerFiles
     schedules: ServerSchedules
@@ -29,6 +32,7 @@ export class ServerClient {
         this.r = requester
         this.id = id
 
+        this.activity = new ServerActivity(requester, id)
         this.databases = new ServerDatabases(requester, id)
         this.files = new ServerFiles(requester, id)
         this.schedules = new ServerSchedules(requester, id)
@@ -47,9 +51,8 @@ export class ServerClient {
         return data.attributes
     }
 
-    // TODO: Implement Websocket wrapper. DO NOT USE
-    websocket = async (): Promise<void> => {
-        throw new Error("Not implemented")
+    websocket = (stripColors: boolean = false): ServerWebsocket => {
+        return new ServerWebsocket(this.r, this.id, stripColors)
     }
 
     resources = async (): Promise<ServerStats> => {

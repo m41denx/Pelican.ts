@@ -67,7 +67,7 @@ export class ServerWebsocket {
     private stripColors: boolean
     private detachMessageListener?: () => void
 
-    constructor(requester: AxiosInstance, id: string, {stripColors}: {stripColors: boolean} = {stripColors: false}) {
+    constructor(requester: AxiosInstance, id: string, stripColors: boolean = false) {
         this.r = requester
         this.serverId = id
         this.stripColors = stripColors

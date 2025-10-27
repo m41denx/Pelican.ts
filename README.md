@@ -2,7 +2,7 @@
     <img src=".github/logo.png" width="420" />
 </h1>
 
-# Pelican.ts Typescript Client for Pelican (and Pterodactyl)
+# Pelican.ts Typescript Client for Pelican panel
 
 ## Installation
 

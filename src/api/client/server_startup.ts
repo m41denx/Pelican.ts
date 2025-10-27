@@ -15,9 +15,7 @@ export class ServerStartup {
     list = async (): Promise<CustomListResponse<StartupParams, StartupMeta>> => {
         const {data} = await this.r.get<
             CustomListResponse<GenericResponse<StartupParams, "egg_variable">, StartupMeta>
-        >(
-            `/servers/${this.id}/startup`
-        )
+        >(`/servers/${this.id}/startup`)
 
         return {
             object: "list",
@@ -29,10 +27,7 @@ export class ServerStartup {
     set = async (key: string, value: string): Promise<StartupParams> => {
         const {data} = await this.r.put<
             GenericResponse<StartupParams, "egg_variable">
-        >(
-            `/servers/${this.id}/startup/variable`,
-            {key, value}
-        )
+        >(`/servers/${this.id}/startup/variable`, {key, value})
         return data.attributes
     }
 }

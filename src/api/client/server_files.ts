@@ -67,8 +67,10 @@ export class ServerFiles {
     compress = async (
         root: string = "/",
         files: string[],
+        archive_name?: string,
+        extension?: "zip" | "tgz" | "tar.gz" | "txz" | "tar.xz" | "tbz2" | "tar.bz2"
     ): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/files/compress`, {root, files})
+        await this.r.post(`/servers/${this.id}/files/compress`, {root, files, archive_name, extension})
     }
 
     decompress = async (
@@ -90,6 +92,23 @@ export class ServerFiles {
         name: string,
     ): Promise<void> => {
         await this.r.post(`/servers/${this.id}/files/create-folder`, {root, name})
+    }
+
+    chmod = async (
+        root: string = "/",
+        files: Array<{ file: string, mode: number }>
+    ): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/files/chmod`, {root, files})
+    }
+
+    pullFromRemote = async (
+        url: string,
+        directory?: string,
+        filename?: string, // Unused
+        use_header: boolean = false, // Unused
+        foreground: boolean = false // Unused
+    ): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/files/pull`, {url, directory, filename, use_header, foreground})
     }
 
     uploadGetUrl = async (): Promise<string> => {

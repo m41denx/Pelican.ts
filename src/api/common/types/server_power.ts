@@ -1,0 +1,1 @@
+export type ServerSignalOption = 'start' | 'stop' | 'restart' | 'kill';

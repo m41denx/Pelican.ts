@@ -24,10 +24,19 @@ export class ServerBackups {
         return data.data.map(d=>d.attributes)
     }
 
-    create = async (): Promise<Backup> => {
+    create = async (args: {
+        name?: string,
+        is_locked: boolean,
+        ignored_files: string[],
+    }): Promise<Backup> => {
+        args.name = z.string().max(255).optional().parse(args.name)
         const {data} = await this.r.post<
             GenericResponse<Backup, "backup">
-        >(`/servers/${this.id}/backups`)
+        >(`/servers/${this.id}/backups`, {
+            name: args.name,
+            is_locked: args.is_locked,
+            ignored_files: args.ignored_files.join("\n")
+        })
         return data.attributes
     }
 

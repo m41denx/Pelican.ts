@@ -1,4 +1,6 @@
 import {AxiosInstance} from "axios";
+import z from "zod";
+import {Nullable} from "@/utils/types";
 
 
 export class ServerSettings {
@@ -11,10 +13,19 @@ export class ServerSettings {
     }
 
     rename = async (name: string): Promise<void> => {
+        name = z.string().max(255).parse(name)
         await this.r.post(`/servers/${this.id}/settings/rename`, {name})
+    }
+
+    updateDescription = async (description: Nullable<string>): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/settings/description`, {description})
     }
 
     reinstall = async (): Promise<void> => {
         await this.r.post(`/servers/${this.id}/settings/reinstall`)
+    }
+
+    changeDockerImage = async (image: string): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/settings/docker-image`, {image})
     }
 }

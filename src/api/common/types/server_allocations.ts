@@ -4,7 +4,7 @@ import {Nullable} from "@/utils/types";
 
 
 export type Allocation = {
-    id?: number,
+    id: number,
     ip: string,
     ip_alias: Nullable<string>,
     port: number,

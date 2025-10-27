@@ -5,5 +5,9 @@ export type ExactlyOneKey<K extends keyof any, V, KK extends keyof any = K> =
         { [Q in keyof O]: O[Q] } : never
     }[K];
 
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
+
 export type Maybe<T> = T | null | undefined
 export type Nullable<T> = T | null

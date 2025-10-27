@@ -55,5 +55,15 @@ type ServerResources = {
     network_rx_bytes: number,
     uptime: number
 }
+export type ServerActivityLog = {
+    id: string,
+    event: string,
+    is_api: boolean,
+    ip: string,
+    description: Nullable<string>,
+    properties: Record<string, string>,
+    has_additional_metadata: boolean,
+    timestamp: string
+}
 
 

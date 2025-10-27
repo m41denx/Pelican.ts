@@ -12,8 +12,6 @@ export enum SERVER_SIGNAL {
     'KILL' = 'kill',
 }
 
-export type ServerSignalOption = 'start' | 'stop' | 'restart' | 'kill';
-
 export type WebsocketEvent =
     | AuthSuccessWsEvent
     | StatusWsEvent

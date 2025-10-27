@@ -1,11 +1,14 @@
+import {Nullable} from "@/utils/types";
 
 
 export type Backup = {
     uuid: string
+    is_successful: boolean,
+    is_locked: boolean,
     name: string
     ignored_files: string[]
-    sha256_hash: string | null
+    checksum: Nullable<string>
     bytes: number
     created_at: string
-    completed_at: string | null
+    completed_at: Nullable<string>
 }

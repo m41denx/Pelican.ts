@@ -2,7 +2,7 @@ import {AxiosInstance} from "axios";
 import z from "zod";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {Database} from "@/api/common/types/server_database";
-
+// TODO: Check for validity
 
 export class ServerDatabases {
     private readonly r: AxiosInstance

@@ -4,6 +4,7 @@ import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {User} from "@/api/application/types/user";
 import {ArrayQueryParams, SortParam} from "@/utils/transform";
 import {ExactlyOneKey} from "@/utils/types";
+import {languagesSchema, timezonesSchema} from "@/api/common/types/enums";
 
 
 export class Users {
@@ -14,7 +15,7 @@ export class Users {
     }
 
     list = async (
-        {...opts}: ListType,
+        opts: ListType,
         page: number = 1
     ): Promise<User[]> => {
         z.number().positive().parse(page)
@@ -50,23 +51,26 @@ export class Users {
     infoByExternal = async (
         external_id: string,
         {include}: { include?: ("servers")[] }
-        ): Promise<User> => {
+    ): Promise<User> => {
         const {data} = await this.r.get<
             GenericResponse<User, "user">
-        >(`/users/external/${external_id}`)
+        >(`/users/external/${external_id}`, {
+            params: {include: include?.join(",")}
+        })
         return data.attributes
     }
 
-    create = async (user: CreateType): Promise<User> => {
+    create = async (user: z.infer<typeof CreateSchema>): Promise<User> => {
+        user = CreateSchema.parse(user)
         const {data} = await this.r.post<
             GenericResponse<User, "user">
         >("/users", user)
         return data.attributes
     }
 
-    update = async (id: number, user: UpdateType): Promise<User> => {
-        z.number().positive().parse(id)
-        const {data} = await this.r.put<
+    update = async (id: number, user: z.infer<typeof CreateSchema>): Promise<User> => {
+        user = CreateSchema.parse(user)
+        const {data} = await this.r.patch<
             GenericResponse<User, "user">
         >(`/users/${id}`, user)
         return data.attributes
@@ -77,6 +81,15 @@ export class Users {
         await this.r.delete(`/users/${id}`)
     }
 
+    addRoles = async (id: number, roles: number[]): Promise<void> => {
+        z.number().positive().parse(id)
+        await this.r.patch(`/users/${id}/roles/assign`, {roles})
+    }
+
+    removeRoles = async (id: number, roles: number[]): Promise<void> => {
+        z.number().positive().parse(id)
+        await this.r.patch(`/users/${id}/roles/remove`, {roles})
+    }
 }
 
 type ListType = {
@@ -90,14 +103,11 @@ type ListFilters = {
 
 type ListSort = ExactlyOneKey<"id" | "uuid", "asc" | "desc">
 
-type CreateType = {
-    email: string,
-    username: string,
-    first_name: string,
-    last_name: string
-}
-
-type UpdateType = CreateType & {
-    language: string
-    password: string
-}
+const CreateSchema = z.object({
+    email: z.email(),
+    external_id: z.string().max(255).optional(),
+    username: z.string().min(1).max(255),
+    password: z.string().optional(),
+    language: languagesSchema,
+    timezone: timezonesSchema
+})

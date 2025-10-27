@@ -1,17 +1,22 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
     "./types": {
       "types": "./dist/types.d.ts"
     }
   },
   "scripts": {
-    "build:code": "tsup src/index.ts --format esm,cjs --dts --sourcemap --target esnext",
+    "build:code": "tsup src/index.ts --format esm,cjs --dts --target esnext",
     "build:types": "tsup src/types.ts --dts-only --target esnext",
     "build": "npm run build:code && npm run build:types",
     "pub": "npm publish --access=public",

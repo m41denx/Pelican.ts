@@ -27,15 +27,15 @@ main()
 
 What's done:
 - [X] Client
-- [ ] Application
+- [X] Application
   - [X] Users
   - [X] Nodes
   - [X] Servers
     - [X] Databases (TODO: Check if server database type is valid)
   - [X] Database Hosts (TODO: find out why create API returns 500 No Route)
   - [X] Roles
-  - [ ] Eggs
-  - [ ] Mounts
+  - [X] Eggs
+  - [X] Mounts
 - [ ] TSDoc
 - [ ] Examples
 - [ ] Tests

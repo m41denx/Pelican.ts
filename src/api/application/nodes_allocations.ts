@@ -28,8 +28,8 @@ export class NodesAllocations {
         ports: number[] | string,
         alias?: string
     ): Promise<void> => {
-        z.string().ip().parse(ip)
-        z.string().ip().or(z.string().url()).optional().parse(alias)
+        z.ipv4().parse(ip)
+        z.ipv4().or(z.url()).optional().parse(alias)
         z.array(z.number()).or(z.string().regex(/\d+-\d+/)).parse(ports)
 
         await this.r.post(`/nodes/${this.id}/allocations`, {

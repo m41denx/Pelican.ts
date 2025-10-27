@@ -5,11 +5,11 @@ import stripColor from "strip-color"
 import {
     BackupCompletedJson,
     PowerState,
-    ServerSignalOption,
     SOCKET_EVENT,
     StatsWsJson,
     WebsocketEvent
 } from "@/api/client/types/websocket";
+import {ServerSignalOption} from "@/api/common/types/server_power";
 
 const isBrowser = typeof window !== "undefined"
 

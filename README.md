@@ -8,8 +8,8 @@
 
 ## Usage
 ```ts
-import { PterodactylClient } from "pelican.ts"
-const client = new PterodactylClient("https://pterodactyl.io", "token")
+import { PelicanClient } from "pelican.ts"
+const client = new PelicanClient("https://pterodactyl.io", "token")
 
 const main = async () => {
     const servers = await client.listServers()

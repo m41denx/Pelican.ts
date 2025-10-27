@@ -1,15 +1,20 @@
 {
-  "name": "pelican.ts",
-  "version": "0.1.0",
-  "description": "",
-  "main": "./dist/pelican.js",
-  "types": "./dist/pelican.d.ts",
+  "name": "@pelican.ts/sdk",
+  "version": "0.2.0",
+  "description": "Pelican panel SDK for TypeScript",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project . && tsc-alias"
+    "build": "tsc --project . && tsc-alias",
+    "publish": "npm publish --access=public"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["pterodactyl", "pterodactyl.ts", "pterodactyl.js", "pelican", "pelican.ts", "pelican.js"],
+  "author": "M41den",
+  "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/m41denx/Pelican.ts"
+  },
   "devDependencies": {
     "@types/node": "^22.18.12",
     "@types/strip-color": "^0.1.2",

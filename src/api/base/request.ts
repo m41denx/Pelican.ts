@@ -7,7 +7,7 @@ export class Agent {
     private readonly token: string
     readonly requester: AxiosInstance
 
-    constructor(url: string, token: string, type: "client" | "applications") {
+    constructor(url: string, token: string, type: "client" | "application") {
         this.base_url = z.url("Invalid URL Schema").parse(url)
         this.token = z.string().regex(/^(ptl[ac]|pacc|papp)_.+$/, "Invalid token type").parse(token)
 

@@ -2,7 +2,7 @@ import {GenericListResponse, GenericResponse} from "@/api/base/types";
 import {EggVariable} from "@/api/common/types/egg";
 import {ServerSubuser} from "@/api/client/types/server_subuser";
 import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits";
-import {Allocation} from "@/api/common/types/server_allocations";
+import {Allocation} from "@/api/client/types/server_allocation";
 import {Nullable} from "@/utils/types";
 
 export type Server = {

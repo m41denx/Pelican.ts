@@ -30,11 +30,9 @@ What's done:
 - [ ] Application
   - [X] Users
   - [X] Nodes
-  - [ ] Locations
-  - [ ] Servers
+  - [X] Servers
     - [ ] Databases
-  - [ ] Nests
-    - [ ] Eggs
+  - [ ] Roles
 - [ ] TSDoc
 - [ ] Examples
 - [ ] Tests

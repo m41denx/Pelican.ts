@@ -19,6 +19,7 @@
     "@types/node": "^22.18.12",
     "@types/strip-color": "^0.1.2",
     "tsc-alias": "^1.8.16",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {

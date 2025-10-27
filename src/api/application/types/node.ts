@@ -1,5 +1,5 @@
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Allocation} from "@/api/common/types/server_allocations";
+import {Allocation} from "@/api/application/types/server_allocation";
 import {Location} from "@/api/application/types/location";
 import {Server} from "@/api/application/types/server";
 import {Nullable} from "@/utils/types";

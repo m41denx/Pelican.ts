@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.3.3-canary.0",
+  "version": "0.3.3-next.0",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -18,8 +18,9 @@
   "scripts": {
     "build:code": "tsup src/index.ts --format esm,cjs --dts --target esnext",
     "build:types": "tsup src/types.ts --dts-only --target esnext",
-    "build": "npm run build:code && npm run build:types",
+    "build": "rm -rf ./dist && npm run build:code && npm run build:types",
     "pub": "npm publish --access=public",
+    "pub:next": "npm publish --access=public --tag=next",
     "generate-types": "bun run scripts/create-types.ts"
   },
   "keywords": [

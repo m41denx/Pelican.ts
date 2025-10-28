@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.3.2",
+  "version": "0.3.3-canary.0",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -22,7 +22,14 @@
     "pub": "npm publish --access=public",
     "generate-types": "bun run scripts/create-types.ts"
   },
-  "keywords": ["pterodactyl", "pterodactyl.ts", "pterodactyl.js", "pelican", "pelican.ts", "pelican.js"],
+  "keywords": [
+    "pterodactyl",
+    "pterodactyl.ts",
+    "pterodactyl.js",
+    "pelican",
+    "pelican.ts",
+    "pelican.js"
+  ],
   "author": "M41den",
   "license": "MIT",
   "repository": {

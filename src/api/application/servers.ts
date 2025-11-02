@@ -80,7 +80,7 @@ export const CreateServerSchema = z.object({
     egg: z.number(),
     docker_image: z.string().optional(),
     startup: z.string().optional(),
-    environment: z.array(z.string()),
+    environment: z.record(z.string(), z.string()),
     skip_scripts: z.boolean().optional(),
     oom_killer: z.boolean().optional(),
     start_on_completion: z.boolean().optional(),

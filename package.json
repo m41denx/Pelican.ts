@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.3.3-next.1",
+  "version": "0.3.3-next.2",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -21,7 +21,8 @@
     "build": "rm -rf ./dist && npm run build:code && npm run build:types",
     "pub": "npm publish --access=public",
     "pub:next": "npm publish --access=public --tag=next",
-    "generate-types": "bun run scripts/create-types.ts"
+    "generate-types": "bun run scripts/create-types.ts",
+    "pipeline": "bun run generate-types && bun run build && bun run pub:next"
   },
   "keywords": [
     "pterodactyl",

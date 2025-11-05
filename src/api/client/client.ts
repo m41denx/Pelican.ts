@@ -17,6 +17,10 @@ export class Client {
         this.account = new Account(requester)
     }
 
+    get $r(): AxiosInstance {
+        return this.r
+    }
+
     listPermissions = async (): Promise<Record<string, Permission>> => {
         const {data} = await this.r.get<
             GenericResponse<{ permissions: Record<string, Permission> }, "system_permissions">
@@ -34,7 +38,7 @@ export class Client {
         z.number().positive().parse(page)
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<Server, "server">>
-        >("/servers", {
+        >("/", {
             params: {type, page, include: include?.join(",")}
         })
         return data.data.map(s => s.attributes)

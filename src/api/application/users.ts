@@ -1,10 +1,11 @@
 import {AxiosInstance} from "axios";
 import z from "zod";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {ApplicationUser} from "@/api/application/types/user";
+import {ApplicationUser, ApplicationUserApiKey} from "@/api/application/types/user";
 import {ArrayQueryParams, SortParam} from "@/utils/transform";
 import {ExactlyOneKey} from "@/utils/types";
 import {languagesSchema, timezonesSchema} from "@/api/common/types/enums";
+import {APIKey} from "@/api/client/types";
 
 
 export class Users {
@@ -89,6 +90,27 @@ export class Users {
     removeRoles = async (id: number, roles: number[]): Promise<void> => {
         z.number().positive().parse(id)
         await this.r.patch(`/users/${id}/roles/remove`, {roles})
+    }
+
+    apiKeys = {
+        list: async (id: number): Promise<ApplicationUserApiKey[]> => {
+            const {data} = await this.r.get<
+                GenericListResponse<GenericResponse<ApplicationUserApiKey, "api_key">>
+            >(`/users/${id}/roles/api-keys`)
+            return data.data.map(k => k.attributes)
+        },
+
+        create: async (id: number, description: string, allowed_ips?: string[]): Promise<ApplicationUserApiKey & { secret_token: string }> => {
+            allowed_ips = z.array(z.ipv4()).optional().parse(allowed_ips)
+            const {data} = await this.r.post<
+                GenericResponse<ApplicationUserApiKey, "api_key", { secret_token: string }>
+            >(`/users/${id}/roles/api-keys`, {description, allowed_ips})
+            return {...data.attributes, secret_token: data.meta!.secret_token}
+        },
+
+        delete: async (id: number, identifier: string): Promise<void> => {
+            await this.r.delete(`/users/${id}/roles/api-keys/${identifier}`)
+        }
     }
 }
 

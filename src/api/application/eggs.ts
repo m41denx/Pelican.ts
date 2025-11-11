@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {Egg} from "@/api/application/types/egg";
+import {Egg, ExportedEgg} from "@/api/application/types/egg";
 
 // TODO: API is incomplete
 
@@ -26,6 +26,11 @@ export class Eggs {
             params: {format},
             transformResponse: r => r
         })
+        return data
+    }
+
+    infoExportable = async (id: number): Promise<ExportedEgg> => {
+        const {data} = await this.r.get<ExportedEgg>(`/eggs/${id}/export`, {params: {format: "json"}})
         return data
     }
 }

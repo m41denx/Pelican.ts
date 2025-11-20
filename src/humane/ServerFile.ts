@@ -71,13 +71,10 @@ export class ServerFile {
             | "tar.xz"
             | "tbz2"
             | "tar.bz2",
-    ) =>
-        this.client.files.compress(
-            this.dir,
-            [this.name],
-            archive_name,
-            extension,
-        )
+    ) => new ServerFile(
+        this.client,
+        await this.client.files.compress(this.dir, [this.name], archive_name, extension)
+    )
 
     decompress = async () => this.client.files.decompress(this.dir, this.name)
 

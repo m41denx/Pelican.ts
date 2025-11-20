@@ -4,10 +4,6 @@
 
 # Pelican.ts — Typescript client for Pelican panel
 
-> [!WARNING]  
-> This is a `next` version of Pelican.ts, it is based on [Pelican-contrib](https://github.com/m41denx/pelican-contrib) 
-> fork and is not compatible with upstream Pelican panel.
-
 ## Installation
 ```shell
 npm install @pelican.ts/sdk

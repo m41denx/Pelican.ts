@@ -64,4 +64,15 @@ export class ServerBackups {
         await this.r.delete(`/servers/${this.id}/backups/${backup_uuid}`)
     }
 
+    rename = async (backup_uuid: string, name: string): Promise<void> => {
+        await this.r.put(`/servers/${this.id}/backups/${backup_uuid}/rename`, {name})
+    }
+
+    toggleLock = async (backup_uuid: string): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/backups/${backup_uuid}/lock`)
+    }
+
+    restore = async (backup_uuid: string, truncate: boolean): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/backups/${backup_uuid}/restore`, {truncate})
+    }
 }

@@ -1,14 +1,15 @@
 import {Nullable} from "@/utils/types";
+import {EggVariable} from "@/api/common/types";
 
 export type Egg = {
     id: number,
     uuid: string,
-    name: number,
+    name: string,
     author: string,
     description: string,
     features: string[],
     tags: string[],
-    docker_image: string,
+    docker_image: Nullable<string>,
     docker_images: Record<string, string>,
     config: {
         files: Record<string, FileConfig>
@@ -34,4 +35,38 @@ export type Egg = {
 type FileConfig = {
     parser: string,
     find: Record<string, string>
+}
+
+export type ApplicationEggVariable = Omit<EggVariable, "server_value" | "is_editable" | "rules"> & {
+    rules: string[],
+    sort: number,
+    user_viewable: boolean,
+    user_editable: boolean,
+}
+
+export type ExportedEgg = {
+    meta: {
+        version: "PLCN_v3",
+        update_url: Nullable<string>
+    },
+    exported_at: string,
+    name: string,
+    author: string,
+    description: string,
+    uuid: string,
+    image: Nullable<string>
+    docker_images: Record<string, string>,
+    features: string[],
+    tags: string[],
+    file_denylist: string[],
+    startup_commands: Record<string, string>,
+    config: Omit<Egg["config"], "extends" | "file_denylist">
+    scripts: {
+        installation: {
+            script: string,
+            container: string,
+            entrypoint: string
+        }
+    },
+    variables: ApplicationEggVariable[]
 }

@@ -30,6 +30,10 @@ export class Client {
         this.mounts = new Mounts(requester)
     }
 
+    get $r(): AxiosInstance {
+        return this.r
+    }
+
     listServers = async (
         search?: string,
         page: number = 1

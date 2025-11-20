@@ -80,10 +80,11 @@ export const CreateServerSchema = z.object({
     egg: z.number(),
     docker_image: z.string().optional(),
     startup: z.string().optional(),
-    environment: z.array(z.string()),
+    environment: z.record(z.string(), z.string()),
     skip_scripts: z.boolean().optional(),
     oom_killer: z.boolean().optional(),
     start_on_completion: z.boolean().optional(),
+    docker_labels: z.record(z.string(), z.string()).optional(),
     limits: z.object({
         memory: z.number().min(0),
         swap: z.number().min(-1),
@@ -112,7 +113,8 @@ const UpdateDetailsSchema = CreateServerSchema.pick({
     external_id: true,
     name: true,
     user: true,
-    description: true
+    description: true,
+    docker_labels: true
 })
 
 const UpdateBuildSchema = CreateServerSchema.pick({

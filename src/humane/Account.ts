@@ -1,0 +1,73 @@
+import type { Client } from "@/api/client/client"
+import type { User } from "@/api/client/types/user"
+
+export class Account {
+    private readonly client: Client
+    readonly uuid: string
+    readonly username: string
+    private $email: string
+    get email() {
+        return this.$email
+    }
+    readonly language: string
+    readonly image: string
+    readonly admin: boolean
+    readonly root_admin: boolean
+    private $has2faEnabled: boolean
+    get has2faEnabled() {
+        return this.$has2faEnabled
+    }
+    readonly createdAt: Date
+    readonly updatedAt: Date
+
+    constructor(client: Client, user: User) {
+        this.client = client
+        this.uuid = user.uuid
+        this.username = user.username
+        this.$email = user.email
+        this.language = user.language
+        this.image = user.image
+        this.admin = user.admin
+        this.root_admin = user.root_admin
+        this.$has2faEnabled = user["2fa_enabled"]
+        this.createdAt = new Date(user.created_at)
+        this.updatedAt = new Date(user.updated_at)
+    }
+
+    updateEmail = async (newEmail: string, password: string) => {
+        await this.client.account.updateEmail(newEmail, password)
+        this.$email = newEmail
+    }
+
+    updatePassword = async (newPassword: string) =>
+        this.client.account.updatePassword(newPassword)
+
+    listApiKeys = async () => this.client.account.apiKeys.list()
+
+    createApiKey = async (description: string, allowed_ips?: string[]) =>
+        this.client.account.apiKeys.create(description, allowed_ips)
+
+    deleteApiKey = async (identifier: string) =>
+        this.client.account.apiKeys.delete(identifier)
+
+    listSshKeys = async () => this.client.account.sshKeys.list()
+
+    createSshKey = async (name: string, public_key: string) =>
+        this.client.account.sshKeys.create(name, public_key)
+
+    deleteSshKey = async (fingerprint: string) =>
+        this.client.account.sshKeys.delete(fingerprint)
+
+    get2faQR = async () => this.client.account.twoFactor.info()
+
+    enable2fa = async (code: string) => {
+        const tokens = await this.client.account.twoFactor.enable(code)
+        this.$has2faEnabled = true
+        return tokens
+    }
+
+    disable2fa = async (password: string) => {
+        await this.client.account.twoFactor.disable(password)
+        this.$has2faEnabled = false
+    }
+}

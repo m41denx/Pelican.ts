@@ -18,3 +18,17 @@ export type ApplicationUser = {
         servers: GenericListResponse<GenericResponse<ApplicationServer>>
     }
 }
+
+export type ApplicationUserApiKey = {
+    id: number,
+    user_id: number,
+    key_type: 1,
+    identifier: string,
+    memo: string,
+    allowed_ips: Array<string>,
+    permissions: [],
+    last_used_at: Nullable<string>,
+    expires_at: Nullable<string>,
+    created_at: string,
+    updated_at: string
+}

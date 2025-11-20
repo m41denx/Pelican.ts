@@ -25,22 +25,22 @@ export class ServerUsers {
         return data.attributes
     }
 
-    info = async (user_id: number): Promise<ServerSubuser> => {
+    info = async (user_uuid: string): Promise<ServerSubuser> => {
         const {data} = await this.r.get<
             GenericResponse<ServerSubuser, "user">
-        >(`/servers/${this.id}/users/${user_id}`)
+        >(`/servers/${this.id}/users/${user_uuid}`)
         return data.attributes
     }
 
-    update = async (user_id: number, permissions: SubuserPermission[] | string[]): Promise<ServerSubuser> => {
+    update = async (user_uuid: string, permissions: SubuserPermission[] | string[]): Promise<ServerSubuser> => {
         const {data} = await this.r.put<
             GenericResponse<ServerSubuser, "user">
-        >(`/servers/${this.id}/users/${user_id}`, {permissions})
+        >(`/servers/${this.id}/users/${user_uuid}`, {permissions})
         return data.attributes
     }
 
-    delete = async (user_id: number): Promise<void> => {
-        await this.r.delete(`/servers/${this.id}/users/${user_id}`)
+    delete = async (user_uuid: string): Promise<void> => {
+        await this.r.delete(`/servers/${this.id}/users/${user_uuid}`)
     }
 
 }

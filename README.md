@@ -4,6 +4,10 @@
 
 # Pelican.ts — Typescript client for Pelican panel
 
+> [!WARNING]  
+> This is a `next` version of Pelican.ts, it is based on [Pelican-contrib](https://github.com/m41denx/pelican-contrib) 
+> fork and is not compatible with upstream Pelican panel.
+
 ## Installation
 ```shell
 npm install @pelican.ts/sdk
@@ -32,7 +36,7 @@ What's done:
   - [X] Nodes
   - [X] Servers
     - [X] Databases (TODO: Check if server database type is valid)
-  - [X] Database Hosts (TODO: find out why create API returns 500 No Route)
+  - [X] Database Hosts (~~TODO: find out why create API returns 500 No Route~~ Fix was merged to upstream)
   - [X] Roles
   - [X] Eggs
   - [X] Mounts
@@ -40,7 +44,7 @@ What's done:
 - [ ] Examples
 - [ ] Tests
 - [ ] Documentation
-- [ ] Humane wrapper
+- [X] Humane wrapper
 
 ## Copyright Notice
 [Pterodactyl®](https://github.com/pterodactyl) is a registered trademark of Dane Everitt and contributors.

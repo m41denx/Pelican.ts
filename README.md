@@ -44,7 +44,7 @@ What's done:
 - [ ] Examples
 - [ ] Tests
 - [ ] Documentation
-- [ ] Humane wrapper
+- [X] Humane wrapper
 
 ## Copyright Notice
 [Pterodactyl®](https://github.com/pterodactyl) is a registered trademark of Dane Everitt and contributors.

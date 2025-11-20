@@ -1,17 +1,11 @@
-import {Client as UserClient} from "@/api/client/client";
-import {Client as AppClient} from "@/api/application/client";
-import {Agent} from "@/api/base/request";
+import { PelicanAPIClient } from "@/api"
+import { Client as UserClient } from "@/humane/Client"
 
-export class PelicanClient extends UserClient{
-    constructor(url: string, token: string, suffix: string = "/api") {
-        const ax = new Agent(url, token, "client", suffix)
-        super(ax.requester)
-    }
-}
-
-export class PelicanApplication extends AppClient{
-    constructor(url: string, token: string, suffix: string = "/api") {
-        const ax = new Agent(url, token, "application", suffix)
-        super(ax.requester)
-    }
+export const createPelicanClient = (
+    url: string,
+    token: string,
+    suffix: string = "/api",
+) => {
+    const client = new PelicanAPIClient(url, token, suffix)
+    return new UserClient(client)
 }

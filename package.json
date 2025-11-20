@@ -1,53 +1,64 @@
 {
-  "name": "@pelican.ts/sdk",
-  "version": "0.3.4-next.3",
-  "description": "Pelican panel SDK for TypeScript",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+    "name": "@pelican.ts/sdk",
+    "version": "0.4.0",
+    "description": "Pelican panel SDK for TypeScript",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs"
+        },
+        "./api": {
+            "types": "./dist/api/index.d.ts",
+            "require": "./dist/api/index.js",
+            "import": "./dist/api/index.mjs"
+        },
+        "./types": {
+            "types": "./dist/types.d.ts"
+        }
     },
-    "./types": {
-      "types": "./dist/types.d.ts"
+    "scripts": {
+        "build:api": "tsup src/api/index.ts --format esm,cjs --dts --target esnext -d dist/api",
+        "build:humane": "tsup src/index.ts --format esm,cjs --dts --target esnext",
+        "build:types": "tsup src/types.ts --dts-only --target esnext",
+        "build": "rm -rf ./dist && npm run build:api && npm run build:humane && npm run build:types",
+        "pub": "npm publish --access=public",
+        "pub:next": "npm publish --access=public --tag=next",
+        "generate-types": "bun run scripts/create-types.ts",
+        "pipeline:next": "bun run generate-types && bun run build && bun run pub:next",
+        "pipeline": "bun run generate-types && bun run build && bun run pub",
+        "format": "biome format --no-errors-on-unmatched --files-ignore-unknown=true --write .",
+        "prepare": "husky"
+    },
+    "keywords": [
+        "pterodactyl",
+        "pterodactyl.ts",
+        "pterodactyl.js",
+        "pelican",
+        "pelican.ts",
+        "pelican.js"
+    ],
+    "author": "M41den",
+    "license": "MIT",
+    "repository": {
+        "url": "git+https://github.com/m41denx/Pelican.ts"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.3.6",
+        "@types/node": "^22.18.12",
+        "@types/strip-color": "^0.1.2",
+        "husky": "^9.1.7",
+        "tsc-alias": "^1.8.16",
+        "tsup": "^8.5.0",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "axios": "^1.12.2",
+        "isomorphic-ws": "^5.0.0",
+        "strip-color": "^0.1.0",
+        "zod": "^4.1.12"
     }
-  },
-  "scripts": {
-    "build:code": "tsup src/index.ts --format esm,cjs --dts --target esnext",
-    "build:types": "tsup src/types.ts --dts-only --target esnext",
-    "build": "rm -rf ./dist && npm run build:code && npm run build:types",
-    "pub": "npm publish --access=public",
-    "pub:next": "npm publish --access=public --tag=next",
-    "generate-types": "bun run scripts/create-types.ts",
-    "pipeline": "bun run generate-types && bun run build && bun run pub:next"
-  },
-  "keywords": [
-    "pterodactyl",
-    "pterodactyl.ts",
-    "pterodactyl.js",
-    "pelican",
-    "pelican.ts",
-    "pelican.js"
-  ],
-  "author": "M41den",
-  "license": "MIT",
-  "repository": {
-    "url": "git+https://github.com/m41denx/Pelican.ts"
-  },
-  "devDependencies": {
-    "@types/node": "^22.18.12",
-    "@types/strip-color": "^0.1.2",
-    "tsc-alias": "^1.8.16",
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "axios": "^1.12.2",
-    "isomorphic-ws": "^5.0.0",
-    "strip-color": "^0.1.0",
-    "zod": "^4.1.12"
-  }
 }

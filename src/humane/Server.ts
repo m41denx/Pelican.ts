@@ -186,6 +186,18 @@ export class Server {
         ...opts: Parameters<ServerFiles["pullFromRemote"]>
     ) => this.client.files.pullFromRemote(...opts)
 
+    compressMultipleFiles = async (
+        ...opts: Parameters<ServerFiles["compress"]>
+    ) => this.client.files.compress(...opts)
+
+    renameMultipleFiles = async (
+        ...opts: Parameters<ServerFiles["rename"]>
+    ) => this.client.files.rename(...opts)
+
+    deleteMultipleFiles = async (
+        ...opts: Parameters<ServerFiles["delete"]>
+    ) => this.client.files.delete(...opts)
+
     getUsers = async () => {
         const data = await this.client.users.list()
         return data.map((d) => new ServerUser(this.client, d))

@@ -69,24 +69,4 @@ export class Account {
             await this.r.post(`/account/ssh-keys/remove`, {fingerprint})
         }
     }
-
-    twoFactor = {
-        info: async (): Promise<{ image_url_data: string }> => {
-            const {data} = await this.r.get<
-                Awaited<ReturnType<typeof this.twoFactor.info>>
-            >("/account/two-factor")
-            return data
-        },
-
-        enable: async (code: string): Promise<{ tokens: string[] }> => {
-            const {data} = await this.r.post<
-                Awaited<ReturnType<typeof this.twoFactor.enable>>
-            >("/account/two-factor", {code})
-            return data
-        },
-
-        disable: async (password: string): Promise<void> => {
-            await this.r.delete("/account/two-factor", {data: {password}})
-        }
-    }
 }

@@ -57,17 +57,4 @@ export class Account {
 
     deleteSshKey = async (fingerprint: string) =>
         this.client.account.sshKeys.delete(fingerprint)
-
-    get2faQR = async () => this.client.account.twoFactor.info()
-
-    enable2fa = async (code: string) => {
-        const tokens = await this.client.account.twoFactor.enable(code)
-        this.$has2faEnabled = true
-        return tokens
-    }
-
-    disable2fa = async (password: string) => {
-        await this.client.account.twoFactor.disable(password)
-        this.$has2faEnabled = false
-    }
 }

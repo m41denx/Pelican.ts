@@ -159,7 +159,7 @@ export class Server {
 
     getFiles = async (path?: string) => {
         const data = await this.client.files.list(path)
-        return data.map(d => new ServerFile(this.client, d))
+        return data.map(d => new ServerFile(this.client, d, path))
     }
 
     createFolder = async (...opts: Parameters<ServerFiles["createFolder"]>) =>

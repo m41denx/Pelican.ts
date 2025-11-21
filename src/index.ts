@@ -9,3 +9,13 @@ export const createPelicanClient = (
     const client = new PelicanAPIClient(url, token, suffix)
     return new UserClient(client)
 }
+
+export {Client} from "@/humane/Client"
+export {Account} from "@/humane/Account"
+export {Server} from "@/humane/Server"
+export {ServerAllocation} from "@/humane/ServerAllocation"
+export {ServerBackup} from "@/humane/ServerBackup"
+export {ServerDatabase} from "@/humane/ServerDatabase"
+export {ServerFile} from "@/humane/ServerFile"
+export {ServerSchedule} from "@/humane/ServerSchedule"
+export {ServerUser} from "@/humane/ServerUser"

@@ -4,16 +4,63 @@
 
 # Pelican.ts — Typescript client for Pelican panel
 
-## Installation
+## 🧭 Installation
 ```shell
 npm install @pelican.ts/sdk
 ```
 
-## Usage
-```ts
-import { PelicanClient } from "@pelican.ts/sdk"
-const client = new PelicanClient("https://demo.pelican.dev", "token")
+## 📦 What's inside?
+### 🤗 Humane Client `@pelican.ts/sdk`
+**Humane Client** is an object-oriented client that provides a more comfortable experience. Each method corresponds to 
+an API endpoint, so each update causes only one request. Objects are updated automatically after each API call.
 
+I found the most use of it for file management, as each ServerFile knows exactly where is it located and what is its 
+parent folder, so you don't have to use `PelicanAPIClient`, `currentDir` and `FileObject` to achieve simple file operations.
+
+Also, each Humane object can be created from API client and corresponding API data object:
+```ts
+import { ServerBackup } from "@pelican.ts/sdk"
+const backup = new ServerBackup(serverClient, backupObject)
+````
+
+**Usage:**
+```ts
+import { createPelicanClient } from "@pelican.ts/sdk"
+const client = createPelicanClient("https://demo.pelican.dev", "token")
+
+// Create server backup and restore it
+const main = async () => {
+    const servers = await client.listServers()
+    const myServer = servers[0]
+    if (myServer.isInstalling || myServer.isSuspended)
+        return
+    const backup = await myServer.createBackup({
+        name: "first backup",
+        is_locked: false,
+        ignored_files: ["/dynmap/*"]
+    })
+    setTimeout(
+        async () => {
+            await backup.restore()
+        }, 60000
+    )
+}
+
+main()
+```
+
+
+### 🤖 API Client `@pelican.ts/sdk/api`
+**API Client** takes a more functional approach, consider it a direct API wrapper. It's stateless and doesn't save objects
+for you. Uses zod for input validation.
+
+**Usage:**
+```ts
+import { PelicanAPIClient } from "@pelican.ts/sdk/api"
+const client = new PelicanAPIClient("https://demo.pelican.dev", "token")
+// API client is also obtainable from Humane Client via createPelicanClient(...).$client
+
+// Create server backup and restore it
 const main = async () => {
     const servers = await client.listServers()
     const serverID = servers[0].identifier // babcaed0 for example
@@ -25,24 +72,27 @@ const main = async () => {
 main()
 ```
 
-What's done:
+### 📚 Types `@pelican.ts/sdk/types`
+Contains every API response type
+```ts
+import type {ApplicationServer, ServerBackup} from "@pelican.ts/sdk/types"
+
+const backup: ServerBackup = {
+    ...
+}
+```
+
+
+**What's done:**
 - [X] Client
 - [X] Application
-  - [X] Users
-  - [X] Nodes
-  - [X] Servers
-    - [X] Databases (TODO: Check if server database type is valid)
-  - [X] Database Hosts (~~TODO: find out why create API returns 500 No Route~~ Fix was merged to upstream)
-  - [X] Roles
-  - [X] Eggs
-  - [X] Mounts
 - [ ] TSDoc
 - [ ] Examples
 - [ ] Tests
 - [ ] Documentation
 - [X] Humane wrapper
 
-## Copyright Notice
+## 🧐 Copyright Notice
 [Pterodactyl®](https://github.com/pterodactyl) is a registered trademark of Dane Everitt and contributors.
 
 [Pelican®](https://github.com/pelican-dev) is a registered trademark of Pelican contributors.
@@ -51,5 +101,5 @@ Pelican.ts is Open Source under the [MIT License](LICENSE) and is the copyright
 of its contributors stated below. Pelican.ts is not endorsed by or affiliated with Pterodactyl® nor Pelican® team.
 
 
-## Contributors
+## 🧑‍💻 Contributors
 [M41den](https://github.com/m41denx) © 2024-2025

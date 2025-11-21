@@ -69,8 +69,11 @@ export class ServerFiles {
         files: string[],
         archive_name?: string,
         extension?: "zip" | "tgz" | "tar.gz" | "txz" | "tar.xz" | "tbz2" | "tar.bz2"
-    ): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/files/compress`, {root, files, archive_name, extension})
+    ): Promise<FileObject> => {
+        const {data} = await this.r.post<
+            GenericResponse<FileObject, "file_object">
+        >(`/servers/${this.id}/files/compress`, {root, files, archive_name, extension})
+        return data.attributes
     }
 
     decompress = async (

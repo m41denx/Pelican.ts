@@ -1,6 +1,6 @@
-import type { ServerClient } from "@/api/client/server"
-import type { ServerBackup as ServerBackupT } from "@/api/common/types/server_backup"
-import type { Nullable } from "@/utils/types"
+import type {ServerClient} from "@/api/client/server"
+import type {ServerBackup as ServerBackupT} from "@/api/common/types/server_backup"
+import type {Nullable} from "@/utils/types"
 
 export class ServerBackup {
     private readonly client: ServerClient
@@ -35,13 +35,10 @@ export class ServerBackup {
 
     delete = async () => this.client.backups.delete(this.uuid)
 
-    rename = async (
-        name: string
-    ) => this.client.backups.rename(this.uuid, name)
+    rename = async (name: string) => this.client.backups.rename(this.uuid, name)
 
     toggleLock = async () => this.client.backups.toggleLock(this.uuid)
 
-    restore = async (
-        truncate: boolean
-    ) => this.client.backups.restore(this.uuid, truncate)
+    restore = async (truncate: boolean) =>
+        this.client.backups.restore(this.uuid, truncate)
 }

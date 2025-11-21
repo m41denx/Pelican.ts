@@ -1,9 +1,9 @@
-import { GenericListResponse, GenericResponse } from "@/api/base/types"
-import { EggVariable } from "@/api/common/types/egg"
-import { ServerSubuser } from "@/api/client/types/server_subuser"
-import { FeatureLimits, ServerLimits } from "@/api/common/types/server_limits"
-import { ServerAllocation } from "@/api/client/types/server_allocation"
-import { Nullable } from "@/utils/types"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {EggVariable} from "@/api/common/types/egg"
+import {ServerSubuser} from "@/api/client/types/server_subuser"
+import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits"
+import {ServerAllocation} from "@/api/client/types/server_allocation"
+import {Nullable} from "@/utils/types"
 
 export type Server = {
     server_owner: boolean
@@ -13,11 +13,7 @@ export type Server = {
     name: string
     node: string
     is_node_under_maintenance: boolean
-    sftp_details: {
-        ip: string
-        alias: Nullable<string>
-        port: number
-    }
+    sftp_details: {ip: string; alias: Nullable<string>; port: number}
     description: string
     limits: ServerLimits
     invocation: string
@@ -35,13 +31,7 @@ export type Server = {
         variables: GenericListResponse<
             GenericResponse<EggVariable, "egg_variable">
         >
-        egg?: GenericResponse<
-            {
-                uuid: string
-                name: string
-            },
-            "egg"
-        >
+        egg?: GenericResponse<{uuid: string; name: string}, "egg">
         subusers?: GenericListResponse<
             GenericResponse<ServerSubuser, "server_subuser">
         >

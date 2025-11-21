@@ -1,7 +1,6 @@
-import {AxiosInstance} from "axios";
-import z from "zod";
-import {Nullable} from "@/utils/types";
-
+import {AxiosInstance} from "axios"
+import z from "zod"
+import {Nullable} from "@/utils/types"
 
 export class ServerSettings {
     private readonly r: AxiosInstance
@@ -17,8 +16,12 @@ export class ServerSettings {
         await this.r.post(`/servers/${this.id}/settings/rename`, {name})
     }
 
-    updateDescription = async (description: Nullable<string>): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/settings/description`, {description})
+    updateDescription = async (
+        description: Nullable<string>
+    ): Promise<void> => {
+        await this.r.post(`/servers/${this.id}/settings/description`, {
+            description
+        })
     }
 
     reinstall = async (): Promise<void> => {

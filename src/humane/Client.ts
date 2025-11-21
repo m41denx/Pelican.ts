@@ -1,6 +1,6 @@
-import type { Client as ClientT } from "@/api/client/client"
-import { Account } from "@/humane/Account"
-import { Server } from "@/humane/Server"
+import type {Client as ClientT} from "@/api/client/client"
+import {Account} from "@/humane/Account"
+import {Server} from "@/humane/Server"
 
 export class Client {
     private readonly client: ClientT
@@ -26,15 +26,15 @@ export class Client {
             page?: number
             per_page?: number
             include?: ("egg" | "subusers")[]
-        } = { type: "accessible", page: 1, per_page: 50 },
+        } = {type: "accessible", page: 1, per_page: 50}
     ) => {
         const data = await this.client.listServers(
             opts.type,
             opts.page,
             opts.per_page,
-            opts.include,
+            opts.include
         )
-        return data.map((d) => new Server(this.client.server(d.uuid), d))
+        return data.map(d => new Server(this.client.server(d.uuid), d))
     }
 
     getServer = async (uuid: string, include?: ("egg" | "subusers")[]) => {

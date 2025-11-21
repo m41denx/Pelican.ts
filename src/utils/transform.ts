@@ -1,13 +1,8 @@
-import {string} from "zod";
-
+import {string} from "zod"
 
 export const ArrayQueryParams = (p: {
-    [key: string]: {
-        [key: string]: string
-    }
-}): {
-    [key: string]: string
-} => {
+    [key: string]: {[key: string]: string}
+}): {[key: string]: string} => {
     const params = new URLSearchParams()
 
     const o: ReturnType<typeof ArrayQueryParams> = {}
@@ -22,5 +17,5 @@ export const ArrayQueryParams = (p: {
 }
 
 export const SortParam = (key: string, p: "asc" | "desc"): string => {
-    return `${p==="desc" ? "-" : ""}${key}`
+    return `${p === "desc" ? "-" : ""}${key}`
 }

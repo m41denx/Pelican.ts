@@ -1,9 +1,9 @@
-import {AxiosInstance} from "axios";
-import {Mount} from "@/api/application/types/mount";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import z from "zod";
-import {Egg} from "@/api/application/types/egg";
-import {ApplicationServer} from "@/api/application/types";
+import {AxiosInstance} from "axios"
+import {Mount} from "@/api/application/types/mount"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import z from "zod"
+import {Egg} from "@/api/application/types/egg"
+import {ApplicationServer} from "@/api/application/types"
 
 export class Mounts {
     private readonly r: AxiosInstance
@@ -13,26 +13,40 @@ export class Mounts {
     }
 
     list = async (): Promise<Mount[]> => {
-        const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<Mount, "mount">>
-        >("/mounts")
+        const {data} =
+            await this.r.get<
+                GenericListResponse<GenericResponse<Mount, "mount">>
+            >("/mounts")
         return data.data.map(d => d.attributes)
     }
 
     info = async (id: number): Promise<Mount> => {
-        const {data} = await this.r.get<GenericResponse<Mount, "mount">>(`/mounts/${id}`)
+        const {data} = await this.r.get<GenericResponse<Mount, "mount">>(
+            `/mounts/${id}`
+        )
         return data.attributes
     }
 
-    create = async (opts: z.infer<typeof CreateMountSchema>): Promise<Mount> => {
+    create = async (
+        opts: z.infer<typeof CreateMountSchema>
+    ): Promise<Mount> => {
         opts = CreateMountSchema.parse(opts)
-        const {data} = await this.r.post<GenericResponse<Mount, "mount">>("/mounts", opts)
+        const {data} = await this.r.post<GenericResponse<Mount, "mount">>(
+            "/mounts",
+            opts
+        )
         return data.attributes
     }
 
-    update = async (id: number, opts: z.infer<typeof CreateMountSchema>): Promise<Mount> => {
+    update = async (
+        id: number,
+        opts: z.infer<typeof CreateMountSchema>
+    ): Promise<Mount> => {
         opts = CreateMountSchema.parse(opts)
-        const {data} = await this.r.patch<GenericResponse<Mount, "mount">>(`/mounts/${id}`, opts)
+        const {data} = await this.r.patch<GenericResponse<Mount, "mount">>(
+            `/mounts/${id}`,
+            opts
+        )
         return data.attributes
     }
 
@@ -85,7 +99,6 @@ export class Mounts {
         await this.r.delete(`/mounts/${id}/servers/${server_id}`)
     }
 }
-
 
 const CreateMountSchema = z.object({
     name: z.string().min(1).max(255),

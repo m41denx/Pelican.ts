@@ -1,8 +1,7 @@
-import {AxiosInstance} from "axios";
-import {APIKey, SSHKey, User} from "@/api/client/types/user";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import z from "zod";
-
+import {AxiosInstance} from "axios"
+import {APIKey, SSHKey, User} from "@/api/client/types/user"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import z from "zod"
 
 export class Account {
     private readonly r: AxiosInstance
@@ -12,7 +11,8 @@ export class Account {
     }
 
     info = async (): Promise<User> => {
-        const {data} = await this.r.get<GenericResponse<User, "user">>("/account")
+        const {data} =
+            await this.r.get<GenericResponse<User, "user">>("/account")
         return data.attributes
     }
 
@@ -31,16 +31,20 @@ export class Account {
 
     apiKeys = {
         list: async (): Promise<APIKey[]> => {
-            const {data} = await this.r.get<
-                GenericListResponse<GenericResponse<APIKey, "api_key">>
-            >("/account/api-keys")
+            const {data} =
+                await this.r.get<
+                    GenericListResponse<GenericResponse<APIKey, "api_key">>
+                >("/account/api-keys")
             return data.data.map(k => k.attributes)
         },
 
-        create: async (description: string, allowed_ips?: string[]): Promise<APIKey & { secret_token: string }> => {
+        create: async (
+            description: string,
+            allowed_ips?: string[]
+        ): Promise<APIKey & {secret_token: string}> => {
             allowed_ips = z.array(z.ipv4()).optional().parse(allowed_ips)
             const {data} = await this.r.post<
-                GenericResponse<APIKey, "api_key", { secret_token: string }>
+                GenericResponse<APIKey, "api_key", {secret_token: string}>
             >("/account/api-keys", {description, allowed_ips})
             return {...data.attributes, secret_token: data.meta!.secret_token}
         },
@@ -52,9 +56,10 @@ export class Account {
 
     sshKeys = {
         list: async (): Promise<SSHKey[]> => {
-            const {data} = await this.r.get<
-                GenericListResponse<GenericResponse<SSHKey, "ssh_key">>
-            >("/account/ssh-keys")
+            const {data} =
+                await this.r.get<
+                    GenericListResponse<GenericResponse<SSHKey, "ssh_key">>
+                >("/account/ssh-keys")
             return data.data.map(k => k.attributes)
         },
 

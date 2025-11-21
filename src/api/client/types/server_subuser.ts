@@ -1,16 +1,15 @@
 export type ServerSubuser = {
-    uuid: string,
-    username: string,
-    email: string,
-    language: string,
-    image: string,
-    admin: false,
-    root_admin: false,
-    "2fa_enabled": boolean,
-    created_at: string,
+    uuid: string
+    username: string
+    email: string
+    language: string
+    image: string
+    admin: false
+    root_admin: false
+    "2fa_enabled": boolean
+    created_at: string
     permissions: SubuserPermission[] | string[]
 }
-
 
 export type SubuserPermission =
     | "activity.read"

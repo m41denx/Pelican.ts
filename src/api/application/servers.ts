@@ -1,8 +1,8 @@
-import {AxiosInstance} from "axios";
-import z from "zod";
-import {GenericResponse} from "@/api/base/types";
-import {ApplicationServer} from "@/api/application/types/server";
-import {ServersDatabases} from "@/api/application/servers_databases";
+import {AxiosInstance} from "axios"
+import z from "zod"
+import {GenericResponse} from "@/api/base/types"
+import {ApplicationServer} from "@/api/application/types/server"
+import {ServersDatabases} from "@/api/application/servers_databases"
 
 export class Servers {
     private readonly r: AxiosInstance
@@ -16,10 +16,12 @@ export class Servers {
         this.databases = new ServersDatabases(this.r, this.id)
     }
 
-    info = async (include?: ("egg" | "subusers")[]): Promise<ApplicationServer> => {
-        const {data} = await this.r.get<GenericResponse<ApplicationServer, "server">>(`/servers/${this.id}`, {
-            params: {include: include?.join(",")}
-        })
+    info = async (
+        include?: ("egg" | "subusers")[]
+    ): Promise<ApplicationServer> => {
+        const {data} = await this.r.get<
+            GenericResponse<ApplicationServer, "server">
+        >(`/servers/${this.id}`, {params: {include: include?.join(",")}})
         return data.attributes
     }
 
@@ -27,17 +29,23 @@ export class Servers {
         await this.r.delete(`/servers/${this.id}${force ? "/force" : ""}`)
     }
 
-    updateDetails = async (opts: z.infer<typeof UpdateDetailsSchema>): Promise<void> => {
+    updateDetails = async (
+        opts: z.infer<typeof UpdateDetailsSchema>
+    ): Promise<void> => {
         opts = UpdateDetailsSchema.parse(opts)
         await this.r.patch(`/servers/${this.id}/details`, opts)
     }
 
-    updateBuild = async (opts: z.infer<typeof UpdateBuildSchema>): Promise<void> => {
+    updateBuild = async (
+        opts: z.infer<typeof UpdateBuildSchema>
+    ): Promise<void> => {
         opts = UpdateBuildSchema.parse(opts)
         await this.r.patch(`/servers/${this.id}/build`, opts)
     }
 
-    updateStartup = async (opts: z.infer<typeof UpdateStartupSchema>): Promise<void> => {
+    updateStartup = async (
+        opts: z.infer<typeof UpdateStartupSchema>
+    ): Promise<void> => {
         opts = UpdateStartupSchema.parse(opts)
         await this.r.patch(`/servers/${this.id}/startup`, opts)
     }
@@ -71,7 +79,6 @@ export class Servers {
     }
 }
 
-
 export const CreateServerSchema = z.object({
     external_id: z.string().min(1).max(255).optional(),
     name: z.string().min(1).max(255),
@@ -98,15 +105,19 @@ export const CreateServerSchema = z.object({
         allocations: z.number().min(0),
         backups: z.number().min(0)
     }),
-    allocation: z.object({
-        default: z.string(),
-        additional: z.array(z.string()).optional()
-    }).optional(),
-    deploy: z.object({
-        tags: z.array(z.string()).optional(),
-        dedicated_ip: z.boolean().optional(),
-        port_range: z.array(z.string()).optional()
-    }).optional()
+    allocation: z
+        .object({
+            default: z.string(),
+            additional: z.array(z.string()).optional()
+        })
+        .optional(),
+    deploy: z
+        .object({
+            tags: z.array(z.string()).optional(),
+            dedicated_ip: z.boolean().optional(),
+            port_range: z.array(z.string()).optional()
+        })
+        .optional()
 })
 
 const UpdateDetailsSchema = CreateServerSchema.pick({
@@ -120,11 +131,11 @@ const UpdateDetailsSchema = CreateServerSchema.pick({
 const UpdateBuildSchema = CreateServerSchema.pick({
     oom_killer: true,
     limits: true,
-    feature_limits: true,
+    feature_limits: true
 }).extend({
     allocation: z.number().optional(),
     add_allocations: z.array(z.string()).optional(),
-    remove_allocations: z.array(z.string()).optional(),
+    remove_allocations: z.array(z.string()).optional()
 })
 
 const UpdateStartupSchema = CreateServerSchema.pick({
@@ -132,6 +143,4 @@ const UpdateStartupSchema = CreateServerSchema.pick({
     environment: true,
     egg: true,
     skip_scripts: true
-}).extend({
-    image: z.string().optional()
-})
+}).extend({image: z.string().optional()})

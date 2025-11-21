@@ -1,4 +1,4 @@
-import { Nullable } from "@/utils/types"
+import {Nullable} from "@/utils/types"
 
 export type User = {
     uuid: string
@@ -28,7 +28,4 @@ export type SSHKey = {
     created_at: string
 }
 
-export type Permission = {
-    description: string
-    keys: Record<string, string>
-}
+export type Permission = {description: string; keys: Record<string, string>}

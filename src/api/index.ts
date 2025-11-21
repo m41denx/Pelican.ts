@@ -1,6 +1,6 @@
-import { Client as UserClient } from "@/api/client/client"
-import { Client as AppClient } from "@/api/application/client"
-import { Agent } from "@/api/base/request"
+import {Client as UserClient} from "@/api/client/client"
+import {Client as AppClient} from "@/api/application/client"
+import {Agent} from "@/api/base/request"
 
 export class PelicanAPIClient extends UserClient {
     constructor(url: string, token: string, suffix: string = "/api") {

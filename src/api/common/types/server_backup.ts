@@ -1,10 +1,9 @@
-import {Nullable} from "@/utils/types";
-
+import {Nullable} from "@/utils/types"
 
 export type ServerBackup = {
     uuid: string
-    is_successful: boolean,
-    is_locked: boolean,
+    is_successful: boolean
+    is_locked: boolean
     name: string
     ignored_files: string[]
     checksum: Nullable<string>

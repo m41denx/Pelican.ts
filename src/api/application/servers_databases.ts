@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios";
-import {ServerDatabase} from "@/api/common/types/server_database";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import z from "zod";
+import {AxiosInstance} from "axios"
+import {ServerDatabase} from "@/api/common/types/server_database"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import z from "zod"
 
 // TODO: Check if database type is valid
 export class ServersDatabases {
@@ -15,7 +15,9 @@ export class ServersDatabases {
 
     list = async (): Promise<ServerDatabase[]> => {
         const {data} = await this.r.get<
-            GenericListResponse<GenericResponse<ServerDatabase, "server_database">>
+            GenericListResponse<
+                GenericResponse<ServerDatabase, "server_database">
+            >
         >(`/servers/${this.id}/databases`)
         return data.data.map(d => d.attributes)
     }
@@ -44,6 +46,8 @@ export class ServersDatabases {
     }
 
     resetPassword = async (database_id: number): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/databases/${database_id}/reset-password`)
+        await this.r.post(
+            `/servers/${this.id}/databases/${database_id}/reset-password`
+        )
     }
 }

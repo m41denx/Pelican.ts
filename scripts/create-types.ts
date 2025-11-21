@@ -1,4 +1,3 @@
-
 import fs from "fs"
 import path from "path"
 
@@ -9,9 +8,10 @@ const typesPaths = [
 ]
 
 typesPaths.forEach(p => {
-    const prefix = path.join(__dirname, "../src" , p)
-    const files = fs.readdirSync(prefix)
-        .filter(f => f!=="index.ts")
+    const prefix = path.join(__dirname, "../src", p)
+    const files = fs
+        .readdirSync(prefix)
+        .filter(f => f !== "index.ts")
         .map(f => f.replace(/\.ts$/, ""))
     const strings: Array<string> = []
     files.forEach(f => {

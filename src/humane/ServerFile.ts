@@ -1,6 +1,6 @@
 import path from "node:path"
-import type { ServerClient } from "@/api/client/server"
-import type { FileObject } from "@/api/common/types/server_files"
+import type {ServerClient} from "@/api/client/server"
+import type {FileObject} from "@/api/common/types/server_files"
 
 export class ServerFile {
     private readonly client: ServerClient
@@ -40,8 +40,8 @@ export class ServerFile {
             "txz",
             "tar.xz",
             "tbz2",
-            "tar.bz2",
-        ].some((ext) => this.name.endsWith(`.${ext}`))
+            "tar.bz2"
+        ].some(ext => this.name.endsWith(`.${ext}`))
     }
 
     /**
@@ -54,7 +54,7 @@ export class ServerFile {
     download = async () => this.client.files.download(this.path)
 
     rename = async (newName: string) =>
-        this.client.files.rename(this.dir, [{ from: this.name, to: newName }])
+        this.client.files.rename(this.dir, [{from: this.name, to: newName}])
 
     copy = async () => this.client.files.copy(this.path)
 
@@ -70,16 +70,22 @@ export class ServerFile {
             | "txz"
             | "tar.xz"
             | "tbz2"
-            | "tar.bz2",
-    ) => new ServerFile(
-        this.client,
-        await this.client.files.compress(this.dir, [this.name], archive_name, extension)
-    )
+            | "tar.bz2"
+    ) =>
+        new ServerFile(
+            this.client,
+            await this.client.files.compress(
+                this.dir,
+                [this.name],
+                archive_name,
+                extension
+            )
+        )
 
     decompress = async () => this.client.files.decompress(this.dir, this.name)
 
     delete = async () => this.client.files.delete(this.dir, [this.name])
 
     chmod = async (mode: number) =>
-        this.client.files.chmod(this.dir, [{ file: this.name, mode }])
+        this.client.files.chmod(this.dir, [{file: this.name, mode}])
 }

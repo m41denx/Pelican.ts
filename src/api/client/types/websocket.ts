@@ -9,7 +9,7 @@ export enum SERVER_SIGNAL {
     START = "start",
     STOP = "stop",
     RESTART = "restart",
-    KILL = "kill",
+    KILL = "kill"
 }
 
 export type WebsocketEvent =
@@ -49,7 +49,7 @@ export enum SOCKET_EVENT {
     BACKUP_RESTORE_COMPLETED = "backup restore completed",
     TOKEN_EXPIRING = "token expiring",
     TOKEN_EXPIRED = "token expired",
-    JWT_ERROR = "jwt error",
+    JWT_ERROR = "jwt error"
 }
 
 export type InstallOutputEvent = {
@@ -57,13 +57,9 @@ export type InstallOutputEvent = {
     args: [string]
 }
 
-export type InstallStartedEvent = {
-    event: SOCKET_EVENT.INSTALL_STARTED
-}
+export type InstallStartedEvent = {event: SOCKET_EVENT.INSTALL_STARTED}
 
-export type InstallCompletedEvent = {
-    event: SOCKET_EVENT.INSTALL_COMPLETED
-}
+export type InstallCompletedEvent = {event: SOCKET_EVENT.INSTALL_COMPLETED}
 
 export type TransferLogsEvent = {
     event: SOCKET_EVENT.TRANSFER_LOGS
@@ -92,11 +88,9 @@ export type BackupRestoreCompletedEvent = {
     event: SOCKET_EVENT.BACKUP_RESTORE_COMPLETED
 }
 
-export type AuthSuccessWsEvent = {
-    event: SOCKET_EVENT.AUTH_SUCCESS
-}
+export type AuthSuccessWsEvent = {event: SOCKET_EVENT.AUTH_SUCCESS}
 
-export type StatusWsEvent = { event: SOCKET_EVENT.STATUS; args: [PowerState] }
+export type StatusWsEvent = {event: SOCKET_EVENT.STATUS; args: [PowerState]}
 
 export type PowerState = "starting" | "stopping" | "running" | "offline"
 
@@ -105,24 +99,21 @@ export type ConsoleLogWsEvent = {
     args: [string]
 }
 
-export type StatsWsEvent = {
-    event: SOCKET_EVENT.STATS
-    args: [string]
-}
+export type StatsWsEvent = {event: SOCKET_EVENT.STATS; args: [string]}
 
 export type StatsWsJson = {
     memory_bytes: number
     memory_limit_bytes: number
     cpu_absolute: number
-    network: { rx_bytes: number; tx_bytes: number }
+    network: {rx_bytes: number; tx_bytes: number}
     state: PowerState
     uptime: number
     disk_bytes: number
 }
 
-export type TokenExpiringWsEvent = { event: SOCKET_EVENT.TOKEN_EXPIRING }
+export type TokenExpiringWsEvent = {event: SOCKET_EVENT.TOKEN_EXPIRING}
 
-export type TokenExpiredWsEvent = { event: SOCKET_EVENT.TOKEN_EXPIRED }
+export type TokenExpiredWsEvent = {event: SOCKET_EVENT.TOKEN_EXPIRED}
 
 /**
  * Example:
@@ -142,9 +133,6 @@ export type DaemonErrorEvent = {
     args: [string]
 }
 
-export type JwtErrorEvent = {
-    event: SOCKET_EVENT.JWT_ERROR
-    args: [string]
-}
+export type JwtErrorEvent = {event: SOCKET_EVENT.JWT_ERROR; args: [string]}
 
-export { ServerWebsocket } from "@/api/client/server_websocket"
+export {ServerWebsocket} from "@/api/client/server_websocket"

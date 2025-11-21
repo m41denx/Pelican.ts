@@ -1,5 +1,5 @@
-import type { Client } from "@/api/client/client"
-import type { User } from "@/api/client/types/user"
+import type {Client} from "@/api/client/client"
+import type {User} from "@/api/client/types/user"
 
 export class Account {
     private readonly client: Client

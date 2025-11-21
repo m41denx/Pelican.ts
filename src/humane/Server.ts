@@ -1,21 +1,21 @@
-import type { ServerClient } from "@/api/client/server"
-import type { ServerBackups } from "@/api/client/server_backups"
-import type { ServerFiles } from "@/api/client/server_files"
-import type { ServerSchedules } from "@/api/client/server_schedules"
-import type { Server as ServerT } from "@/api/client/types/server"
-import { ServerAllocation } from "@/humane/ServerAllocation"
-import { ServerBackup } from "@/humane/ServerBackup"
-import { ServerDatabase } from "@/humane/ServerDatabase"
-import { ServerFile } from "@/humane/ServerFile"
-import { ServerSchedule } from "@/humane/ServerSchedule"
-import { ServerUser } from "@/humane/ServerUser"
+import type {ServerClient} from "@/api/client/server"
+import type {ServerBackups} from "@/api/client/server_backups"
+import type {ServerFiles} from "@/api/client/server_files"
+import type {ServerSchedules} from "@/api/client/server_schedules"
+import type {Server as ServerT} from "@/api/client/types/server"
+import {ServerAllocation} from "@/humane/ServerAllocation"
+import {ServerBackup} from "@/humane/ServerBackup"
+import {ServerDatabase} from "@/humane/ServerDatabase"
+import {ServerFile} from "@/humane/ServerFile"
+import {ServerSchedule} from "@/humane/ServerSchedule"
+import {ServerUser} from "@/humane/ServerUser"
 import type {
     EggVariable,
     FeatureLimits,
     ServerLimits,
-    SubuserPermission,
+    SubuserPermission
 } from "@/types"
-import type { Nullable } from "@/utils/types"
+import type {Nullable} from "@/utils/types"
 
 export class Server {
     private readonly client: ServerClient
@@ -30,11 +30,7 @@ export class Server {
     }
     readonly node: string
     readonly isNodeUnderMaintenance: boolean
-    readonly sftp: {
-        ip: string
-        alias: Nullable<string>
-        port: number
-    }
+    readonly sftp: {ip: string; alias: Nullable<string>; port: number}
     private $description: string
     get description() {
         return this.$description
@@ -53,10 +49,7 @@ export class Server {
     readonly isTransferring: boolean
     readonly allocations: ServerAllocation[]
     readonly variables: EggVariable[]
-    readonly egg?: {
-        uuid: string
-        name: string
-    }
+    readonly egg?: {uuid: string; name: string}
     readonly subusers?: ServerUser[]
 
     constructor(client: ServerClient, server: ServerT) {
@@ -80,14 +73,14 @@ export class Server {
         this.isInstalling = server.is_installing
         this.isTransferring = server.is_transferring
         this.allocations = server.relationships.allocations.data.map(
-            (d) => new ServerAllocation(this.client, d.attributes),
+            d => new ServerAllocation(this.client, d.attributes)
         )
         this.variables = server.relationships.variables.data.map(
-            (d) => d.attributes,
+            d => d.attributes
         )
         this.egg = server.relationships.egg?.attributes
         this.subusers = server.relationships.subusers?.data.map(
-            (d) => new ServerUser(this.client, d.attributes),
+            d => new ServerUser(this.client, d.attributes)
         )
     }
 
@@ -109,7 +102,7 @@ export class Server {
     }
 
     getActivityLogs = async (
-        opts: { page?: number; per_page?: number } = { page: 1, per_page: 50 },
+        opts: {page?: number; per_page?: number} = {page: 1, per_page: 50}
     ) => this.client.activity.list(opts.page, opts.per_page)
 
     websocket = (stripColors: boolean = false) =>
@@ -123,13 +116,10 @@ export class Server {
         this.client.power(signal)
 
     getDatabases = async (
-        opts: { include?: "password"[]; page?: number } = {
-            include: [],
-            page: 1,
-        },
+        opts: {include?: "password"[]; page?: number} = {include: [], page: 1}
     ) => {
         const data = await this.client.databases.list(opts.include, opts.page)
-        return data.map((d) => new ServerDatabase(this.client, d))
+        return data.map(d => new ServerDatabase(this.client, d))
     }
 
     createDatabase = async (database: string, remote: string) => {
@@ -139,7 +129,7 @@ export class Server {
 
     getSchedules = async () => {
         const data = await this.client.schedules.list()
-        return data.map((d) => new ServerSchedule(this.client, d))
+        return data.map(d => new ServerSchedule(this.client, d))
     }
 
     createSchedule = async (...opts: Parameters<ServerSchedules["create"]>) => {
@@ -149,7 +139,7 @@ export class Server {
 
     getBackups = async (page: number = 1) => {
         const data = await this.client.backups.list(page)
-        return data.map((d) => new ServerBackup(this.client, d))
+        return data.map(d => new ServerBackup(this.client, d))
     }
 
     createBackup = async (...args: Parameters<ServerBackups["create"]>) => {
@@ -159,7 +149,7 @@ export class Server {
 
     getAllocations = async () => {
         const data = await this.client.allocations.list()
-        return data.map((d) => new ServerAllocation(this.client, d))
+        return data.map(d => new ServerAllocation(this.client, d))
     }
 
     createAllocation = async () => {
@@ -169,7 +159,7 @@ export class Server {
 
     getFiles = async (path?: string) => {
         const data = await this.client.files.list(path)
-        return data.map((d) => new ServerFile(this.client, d))
+        return data.map(d => new ServerFile(this.client, d))
     }
 
     createFolder = async (...opts: Parameters<ServerFiles["createFolder"]>) =>
@@ -190,22 +180,20 @@ export class Server {
         ...opts: Parameters<ServerFiles["compress"]>
     ) => this.client.files.compress(...opts)
 
-    renameMultipleFiles = async (
-        ...opts: Parameters<ServerFiles["rename"]>
-    ) => this.client.files.rename(...opts)
+    renameMultipleFiles = async (...opts: Parameters<ServerFiles["rename"]>) =>
+        this.client.files.rename(...opts)
 
-    deleteMultipleFiles = async (
-        ...opts: Parameters<ServerFiles["delete"]>
-    ) => this.client.files.delete(...opts)
+    deleteMultipleFiles = async (...opts: Parameters<ServerFiles["delete"]>) =>
+        this.client.files.delete(...opts)
 
     getUsers = async () => {
         const data = await this.client.users.list()
-        return data.map((d) => new ServerUser(this.client, d))
+        return data.map(d => new ServerUser(this.client, d))
     }
 
     createUser = async (
         email: string,
-        permissions: SubuserPermission[] | string[],
+        permissions: SubuserPermission[] | string[]
     ) => {
         const data = await this.client.users.create(email, permissions)
         return new ServerUser(this.client, data)

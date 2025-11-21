@@ -1,7 +1,7 @@
-import type { ServerClient } from "@/api/client/server"
+import type {ServerClient} from "@/api/client/server"
 import type {
     ServerSubuser,
-    SubuserPermission,
+    SubuserPermission
 } from "@/api/client/types/server_subuser"
 
 export class ServerUser {

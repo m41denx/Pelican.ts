@@ -8,18 +8,12 @@ import {
     SOCKET_EVENT,
     StatsWsJson,
     WebsocketEvent
-} from "@/api/client/types/websocket";
-import {ServerSignalOption} from "@/api/common/types/server_power";
+} from "@/api/client/types/websocket"
+import {ServerSignalOption} from "@/api/common/types/server_power"
 
 const isBrowser = typeof window !== "undefined"
 
-
-type WebsocketHandshakePayload = {
-    data: {
-        token: string
-        socket: string
-    }
-}
+type WebsocketHandshakePayload = {data: {token: string; socket: string}}
 
 type SocketEventPayloadMap = {
     [SOCKET_EVENT.AUTH_SUCCESS]: undefined
@@ -40,9 +34,10 @@ type SocketEventPayloadMap = {
     [SOCKET_EVENT.JWT_ERROR]: string
 }
 
-type Listener<E extends SOCKET_EVENT> = SocketEventPayloadMap[E] extends undefined
-    ? () => void
-    : (payload: SocketEventPayloadMap[E]) => void
+type Listener<E extends SOCKET_EVENT> =
+    SocketEventPayloadMap[E] extends undefined
+        ? () => void
+        : (payload: SocketEventPayloadMap[E]) => void
 
 type MessageEventLike = {data?: unknown}
 
@@ -52,7 +47,7 @@ type ErrorEventLike = Parameters<NonNullable<WebSocket["onerror"]>>[0]
 
 const RECONNECT_ERRORS = new Set([
     "jwt: exp claim is invalid",
-    "jwt: created too far in past (denylist)",
+    "jwt: created too far in past (denylist)"
 ])
 
 const FALLBACK_LOG_MESSAGE = "No logs - is the server online?"
@@ -67,13 +62,20 @@ export class ServerWebsocket {
     private stripColors: boolean
     private detachMessageListener?: () => void
 
-    constructor(requester: AxiosInstance, id: string, stripColors: boolean = false) {
+    constructor(
+        requester: AxiosInstance,
+        id: string,
+        stripColors: boolean = false
+    ) {
         this.r = requester
         this.serverId = id
         this.stripColors = stripColors
     }
 
-    public on<E extends SOCKET_EVENT>(event: E, listener: Listener<E>): () => void {
+    public on<E extends SOCKET_EVENT>(
+        event: E,
+        listener: Listener<E>
+    ): () => void {
         const handler = listener as (...args: unknown[]) => void
         this.bus.on(event, handler)
         return () => {
@@ -81,12 +83,20 @@ export class ServerWebsocket {
         }
     }
 
-    public deregister<E extends SOCKET_EVENT>(event: E, listener: Listener<E>): void {
+    public deregister<E extends SOCKET_EVENT>(
+        event: E,
+        listener: Listener<E>
+    ): void {
         const handler = listener as (...args: unknown[]) => void
         this.bus.removeListener(event, handler)
     }
 
-    private emit<E extends SOCKET_EVENT>(event: E, ...args: SocketEventPayloadMap[E] extends undefined ? [] : [SocketEventPayloadMap[E]]): void {
+    private emit<E extends SOCKET_EVENT>(
+        event: E,
+        ...args: SocketEventPayloadMap[E] extends undefined
+            ? []
+            : [SocketEventPayloadMap[E]]
+    ): void {
         if (args.length === 0) {
             this.bus.emit(event)
         } else {
@@ -94,7 +104,10 @@ export class ServerWebsocket {
         }
     }
 
-    public async connect(resumable?: boolean, debugLogging?: boolean): Promise<void> {
+    public async connect(
+        resumable?: boolean,
+        debugLogging?: boolean
+    ): Promise<void> {
         this.debugLogging = debugLogging ?? false
 
         if (this.socket) {
@@ -105,7 +118,9 @@ export class ServerWebsocket {
 
         this.socket = isBrowser
             ? new WebSocket(socketUrl)
-            : new WebSocket(socketUrl, undefined, {origin: new URL(socketUrl).origin})
+            : new WebSocket(socketUrl, undefined, {
+                  origin: new URL(socketUrl).origin
+              })
 
         await new Promise<void>((resolve, reject) => {
             const socket = this.socket
@@ -124,14 +139,22 @@ export class ServerWebsocket {
                 } catch (error) {
                     socket.onopen = null
                     socket.onerror = null
-                    reject(error instanceof Error ? error : new Error("Websocket authentication failed"))
+                    reject(
+                        error instanceof Error
+                            ? error
+                            : new Error("Websocket authentication failed")
+                    )
                 }
             }
 
             socket.onerror = (event: ErrorEventLike) => {
                 socket.onopen = null
                 socket.onerror = null
-                reject(event instanceof Error ? event : new Error("Websocket connection error"))
+                reject(
+                    event instanceof Error
+                        ? event
+                        : new Error("Websocket connection error")
+                )
             }
         })
 
@@ -189,21 +212,33 @@ export class ServerWebsocket {
         }
 
         if (typeof this.socket.addEventListener === "function") {
-            this.socket.addEventListener("message", handler as (event: MessageEventLike) => void)
+            this.socket.addEventListener(
+                "message",
+                handler as (event: MessageEventLike) => void
+            )
             this.detachMessageListener = () => {
-                this.socket?.removeEventListener?.("message", handler as (event: MessageEventLike) => void)
+                this.socket?.removeEventListener?.(
+                    "message",
+                    handler as (event: MessageEventLike) => void
+                )
             }
         } else {
-            const fallback = (data: unknown) => handler({data} satisfies MessageEventLike)
+            const fallback = (data: unknown) =>
+                handler({data} satisfies MessageEventLike)
             const socket = this.socket as unknown as {
                 on?: (event: string, listener: (data: unknown) => void) => void
                 off?: (event: string, listener: (data: unknown) => void) => void
-                removeListener?: (event: string, listener: (data: unknown) => void) => void
+                removeListener?: (
+                    event: string,
+                    listener: (data: unknown) => void
+                ) => void
             }
 
             socket.on?.("message", fallback)
             this.detachMessageListener = () => {
-                const target = this.socket as unknown as typeof socket | undefined
+                const target = this.socket as unknown as
+                    | typeof socket
+                    | undefined
                 if (!target) {
                     return
                 }
@@ -261,7 +296,10 @@ export class ServerWebsocket {
             return event.toString("utf8")
         }
 
-        if (typeof ArrayBuffer !== "undefined" && event instanceof ArrayBuffer) {
+        if (
+            typeof ArrayBuffer !== "undefined"
+            && event instanceof ArrayBuffer
+        ) {
             if (typeof TextDecoder !== "undefined") {
                 return new TextDecoder().decode(new Uint8Array(event))
             }
@@ -318,7 +356,9 @@ export class ServerWebsocket {
             }
             case SOCKET_EVENT.BACKUP_COMPLETED: {
                 try {
-                    const payload = JSON.parse(message.args[0]) as BackupCompletedJson
+                    const payload = JSON.parse(
+                        message.args[0]
+                    ) as BackupCompletedJson
                     this.emit(SOCKET_EVENT.BACKUP_COMPLETED, payload)
                 } catch (error) {
                     if (this.debugLogging) {
@@ -401,7 +441,9 @@ export class ServerWebsocket {
     }
 
     private async refreshCredentials(): Promise<string> {
-        const {data} = await this.r.get<WebsocketHandshakePayload>(`/servers/${this.serverId}/websocket`)
+        const {data} = await this.r.get<WebsocketHandshakePayload>(
+            `/servers/${this.serverId}/websocket`
+        )
         this.currentToken = data.data.token
         return data.data.socket
     }
@@ -415,7 +457,9 @@ export class ServerWebsocket {
             throw new Error("Missing websocket token")
         }
 
-        this.socket.send(JSON.stringify({event: "auth", args: [this.currentToken]}))
+        this.socket.send(
+            JSON.stringify({event: "auth", args: [this.currentToken]})
+        )
     }
 
     public disconnect(): void {
@@ -438,7 +482,9 @@ export class ServerWebsocket {
     private send(event: string, args: unknown[]): void {
         if (!this.socket) {
             if (this.debugLogging) {
-                console.warn(`Attempted to send "${event}" without an active websocket connection`)
+                console.warn(
+                    `Attempted to send "${event}" without an active websocket connection`
+                )
             }
             return
         }
@@ -459,7 +505,7 @@ export class ServerWebsocket {
                 reject(new Error("Timed out waiting for stats"))
             }, 5000)
 
-            off = this.on(SOCKET_EVENT.STATS, (payload) => {
+            off = this.on(SOCKET_EVENT.STATS, payload => {
                 clearTimeout(timeout)
                 off?.()
                 resolve(payload)
@@ -496,7 +542,7 @@ export class ServerWebsocket {
                 finalize(lines.length > 0 ? lines : [FALLBACK_LOG_MESSAGE])
             }, 5000)
 
-            off = this.on(SOCKET_EVENT.CONSOLE_OUTPUT, (line) => {
+            off = this.on(SOCKET_EVENT.CONSOLE_OUTPUT, line => {
                 lines.push(line)
                 if (initialTimeout) {
                     clearTimeout(initialTimeout)

@@ -1,8 +1,10 @@
-import {AxiosInstance} from "axios";
-import {Allocation, AllocationRel} from "@/api/application/types/server_allocation";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import z from "zod";
-
+import {AxiosInstance} from "axios"
+import {
+    Allocation,
+    AllocationRel
+} from "@/api/application/types/server_allocation"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import z from "zod"
 
 export class NodesAllocations {
     private readonly r: AxiosInstance
@@ -13,7 +15,9 @@ export class NodesAllocations {
         this.id = id
     }
 
-    list = async (include?: ("node" | "server")[]): Promise<AllocationRel[]> => {
+    list = async (
+        include?: ("node" | "server")[]
+    ): Promise<AllocationRel[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<AllocationRel, "allocation">>
         >(`/nodes/${this.id}/allocations`, {
@@ -30,11 +34,11 @@ export class NodesAllocations {
     ): Promise<void> => {
         z.ipv4().parse(ip)
         z.ipv4().or(z.url().max(255)).optional().parse(alias)
-        z.array(z.number()).or(z.string().regex(/\d+-\d+/)).parse(ports)
+        z.array(z.number())
+            .or(z.string().regex(/\d+-\d+/))
+            .parse(ports)
 
-        await this.r.post(`/nodes/${this.id}/allocations`, {
-            ip, ports, alias
-        })
+        await this.r.post(`/nodes/${this.id}/allocations`, {ip, ports, alias})
     }
 
     delete = async (alloc_id: number): Promise<void> => {

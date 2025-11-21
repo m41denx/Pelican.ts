@@ -1,12 +1,14 @@
-import {AxiosInstance} from "axios";
-import z from "zod";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {ApplicationUser, ApplicationUserApiKey} from "@/api/application/types/user";
-import {ArrayQueryParams, SortParam} from "@/utils/transform";
-import {ExactlyOneKey} from "@/utils/types";
-import {languagesSchema, timezonesSchema} from "@/api/common/types/enums";
-import {APIKey} from "@/api/client/types";
-
+import {AxiosInstance} from "axios"
+import z from "zod"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {
+    ApplicationUser,
+    ApplicationUserApiKey
+} from "@/api/application/types/user"
+import {ArrayQueryParams, SortParam} from "@/utils/transform"
+import {ExactlyOneKey} from "@/utils/types"
+import {languagesSchema, timezonesSchema} from "@/api/common/types/enums"
+import {APIKey} from "@/api/client/types"
 
 export class Users {
     private readonly r: AxiosInstance
@@ -38,20 +40,18 @@ export class Users {
 
     info = async (
         id: number,
-        {include}: { include?: ("servers")[] }
+        {include}: {include?: "servers"[]}
     ): Promise<ApplicationUser> => {
         z.number().positive().parse(id)
         const {data} = await this.r.get<
             GenericResponse<ApplicationUser, "user">
-        >(`/users/${id}`, {
-            params: {include: include?.join(",")}
-        })
+        >(`/users/${id}`, {params: {include: include?.join(",")}})
         return data.attributes
     }
 
     infoByExternal = async (
         external_id: string,
-        {include}: { include?: ("servers")[] }
+        {include}: {include?: "servers"[]}
     ): Promise<ApplicationUser> => {
         const {data} = await this.r.get<
             GenericResponse<ApplicationUser, "user">
@@ -61,7 +61,9 @@ export class Users {
         return data.attributes
     }
 
-    create = async (user: z.infer<typeof CreateSchema>): Promise<ApplicationUser> => {
+    create = async (
+        user: z.infer<typeof CreateSchema>
+    ): Promise<ApplicationUser> => {
         user = CreateSchema.parse(user)
         const {data} = await this.r.post<
             GenericResponse<ApplicationUser, "user">
@@ -69,7 +71,10 @@ export class Users {
         return data.attributes
     }
 
-    update = async (id: number, user: z.infer<typeof CreateSchema>): Promise<ApplicationUser> => {
+    update = async (
+        id: number,
+        user: z.infer<typeof CreateSchema>
+    ): Promise<ApplicationUser> => {
         user = CreateSchema.parse(user)
         const {data} = await this.r.patch<
             GenericResponse<ApplicationUser, "user">
@@ -95,15 +100,25 @@ export class Users {
     apiKeys = {
         list: async (id: number): Promise<ApplicationUserApiKey[]> => {
             const {data} = await this.r.get<
-                GenericListResponse<GenericResponse<ApplicationUserApiKey, "api_key">>
+                GenericListResponse<
+                    GenericResponse<ApplicationUserApiKey, "api_key">
+                >
             >(`/users/${id}/api-keys`)
             return data.data.map(k => k.attributes)
         },
 
-        create: async (id: number, description: string, allowed_ips?: string[]): Promise<ApplicationUserApiKey & { secret_token: string }> => {
+        create: async (
+            id: number,
+            description: string,
+            allowed_ips?: string[]
+        ): Promise<ApplicationUserApiKey & {secret_token: string}> => {
             allowed_ips = z.array(z.ipv4()).optional().parse(allowed_ips)
             const {data} = await this.r.post<
-                GenericResponse<ApplicationUserApiKey, "api_key", { secret_token: string }>
+                GenericResponse<
+                    ApplicationUserApiKey,
+                    "api_key",
+                    {secret_token: string}
+                >
             >(`/users/${id}/api-keys`, {description, allowed_ips})
             return {...data.attributes, secret_token: data.meta!.secret_token}
         },
@@ -114,14 +129,10 @@ export class Users {
     }
 }
 
-type ListType = {
-    include?: ("servers")[],
-    filters?: ListFilters,
-    sort?: ListSort
-}
+type ListType = {include?: "servers"[]; filters?: ListFilters; sort?: ListSort}
 type ListFilters = {
-    [key in "email" | "uuid" | "username" | "external_id"]: string;
-};
+    [key in "email" | "uuid" | "username" | "external_id"]: string
+}
 
 type ListSort = ExactlyOneKey<"id" | "uuid", "asc" | "desc">
 

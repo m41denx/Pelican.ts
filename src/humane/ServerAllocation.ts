@@ -1,6 +1,6 @@
-import type { ServerClient } from "@/api/client/server"
-import type { ServerAllocation as ServerAllocationT } from "@/api/client/types/server_allocation"
-import type { Nullable } from "@/utils/types"
+import type {ServerClient} from "@/api/client/server"
+import type {ServerAllocation as ServerAllocationT} from "@/api/client/types/server_allocation"
+import type {Nullable} from "@/utils/types"
 
 export class ServerAllocation {
     private readonly client: ServerClient

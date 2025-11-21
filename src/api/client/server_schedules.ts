@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios";
-import {Schedule, ScheduleTask} from "@/api/common/types/server_schedule";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {PartialBy} from "@/utils/types";
+import {AxiosInstance} from "axios"
+import {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {PartialBy} from "@/utils/types"
 
 export class ServerSchedules {
     private readonly r: AxiosInstance
@@ -26,17 +26,18 @@ export class ServerSchedules {
         return data.attributes
     }
 
-    control = (sched_id: number) => new ScheduleControl(this.r, this.id, sched_id)
+    control = (sched_id: number) =>
+        new ScheduleControl(this.r, this.id, sched_id)
 }
 
 type ScheduleCreateParams = {
-    name: string,
-    is_active?: boolean,
-    only_when_online?: boolean,
-    minute: string,
-    hour: string,
-    day_of_week: string,
-    month: string,
+    name: string
+    is_active?: boolean
+    only_when_online?: boolean
+    minute: string
+    hour: string
+    day_of_week: string
+    month: string
     day_of_month: string
 }
 
@@ -70,13 +71,22 @@ class ScheduleControl {
     }
 
     execute = async (): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/schedules/${this.sched_id}/execute`)
+        await this.r.post(
+            `/servers/${this.id}/schedules/${this.sched_id}/execute`
+        )
     }
 
     tasks = {
         create: async (
             opts: PartialBy<
-                Pick<ScheduleTask, "action" | "payload" | "time_offset" | "sequence_id" | "continue_on_failure">,
+                Pick<
+                    ScheduleTask,
+                    | "action"
+                    | "payload"
+                    | "time_offset"
+                    | "sequence_id"
+                    | "continue_on_failure"
+                >,
                 "payload" | "sequence_id" | "continue_on_failure"
             >
         ): Promise<ScheduleTask> => {
@@ -86,21 +96,35 @@ class ScheduleControl {
             return data.attributes
         },
 
-        update: async <T extends "command" | "power" | "backup" | "delete_files">(
+        update: async <
+            T extends "command" | "power" | "backup" | "delete_files"
+        >(
             task_id: number,
             opts: PartialBy<
-                Pick<ScheduleTask, "action" | "payload" | "time_offset" | "sequence_id" | "continue_on_failure">,
+                Pick<
+                    ScheduleTask,
+                    | "action"
+                    | "payload"
+                    | "time_offset"
+                    | "sequence_id"
+                    | "continue_on_failure"
+                >,
                 "payload" | "sequence_id" | "continue_on_failure"
             >
         ): Promise<ScheduleTask> => {
             const {data} = await this.r.post<
                 GenericResponse<ScheduleTask, "server_schedule_task">
-            >(`/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`, opts)
+            >(
+                `/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`,
+                opts
+            )
             return data.attributes
         },
 
         delete: async (task_id: number): Promise<void> => {
-            await this.r.delete(`/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`)
+            await this.r.delete(
+                `/servers/${this.id}/schedules/${this.sched_id}/tasks/${task_id}`
+            )
         }
     }
 }

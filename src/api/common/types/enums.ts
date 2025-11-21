@@ -1,4 +1,4 @@
-import z from "zod";
+import z from "zod"
 
 export const languagesSchema = z.enum([
     "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs", "ca", "ce", "cs", "cv", "cy",

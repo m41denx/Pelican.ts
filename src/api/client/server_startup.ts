@@ -1,7 +1,10 @@
-import {AxiosInstance} from "axios";
-import {CustomListResponse, GenericListResponse, GenericResponse} from "@/api/base/types";
-import {StartupMeta, StartupParams} from "@/api/common/types/server_startup";
-
+import {AxiosInstance} from "axios"
+import {
+    CustomListResponse,
+    GenericListResponse,
+    GenericResponse
+} from "@/api/base/types"
+import {StartupMeta, StartupParams} from "@/api/common/types/server_startup"
 
 export class ServerStartup {
     private readonly r: AxiosInstance
@@ -12,15 +15,20 @@ export class ServerStartup {
         this.id = id
     }
 
-    list = async (): Promise<CustomListResponse<StartupParams, StartupMeta>> => {
+    list = async (): Promise<
+        CustomListResponse<StartupParams, StartupMeta>
+    > => {
         const {data} = await this.r.get<
-            CustomListResponse<GenericResponse<StartupParams, "egg_variable">, StartupMeta>
+            CustomListResponse<
+                GenericResponse<StartupParams, "egg_variable">,
+                StartupMeta
+            >
         >(`/servers/${this.id}/startup`)
 
         return {
             object: "list",
             meta: data.meta,
-            data: data.data.map(d=>d.attributes)
+            data: data.data.map(d => d.attributes)
         }
     }
 

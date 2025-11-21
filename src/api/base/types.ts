@@ -1,30 +1,25 @@
 export type GenericResponse<T, N extends string = string, M = undefined> = {
-    object: N,
-    attributes: T,
+    object: N
+    attributes: T
     meta?: M
 }
 
 type PaginationMeta = {
-    total: number,
-    count: number,
-    per_page: number,
-    current_page: number,
-    total_pages: number,
+    total: number
+    count: number
+    per_page: number
+    current_page: number
+    total_pages: number
     links: any
 }
 
 export type GenericListResponse<T> = {
-    object: "list",
-    data: T[],
-    meta?: { pagination: PaginationMeta }
+    object: "list"
+    data: T[]
+    meta?: {pagination: PaginationMeta}
 }
 
-export type CustomListResponse<T, M> = {
-    object: "list",
-    data: T[],
-    meta?: M
-}
-
+export type CustomListResponse<T, M> = {object: "list"; data: T[]; meta?: M}
 
 export class PterodactylException extends Error {
     data: PterodactylError[]
@@ -38,10 +33,8 @@ export class PterodactylException extends Error {
 }
 
 export type PterodactylError = {
-    code: string,
-    status?: number,
-    detail: string,
-    source?: {
-        [key: string]: string
-    }
+    code: string
+    status?: number
+    detail: string
+    source?: {[key: string]: string}
 }

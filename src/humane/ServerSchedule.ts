@@ -1,6 +1,6 @@
-import type { ServerClient } from "@/api/client/server"
-import type { Schedule, ScheduleTask } from "@/api/common/types/server_schedule"
-import type { Nullable, PartialBy } from "@/utils/types"
+import type {ServerClient} from "@/api/client/server"
+import type {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
+import type {Nullable, PartialBy} from "@/utils/types"
 
 export class ServerSchedule {
     private readonly client: ServerClient
@@ -12,7 +12,7 @@ export class ServerSchedule {
         minute: string
     }
     get cron() {
-        return { ...this.$cron }
+        return {...this.$cron}
     }
     readonly id: number
     private $isActive: boolean
@@ -53,7 +53,7 @@ export class ServerSchedule {
         this.nextRunAt = new Date(schedule.next_run_at)
         this.$onlyWhenOnline = schedule.only_when_online
         this.tasks = schedule.relationships.tasks.data.map(
-            (d) => new ServerScheduleTask(this.client, this.id, d.attributes),
+            d => new ServerScheduleTask(this.client, this.id, d.attributes)
         )
         this.$updatedAt = new Date(schedule.updated_at)
     }
@@ -144,7 +144,7 @@ export class ServerScheduleTask {
                 | "continue_on_failure"
             >,
             "payload" | "sequence_id" | "continue_on_failure"
-        >,
+        >
     ) => {
         const data = await this.client.schedules
             .control(this.scheduleId)

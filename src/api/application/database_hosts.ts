@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {DatabaseHost} from "@/api/application/types/database_host";
-import z from "zod";
+import {AxiosInstance} from "axios"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {DatabaseHost} from "@/api/application/types/database_host"
+import z from "zod"
 
 export class DatabaseHosts {
     private readonly r: AxiosInstance
@@ -10,20 +10,14 @@ export class DatabaseHosts {
         this.r = r
     }
 
-    list = async (
-        page: number = 1
-    ): Promise<DatabaseHost[]> => {
+    list = async (page: number = 1): Promise<DatabaseHost[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<DatabaseHost, "database_host">>
-        >("/database-hosts", {
-            params: {page}
-        })
+        >("/database-hosts", {params: {page}})
         return data.data.map(d => d.attributes)
     }
 
-    info = async (
-        id: string
-    ): Promise<DatabaseHost> => {
+    info = async (id: string): Promise<DatabaseHost> => {
         const {data} = await this.r.get<
             GenericResponse<DatabaseHost, "database_host">
         >(`/database-hosts/${id}`)
@@ -35,9 +29,12 @@ export class DatabaseHosts {
         opts: z.infer<typeof CreateDBHostSchema>
     ): Promise<void> => {
         opts = CreateDBHostSchema.parse(opts)
-        await this.r.post<
-            GenericResponse<DatabaseHost, "database_host">
-        >("/database-hosts", opts).catch(e=>{})
+        await this.r
+            .post<GenericResponse<DatabaseHost, "database_host">>(
+                "/database-hosts",
+                opts
+            )
+            .catch(e => {})
     }
 
     update = async (
@@ -52,9 +49,7 @@ export class DatabaseHosts {
         return data.attributes
     }
 
-    delete = async (
-        id: string
-    ): Promise<void> => {
+    delete = async (id: string): Promise<void> => {
         await this.r.delete(`/database-hosts/${id}`)
     }
 }

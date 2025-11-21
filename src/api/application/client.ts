@@ -1,14 +1,14 @@
-import {AxiosInstance} from "axios";
-import {Users} from "@/api/application/users";
-import {Nodes} from "@/api/application/nodes";
-import {GenericListResponse, GenericResponse} from "@/api/base/types";
-import {ApplicationServer} from "@/api/application/types/server";
-import {CreateServerSchema, Servers} from "@/api/application/servers";
-import z from "zod";
-import {DatabaseHosts} from "@/api/application/database_hosts";
-import {Roles} from "@/api/application/roles";
-import {Eggs} from "@/api/application/eggs";
-import {Mounts} from "@/api/application/mounts";
+import {AxiosInstance} from "axios"
+import {Users} from "@/api/application/users"
+import {Nodes} from "@/api/application/nodes"
+import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {ApplicationServer} from "@/api/application/types/server"
+import {CreateServerSchema, Servers} from "@/api/application/servers"
+import z from "zod"
+import {DatabaseHosts} from "@/api/application/database_hosts"
+import {Roles} from "@/api/application/roles"
+import {Eggs} from "@/api/application/eggs"
+import {Mounts} from "@/api/application/mounts"
 
 export class Client {
     private readonly r: AxiosInstance
@@ -40,20 +40,27 @@ export class Client {
     ): Promise<ApplicationServer[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<ApplicationServer, "server">>
-        >("/servers", {
-            params: {search, page}
-        })
+        >("/servers", {params: {search, page}})
         return data.data.map(s => s.attributes)
     }
 
-    createServer = async (opts: z.infer<typeof CreateServerSchema>): Promise<ApplicationServer> => {
+    createServer = async (
+        opts: z.infer<typeof CreateServerSchema>
+    ): Promise<ApplicationServer> => {
         opts = CreateServerSchema.parse(opts)
-        const {data} = await this.r.post<GenericResponse<ApplicationServer, "server">>("/servers", opts)
+        const {data} = await this.r.post<
+            GenericResponse<ApplicationServer, "server">
+        >("/servers", opts)
         return data.attributes
     }
 
-    getServerByExternalId = async (external_id: string, include?: ("egg" | "subusers")[]): Promise<ApplicationServer> => {
-        const {data} = await this.r.get<GenericResponse<ApplicationServer, "server">>(`/servers/external/${external_id}`, {
+    getServerByExternalId = async (
+        external_id: string,
+        include?: ("egg" | "subusers")[]
+    ): Promise<ApplicationServer> => {
+        const {data} = await this.r.get<
+            GenericResponse<ApplicationServer, "server">
+        >(`/servers/external/${external_id}`, {
             params: {include: include?.join(",")}
         })
         return data.attributes

@@ -1,1 +1,1 @@
-export type ServerSignalOption = 'start' | 'stop' | 'restart' | 'kill';
+export type ServerSignalOption = "start" | "stop" | "restart" | "kill"

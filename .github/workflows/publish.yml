@@ -3,7 +3,7 @@ name: Publish Package
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
   workflow_dispatch:
 
 permissions:
@@ -35,6 +35,9 @@ jobs:
 
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: 🚧 Installing latest npm
+        run: npm install -g npm@latest
 
       - name: 🚀 Run publish pipeline
         run: bun run pipeline

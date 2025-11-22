@@ -29,6 +29,8 @@ export class ServerSettings {
     }
 
     changeDockerImage = async (image: string): Promise<void> => {
-        await this.r.post(`/servers/${this.id}/settings/docker-image`, {image})
+        await this.r.put(`/servers/${this.id}/settings/docker-image`, {
+            docker_image: image
+        })
     }
 }

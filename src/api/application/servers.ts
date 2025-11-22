@@ -141,6 +141,5 @@ const UpdateBuildSchema = CreateServerSchema.pick({
 const UpdateStartupSchema = CreateServerSchema.pick({
     startup: true,
     environment: true,
-    egg: true,
-    skip_scripts: true
-}).extend({image: z.string().optional()})
+    egg: true
+}).extend({image: z.string().optional(), skip_scripts: z.boolean()})

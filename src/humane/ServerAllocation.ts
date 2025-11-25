@@ -19,7 +19,7 @@ export class ServerAllocation {
 
     constructor(client: ServerClient, alloc: ServerAllocationT) {
         this.client = client
-        this.alias = alloc.alias
+        this.alias = alloc.ip_alias
         this.id = alloc.id
         this.ip = alloc.ip
         this.$isDefault = alloc.is_default

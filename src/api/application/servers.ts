@@ -65,7 +65,7 @@ export class Servers {
     transferStart = async (
         node_id: number,
         allocation_id: number,
-        allocation_additional?: string[]
+        allocation_additional?: number[]
     ): Promise<void> => {
         await this.r.post(`/servers/${this.id}/transfer`, {
             node_id,

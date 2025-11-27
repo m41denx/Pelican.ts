@@ -1,0 +1,122 @@
+## 0.4.14
+## What's Changed
+### 📦 Other changes
+- (feat) BREAKING: Changed new Client API keys delete route
+- (chore) fixed ci and autoreleaser
+
+
+## 0.4.13
+## What's Changed
+### 📦 Other changes
+- (fix) Fixed migration endpoint types
+
+## 0.4.12
+## What's Changed
+### 📦 Other changes
+- (chore) Fixed GitHub workflow
+- (fix) Fixed IP Alias field
+
+## 0.4.11
+## What's Changed
+### 📦 Other changes
+- (fix) Fixed UpdatedStartupSchema
+- (fix) Fixed changeDockerImage
+
+## 0.4.9
+## What's Changed
+### 📦 Other changes
+- (chore) Applied biome formatting for consistency
+- (fix) Fixed files directory context
+
+## 0.4.8
+## What's Changed
+### 📦 Other changes
+- (feat) BREAKING: Removed deprecated 2fa routes
+
+## 0.4.6
+
+0.4.1-0.4.5 were sacrificed to release gods
+
+## What's Changed
+### ✨ New Features
+- (feat) Added server file bulk actions (compress, rename, delete)
+
+### 📦 Other changes
+- (feat) Export humane classes
+- (fix) Fixed file compress return
+- (fix) Added missing methods from ServerBackup
+- (chore) Updated README to add examples and description
+
+## 0.4.0
+## What's Changed
+### ✨ New Features
+- (new) New stateful "humane client", api is moved into `@pelican.ts/sdk/api`
+- (feat) Added support for editing Docker labels via application API (doesn't supported at upstream)
+- (feat) Added support for editing user api keys via application API (doesn't supported at upstream)
+
+### 📦 Other changes
+- (fix) Server subusers invalid types
+- (fix) Fixed server environment type in CreateServerSchema
+- (fix) User list servers endpoint is incorrect
+- (fix) Fixed egg types and exported egg endpoint
+- (chore) Added biome formatter/linter
+
+## 0.3.2
+
+0.3.1 was sacrificed to release gods
+
+## What's Changed
+### 📦 Other changes
+- Fix typos
+- Updated .npmignore
+
+## What's Changed
+### ✨ New Features
+- Application API eggs endpoints
+- Application API mounts endpoints
+
+## 0.3.0
+## What's Changed
+### ✨ New Features
+- Application API eggs endpoints
+- Application API mounts endpoints
+
+## 0.2.5
+## What's Changed
+### ✨ New Features
+- Created `@pelican.ts/sdk/types` subpackage
+
+## 0.2.4
+## What's Changed
+### ✨ New Features
+- Application API database host endpoints
+- Application API roles endpoints
+
+### 📦 Other changes
+- Fix typos
+
+## 0.2.3
+
+0.2.2 was sacrificed to release gods
+
+## What's Changed
+### ✨ New Features
+- Application API account endpoints 
+- Application API nodes endpoints
+- Application API allocations endpoints
+- Application API servers endpoints
+- Application API server databases endpoints
+
+### 📦 Other changes
+- Fixed compatibility with Pelican (allocation and node types)
+
+## 0.2.1
+## What's Changed
+### 📦 Other changes
+- Added MIT license
+- Updated logo
+
+## 0.2.0
+## What's Changed
+### ✨ New Features
+- Initial NPM release

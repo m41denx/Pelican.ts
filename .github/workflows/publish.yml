@@ -44,3 +44,8 @@ jobs:
 
       - name: ☁️ Publish package
         run: npm -v && npm run pub
+
+      - name: 🙌 Create Github Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: CHANGELOG.md

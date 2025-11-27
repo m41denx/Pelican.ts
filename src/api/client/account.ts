@@ -71,7 +71,7 @@ export class Account {
         },
 
         delete: async (fingerprint: string): Promise<void> => {
-            await this.r.post(`/account/ssh-keys/remove`, {fingerprint})
+            await this.r.delete(`/account/ssh-keys/${fingerprint}`)
         }
     }
 }

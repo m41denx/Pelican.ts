@@ -1,2 +1,2 @@
 echo "🙄 Nonchalantly saving you from big commit deltas due to formatting..."
-git-format-staged --formatter 'biome format --no-errors-on-unmatched --files-ignore-unknown=true --write .' .
+git-format-staged --formatter 'biome format --no-errors-on-unmatched --files-ignore-unknown=true --write' .

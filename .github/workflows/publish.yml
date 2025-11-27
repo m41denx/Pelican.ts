@@ -36,8 +36,11 @@ jobs:
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: 🚧 Installing latest npm
+      - name: 🚧 Install latest npm
         run: npm install -g npm@latest
 
-      - name: 🚀 Run publish pipeline
-        run: bun run pipeline
+      - name: 🚀 Build package
+        run: bun run generate-types && bun run build
+
+      - name: ☁️ Publish package
+        run: npm -v && npm run pub

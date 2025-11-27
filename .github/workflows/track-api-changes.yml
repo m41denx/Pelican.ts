@@ -1,0 +1,135 @@
+name: Track Upstream API Changes
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clone upstream repo
+        run: |
+          git clone https://github.com/pelican-dev/panel.git upstream
+          cd upstream
+          git fetch origin main
+
+      - name: Check for new commits
+        id: check
+        run: |
+          if [ -f .github/.last_checked_commit ]; then
+            LAST_COMMIT=$(cat .github/.last_checked_commit)
+          else
+            # If first run, check last 7 days
+            LAST_COMMIT=$(cd upstream && git log --since="7 days ago" --format="%H" | tail -1)
+          fi
+          
+          cd upstream
+          
+          # Get all new commits
+          NEW_COMMITS=$(git log ${LAST_COMMIT}..origin/main --format="%H" --reverse)
+          
+          if [ -z "$NEW_COMMITS" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check which commits touched specified folders
+          WATCHED_FOLDERS="routes/ app/Http/"
+          RELEVANT_COMMITS=""
+          
+          for commit in $NEW_COMMITS; do
+            # Check if commit changed files in watched folders
+            CHANGED=$(git diff-tree --no-commit-id --name-only -r $commit | grep -E "^($(echo $WATCHED_FOLDERS | tr ' ' '|'))" || true)
+            if [ -n "$CHANGED" ]; then
+              RELEVANT_COMMITS="$RELEVANT_COMMITS $commit"
+            fi
+          done
+          
+          if [ -z "$RELEVANT_COMMITS" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "$RELEVANT_COMMITS" > /tmp/relevant_commits.txt
+          fi
+          
+          # Save latest commit for next run
+          LATEST=$(git log origin/main -1 --format="%H")
+          echo $LATEST > /tmp/latest_commit.txt
+
+      - name: Generate issue body
+        if: steps.check.outputs.has_changes == 'true'
+        id: issue
+        run: |
+          cd upstream
+          
+          COMMITS=$(cat /tmp/relevant_commits.txt)
+          WATCHED_FOLDERS="routes/ app/Http/"
+          
+          # Start building issue body
+          {
+            echo "## API Changes Detected"
+            echo ""
+            echo "The following commits modified API-related files in the upstream repository:"
+            echo ""
+          } > /tmp/issue_body.md
+          
+          for commit in $COMMITS; do
+            COMMIT_MSG=$(git log -1 --format="%s" $commit)
+            COMMIT_AUTHOR=$(git log -1 --format="%an" $commit)
+            COMMIT_DATE=$(git log -1 --format="%ci" $commit)
+            COMMIT_URL="https://github.com/pelican-dev/panel/commit/$commit"
+          
+            {
+              echo "### \`${commit:0:7}\` - $COMMIT_MSG"
+              echo "**Author:** $COMMIT_AUTHOR  "
+              echo "**Date:** $COMMIT_DATE  "
+              echo "**Commit:** $COMMIT_URL"
+              echo ""
+              echo "**Changed files:**"
+              git diff-tree --no-commit-id --name-only -r $commit | grep -E "^($(echo $WATCHED_FOLDERS | tr ' ' '|'))" | while read file; do
+                echo "- \`$file\`"
+              done
+              echo ""
+            } >> /tmp/issue_body.md
+          done
+          
+          {
+            echo "---"
+            echo ""
+            echo "Please review these changes and update the API client accordingly."
+          } >> /tmp/issue_body.md
+
+      - name: Create GitHub issue
+        if: steps.check.outputs.has_changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const issueBody = fs.readFileSync('/tmp/issue_body.md', 'utf8');
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `API Changes Detected - ${new Date().toISOString().split('T')[0]}`,
+              body: issueBody,
+              labels: ['api-changes']
+            });
+
+      - name: Update last checked commit
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          cp /tmp/latest_commit.txt .github/.last_checked_commit
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/.last_checked_commit
+          git commit -m "Update last checked commit"
+          git push

@@ -10,7 +10,6 @@ export type ApplicationServer = {
     name: string
     description: string
     status: Nullable<unknown>
-    docker_labels: Record<string, string>
     suspended: boolean
     limits: ServerLimits
     feature_limits: FeatureLimits

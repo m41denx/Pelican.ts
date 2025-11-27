@@ -1,3 +1,8 @@
+## 0.4.15
+## What's Changed
+### 📦 Other changes
+- (fix) Application API container docker_labels field
+
 ## 0.4.14
 ## What's Changed
 ### 📦 Other changes

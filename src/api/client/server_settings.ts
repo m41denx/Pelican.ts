@@ -1,6 +1,6 @@
-import {AxiosInstance} from "axios"
+import type {AxiosInstance} from "axios"
 import z from "zod"
-import {Nullable} from "@/utils/types"
+import type {Nullable} from "@/utils/types"
 
 export class ServerSettings {
     private readonly r: AxiosInstance

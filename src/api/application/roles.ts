@@ -1,8 +1,6 @@
-import {AxiosInstance} from "axios"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {Role} from "@/api/application/types/role"
-
-// TODO: API is incomplete
+import type {AxiosInstance} from "axios"
+import type {Role} from "@/api/application/types/role"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class Roles {
     private readonly r: AxiosInstance

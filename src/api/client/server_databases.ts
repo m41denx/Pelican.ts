@@ -1,8 +1,7 @@
-import {AxiosInstance} from "axios"
+import type {AxiosInstance} from "axios"
 import z from "zod"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {ServerDatabase} from "@/api/common/types/server_database"
-// TODO: Check for validity
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {ServerDatabase} from "@/api/common/types/server_database"
 
 export class ServerDatabases {
     private readonly r: AxiosInstance

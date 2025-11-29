@@ -1,10 +1,9 @@
-import {AxiosInstance} from "axios"
-import {
-    CustomListResponse,
-    GenericListResponse,
-    GenericResponse
-} from "@/api/base/types"
-import {StartupMeta, StartupParams} from "@/api/common/types/server_startup"
+import type {AxiosInstance} from "axios"
+import type {CustomListResponse, GenericResponse} from "@/api/base/types"
+import type {
+    StartupMeta,
+    StartupParams
+} from "@/api/common/types/server_startup"
 
 export class ServerStartup {
     private readonly r: AxiosInstance

@@ -1,4 +1,4 @@
-import {Nullable} from "@/utils/types"
+import type {Nullable} from "@/utils/types"
 
 export type ServerBackup = {
     uuid: string

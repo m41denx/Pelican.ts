@@ -1,5 +1,5 @@
-import {Nullable} from "@/utils/types"
-import {EggVariable} from "@/api/common/types"
+import type {EggVariable} from "@/api/common/types"
+import type {Nullable} from "@/utils/types"
 
 export type Egg = {
     id: number

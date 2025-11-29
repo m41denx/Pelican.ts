@@ -1,14 +1,14 @@
-import {AxiosInstance} from "axios"
-import {Users} from "@/api/application/users"
-import {Nodes} from "@/api/application/nodes"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {ApplicationServer} from "@/api/application/types/server"
-import {CreateServerSchema, Servers} from "@/api/application/servers"
-import z from "zod"
+import type {AxiosInstance} from "axios"
+import type z from "zod"
 import {DatabaseHosts} from "@/api/application/database_hosts"
-import {Roles} from "@/api/application/roles"
 import {Eggs} from "@/api/application/eggs"
 import {Mounts} from "@/api/application/mounts"
+import {Nodes} from "@/api/application/nodes"
+import {Roles} from "@/api/application/roles"
+import {CreateServerSchema, Servers} from "@/api/application/servers"
+import type {ApplicationServer} from "@/api/application/types/server"
+import {Users} from "@/api/application/users"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class Client {
     private readonly r: AxiosInstance

@@ -1,6 +1,6 @@
-import {AxiosInstance} from "axios"
-import {ServerActivityLog} from "@/api/client/types/server"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {ServerActivityLog} from "@/api/client/types/server"
 
 export class ServerActivity {
     private readonly r: AxiosInstance

@@ -1,7 +1,7 @@
-import {GenericResponse} from "@/api/base/types"
-import {ApplicationServer} from "@/api/application/types/server"
-import {Node} from "@/api/application/types/node"
-import {Nullable} from "@/utils/types"
+import type {Node} from "@/api/application/types/node"
+import type {ApplicationServer} from "@/api/application/types/server"
+import type {GenericResponse} from "@/api/base/types"
+import type {Nullable} from "@/utils/types"
 
 export type Allocation = {
     id: number

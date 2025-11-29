@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {DatabaseHost} from "@/api/application/types/database_host"
+import type {AxiosInstance} from "axios"
 import z from "zod"
+import type {DatabaseHost} from "@/api/application/types/database_host"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class DatabaseHosts {
     private readonly r: AxiosInstance

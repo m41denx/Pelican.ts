@@ -1,9 +1,12 @@
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {EggVariable} from "@/api/common/types/egg"
-import {ServerSubuser} from "@/api/client/types/server_subuser"
-import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits"
-import {ServerAllocation} from "@/api/client/types/server_allocation"
-import {Nullable} from "@/utils/types"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {ServerAllocation} from "@/api/client/types/server_allocation"
+import type {ServerSubuser} from "@/api/client/types/server_subuser"
+import type {EggVariable} from "@/api/common/types/egg"
+import type {
+    FeatureLimits,
+    ServerLimits
+} from "@/api/common/types/server_limits"
+import type {Nullable} from "@/utils/types"
 
 export type Server = {
     server_owner: boolean

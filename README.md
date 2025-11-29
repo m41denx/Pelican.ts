@@ -4,6 +4,8 @@
 
 # Pelican.ts — Typescript client for Pelican panel
 
+![](https://flat.badgen.net/npm/v/@pelican.ts/sdk) ![](https://flat.badgen.net/bundlephobia/minzip/@pelican.ts/sdk)
+
 ## 🧭 Installation
 ```shell
 npm install @pelican.ts/sdk
@@ -86,7 +88,6 @@ const backup: ServerBackup = {
 **What's done:**
 - [X] Client
 - [X] Application
-- [ ] TSDoc
 - [ ] Examples
 - [ ] Tests
 - [ ] Documentation

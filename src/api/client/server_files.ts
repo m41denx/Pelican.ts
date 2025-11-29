@@ -1,7 +1,6 @@
-import axios, {AxiosInstance} from "axios"
-import {string} from "zod"
-import {FileObject} from "@/api/common/types/server_files"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import axios, {type AxiosInstance} from "axios"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {FileObject} from "@/api/common/types/server_files"
 
 export class ServerFiles {
     private readonly r: AxiosInstance

@@ -1,5 +1,5 @@
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {Nullable} from "@/utils/types"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {Nullable} from "@/utils/types"
 
 export type Schedule = {
     id: number

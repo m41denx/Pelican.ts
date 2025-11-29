@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios"
-import {APIKey, SSHKey, User} from "@/api/client/types/user"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
 import z from "zod"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {APIKey, SSHKey, User} from "@/api/client/types/user"
 
 export class Account {
     private readonly r: AxiosInstance

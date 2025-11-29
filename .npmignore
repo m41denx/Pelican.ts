@@ -1,6 +1,7 @@
-node_modules
+.git
 .github
 .husky
 .idea
+node_modules
 scripts
 src

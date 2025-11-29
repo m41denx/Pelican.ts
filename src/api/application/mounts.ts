@@ -1,9 +1,9 @@
-import {AxiosInstance} from "axios"
-import {Mount} from "@/api/application/types/mount"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
 import z from "zod"
-import {Egg} from "@/api/application/types/egg"
-import {ApplicationServer} from "@/api/application/types"
+import type {ApplicationServer} from "@/api/application/types"
+import type {Egg} from "@/api/application/types/egg"
+import type {Mount} from "@/api/application/types/mount"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class Mounts {
     private readonly r: AxiosInstance

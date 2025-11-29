@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios"
-import {ServerDatabase} from "@/api/common/types/server_database"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
 import z from "zod"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {ServerDatabase} from "@/api/common/types/server_database"
 
 // TODO: Check if database type is valid
 export class ServersDatabases {

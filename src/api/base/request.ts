@@ -1,6 +1,6 @@
+import axios, {type AxiosInstance} from "axios"
 import z from "zod"
-import axios, {AxiosInstance, AxiosResponse} from "axios"
-import {PterodactylError, PterodactylException} from "@/api/base/types"
+import {type PterodactylError, PterodactylException} from "@/api/base/types"
 
 export class Agent {
     private readonly base_url: string

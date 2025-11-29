@@ -1,6 +1,6 @@
-import {AxiosInstance} from "axios"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {Egg, ExportedEgg} from "@/api/application/types/egg"
+import type {AxiosInstance} from "axios"
+import type {Egg, ExportedEgg} from "@/api/application/types/egg"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 // TODO: API is incomplete
 

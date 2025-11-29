@@ -10,8 +10,8 @@ export const createPelicanClient = (
     return new UserClient(client)
 }
 
-export {Client} from "@/humane/Client"
 export {Account} from "@/humane/Account"
+export {Client} from "@/humane/Client"
 export {Server} from "@/humane/Server"
 export {ServerAllocation} from "@/humane/ServerAllocation"
 export {ServerBackup} from "@/humane/ServerBackup"

@@ -1,10 +1,7 @@
-import {AxiosInstance} from "axios"
-import {
-    Allocation,
-    AllocationRel
-} from "@/api/application/types/server_allocation"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
 import z from "zod"
+import type {AllocationRel} from "@/api/application/types/server_allocation"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class NodesAllocations {
     private readonly r: AxiosInstance

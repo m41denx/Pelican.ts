@@ -1,4 +1,4 @@
-import {GenericResponse} from "@/api/base/types"
+import type {GenericResponse} from "@/api/base/types"
 
 export type ServerDatabase = {
     id: string

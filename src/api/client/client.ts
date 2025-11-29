@@ -1,10 +1,10 @@
-import {Account} from "@/api/client/account"
-import {AxiosInstance} from "axios"
-import {Permission} from "@/api/client/types/user"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {Server} from "@/api/client/types/server"
+import type {AxiosInstance} from "axios"
 import z from "zod"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import {Account} from "@/api/client/account"
 import {ServerClient} from "@/api/client/server"
+import type {Server} from "@/api/client/types/server"
+import type {Permission} from "@/api/client/types/user"
 
 export class Client {
     account: Account

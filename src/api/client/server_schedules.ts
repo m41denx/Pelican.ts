@@ -1,7 +1,7 @@
-import {AxiosInstance} from "axios"
-import {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {PartialBy} from "@/utils/types"
+import type {AxiosInstance} from "axios"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
+import type {PartialBy} from "@/utils/types"
 
 export class ServerSchedules {
     private readonly r: AxiosInstance

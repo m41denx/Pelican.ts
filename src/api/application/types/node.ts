@@ -1,8 +1,7 @@
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {Allocation} from "@/api/application/types/server_allocation"
-import {Location} from "@/api/application/types/location"
-import {ApplicationServer} from "@/api/application/types/server"
-import {Nullable} from "@/utils/types"
+import type {ApplicationServer} from "@/api/application/types/server"
+import type {Allocation} from "@/api/application/types/server_allocation"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {Nullable} from "@/utils/types"
 
 export type Node = {
     id: number
@@ -34,7 +33,6 @@ export type Node = {
         allocations?: GenericListResponse<
             GenericResponse<Allocation, "allocation">
         >
-        location?: GenericResponse<Location, "location">
         servers?: GenericListResponse<
             GenericResponse<ApplicationServer, "server">
         >

@@ -1,9 +1,8 @@
-import {AxiosInstance} from "axios"
-import {NodesAllocations} from "@/api/application/nodes_allocations"
-import {ApplicationServer} from "@/api/application/types/server"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {AxiosInstance} from "axios"
 import z from "zod"
-import {Node, NodeConfiguration} from "@/api/application/types/node"
+import {NodesAllocations} from "@/api/application/nodes_allocations"
+import type {Node, NodeConfiguration} from "@/api/application/types/node"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class Nodes {
     private readonly r: AxiosInstance
@@ -13,7 +12,7 @@ export class Nodes {
     }
 
     list = async (
-        include?: ("allocations" | "location" | "servers")[],
+        include?: ("allocations" | "servers")[],
         page: number = 1
     ): Promise<Node[]> => {
         z.number().positive().parse(page)
@@ -31,7 +30,7 @@ export class Nodes {
             location_ids?: string[]
             tags?: string[]
         },
-        include?: ("allocations" | "location" | "servers")[],
+        include?: ("allocations" | "servers")[],
         page: number = 1
     ): Promise<Node[]> => {
         z.number().positive().parse(page)
@@ -53,7 +52,7 @@ export class Nodes {
 
     info = async (
         id: number,
-        include?: ("allocations" | "location" | "servers")[]
+        include?: ("allocations" | "servers")[]
     ): Promise<Node> => {
         z.number().positive().parse(id)
         const {data} = await this.r.get<GenericResponse<Node, "node">>(

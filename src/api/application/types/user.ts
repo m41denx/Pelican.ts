@@ -1,6 +1,6 @@
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {ApplicationServer} from "@/api/application/types/server"
-import {Nullable} from "@/utils/types"
+import type {ApplicationServer} from "@/api/application/types/server"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {Nullable} from "@/utils/types"
 
 export type ApplicationUser = {
     id: number

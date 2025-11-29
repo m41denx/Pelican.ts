@@ -1,6 +1,9 @@
-import {FeatureLimits, ServerLimits} from "@/api/common/types/server_limits"
-import {Container} from "@/api/application/types/container"
-import {Nullable} from "@/utils/types"
+import type {Container} from "@/api/application/types/container"
+import type {
+    FeatureLimits,
+    ServerLimits
+} from "@/api/common/types/server_limits"
+import type {Nullable} from "@/utils/types"
 
 export type ApplicationServer = {
     id: number

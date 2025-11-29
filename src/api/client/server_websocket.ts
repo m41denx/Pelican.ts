@@ -1,15 +1,15 @@
-import {AxiosInstance} from "axios"
+import type {AxiosInstance} from "axios"
 import {EventEmitter} from "events"
 import WebSocket from "isomorphic-ws"
 import stripColor from "strip-color"
 import {
-    BackupCompletedJson,
-    PowerState,
+    type BackupCompletedJson,
+    type PowerState,
     SOCKET_EVENT,
-    StatsWsJson,
-    WebsocketEvent
+    type StatsWsJson,
+    type WebsocketEvent
 } from "@/api/client/types/websocket"
-import {ServerSignalOption} from "@/api/common/types/server_power"
+import type {ServerSignalOption} from "@/api/common/types/server_power"
 
 const isBrowser = typeof window !== "undefined"
 

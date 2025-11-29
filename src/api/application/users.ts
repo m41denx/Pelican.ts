@@ -1,14 +1,13 @@
-import {AxiosInstance} from "axios"
+import type {AxiosInstance} from "axios"
 import z from "zod"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {
+import type {
     ApplicationUser,
     ApplicationUserApiKey
 } from "@/api/application/types/user"
-import {ArrayQueryParams, SortParam} from "@/utils/transform"
-import {ExactlyOneKey} from "@/utils/types"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 import {languagesSchema, timezonesSchema} from "@/api/common/types/enums"
-import {APIKey} from "@/api/client/types"
+import {ArrayQueryParams, SortParam} from "@/utils/transform"
+import type {ExactlyOneKey} from "@/utils/types"
 
 export class Users {
     private readonly r: AxiosInstance
@@ -29,9 +28,11 @@ export class Users {
                 include: opts.include?.join(","),
                 page,
                 ...ArrayQueryParams({filters: opts.filters || {}}),
-                sort: opts.sort?.id
-                    ? SortParam("id", opts.sort?.id)
-                    : SortParam("uuid", opts.sort?.uuid!)
+                sort:
+                    opts.sort
+                    && (opts.sort.id
+                        ? SortParam("id", opts.sort.id)
+                        : SortParam("uuid", opts.sort.uuid))
             }
         })
 

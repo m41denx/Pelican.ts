@@ -1,6 +1,6 @@
-import {AxiosInstance} from "axios"
-import {GenericListResponse, GenericResponse} from "@/api/base/types"
-import {
+import type {AxiosInstance} from "axios"
+import type {GenericListResponse, GenericResponse} from "@/api/base/types"
+import type {
     ServerSubuser,
     SubuserPermission
 } from "@/api/client/types/server_subuser"

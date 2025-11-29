@@ -10,7 +10,7 @@ type PaginationMeta = {
     per_page: number
     current_page: number
     total_pages: number
-    links: any
+    links: unknown
 }
 
 export type GenericListResponse<T> = {

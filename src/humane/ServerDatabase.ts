@@ -1,6 +1,5 @@
 import type {ServerClient} from "@/api/client/server"
 import type {ServerDatabase as ServerDatabaseT} from "@/api/common/types/server_database"
-// TODO: Check for validity
 
 export class ServerDatabase {
     private readonly client: ServerClient

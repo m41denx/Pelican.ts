@@ -107,7 +107,7 @@ export const CreateServerSchema = z.object({
     }),
     allocation: z
         .object({
-            default: z.string(),
+            default: z.string().nullable(),
             additional: z.array(z.string()).optional()
         })
         .optional(),

@@ -54,7 +54,8 @@
     "husky": "^9.1.7",
     "tsc-alias": "^1.8.16",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
   },
   "dependencies": {
     "axios": "^1.12.2",

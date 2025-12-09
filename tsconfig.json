@@ -15,12 +15,12 @@
     "strict": true,
     "target": "ESNext",
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "dist"],
   "tsc-alias": {
     "resolveFullPaths": false

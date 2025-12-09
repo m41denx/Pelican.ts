@@ -89,7 +89,7 @@ const backup: ServerBackup = {
 - [X] Client
 - [X] Application
 - [ ] Examples
-- [ ] Tests
+- [X] Tests
 - [ ] Documentation
 - [X] Humane wrapper
 

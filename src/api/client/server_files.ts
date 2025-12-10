@@ -23,8 +23,10 @@ export class ServerFiles {
      */
     contents = async (path: string): Promise<string> => {
         const {data} = await this.r.get<string>(
-            `/servers/${this.id}/files/contents`,
-            {params: {file: path}}
+            `/servers/${this.id}/files/contents`, {
+                params: {file: path},
+                responseType: "text"
+            },
         )
         return data
     }

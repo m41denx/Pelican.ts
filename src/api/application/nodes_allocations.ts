@@ -13,12 +13,18 @@ export class NodesAllocations {
     }
 
     list = async (
+        page: number = 1,
+        per_page: number = 50,
         include?: ("node" | "server")[]
     ): Promise<AllocationRel[]> => {
         const {data} = await this.r.get<
             GenericListResponse<GenericResponse<AllocationRel, "allocation">>
         >(`/nodes/${this.id}/allocations`, {
-            params: {include: include?.join(",")}
+            params: {
+                page,
+                per_page,
+                include: include?.join(",")
+            }
         })
 
         return data.data.map(d => d.attributes)

@@ -1,6 +1,12 @@
 import {PelicanAPIClient} from "@/api"
 import {Client as UserClient} from "@/humane/Client"
 
+/**
+ * Creates a Humane Pelican User client
+ * @param url Pelican Panel URL (ex: https://demo.pelican.dev)
+ * @param token Pelican User Token (`pacc...`)
+ * @param suffix API suffix, used if you expose api on a different path
+ */
 export const createPelicanClient = (
     url: string,
     token: string,

@@ -1,6 +1,19 @@
 import type {Client} from "@/api/client/client"
 import type {User} from "@/api/client/types/user"
 
+/**
+ * Instance of a Humane Pelican User
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const userData = await client.account.info()
+ * const account = new Account(client, userData)
+ * ```
+ */
 export class Account {
     private readonly client: Client
     readonly uuid: string

@@ -86,11 +86,11 @@ const backup: ServerBackup = {
 
 
 **What's done:**
-- [X] Client
-- [X] Application
+- [X] Client API
+- [X] Application API
 - [ ] Examples
 - [ ] Tests
-- [ ] Documentation
+- [X] Documentation
 - [X] Humane wrapper
 
 ## 🧐 Copyright Notice

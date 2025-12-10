@@ -17,17 +17,44 @@ import type {
 } from "@/types"
 import type {Nullable} from "@/utils/types"
 
+/**
+ * Instance of a Humane Pelican Server
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const serverData = await client.account.server(...).info()
+ * const server = new Server(client, serverData)
+ * ```
+ */
 export class Server {
     private readonly client: ServerClient
 
+    /**
+     * Whether the user owns the server
+     *
+     * @remarks
+     * Useful for gatekeeping features from subusers
+     */
     readonly ownsServer: boolean
     readonly identifier: string
+    /**
+     * ID used by Pelican Application API
+     */
     readonly internalId?: number
     readonly uuid: string
     private $name: string
     get name() {
         return this.$name
     }
+
+    /**
+     * Node name used by this server
+     * @
+     */
     readonly node: string
     readonly isNodeUnderMaintenance: boolean
     readonly sftp: {ip: string; alias: Nullable<string>; port: number}

@@ -18,7 +18,7 @@ export class ServerFile {
 
     constructor(client: ServerClient, file: FileObject, dir: string = "/") {
         this.client = client
-        this.dir = dir
+        this.dir = dir || "/"
         this.createdAt = new Date(file.created_at)
         this.isFile = file.is_file
         this.isSymlink = file.is_symlink

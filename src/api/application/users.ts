@@ -140,6 +140,7 @@ type ListSort = ExactlyOneKey<"id" | "uuid", "asc" | "desc">
 const CreateSchema = z.object({
     email: z.email(),
     external_id: z.string().max(255).optional(),
+    is_managed_externally: z.boolean().optional().default(false),
     username: z.string().min(1).max(255),
     password: z.string().optional(),
     language: languagesSchema,

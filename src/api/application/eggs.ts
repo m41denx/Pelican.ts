@@ -40,4 +40,30 @@ export class Eggs {
         })
         return data
     }
+
+    import = async (
+        egg: ExportedEgg | string,
+        format: "json" | "yaml" = "json"
+    ): Promise<ExportedEgg> => {
+        let body!: ExportedEgg | FormData
+        if (format === "yaml" && typeof egg === "string") {
+            throw new Error("YAML import is not supported yet")
+        } else if (format === "json" && typeof egg === "object")
+            body = egg
+        else
+            throw new Error("Invalid format or egg type")
+
+        const {data} = await this.r.post<ExportedEgg>(`/eggs/import`, body, {
+            params: {format}
+        })
+        return data
+    }
+
+    delete = async (id: number): Promise<void> => {
+        await this.r.delete(`/eggs/${id}`)
+    }
+
+    deleteByUUID = async (uuid: string): Promise<void> => {
+        await this.r.delete(`/eggs/uuid/${uuid}`)
+    }
 }

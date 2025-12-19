@@ -23,7 +23,7 @@ export type Server = {
     docker_image: string
     egg_features: Nullable<string[]>
     feature_limits: FeatureLimits
-    status: Nullable<unknown>
+    status: Nullable<ServerStats["current_state"]>
     is_suspended: boolean
     is_installing: boolean
     is_transferring: boolean

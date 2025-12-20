@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.4.16-next.3",
+  "version": "0.4.16",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

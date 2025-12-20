@@ -1,4 +1,4 @@
-## 0.4.16
+## 0.5.0
 ## What's Changed
 ### ✨ New Features
 - (feat) Application API: Node Allocations now support pagination and specifying page size

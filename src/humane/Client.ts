@@ -41,18 +41,18 @@ export class Client {
      * List servers
      *
      * @param opts Filtering options (all optional)
+     *
+     * @remarks
+     * `type` — Server access type (Default: accessible)
+     *
+     * Variants:
+     * - `accessible` — your servers and servers you have access to as a subuser
+     * - `mine` — only your servers
+     * - `admin` — only servers you have admin access to (excluding yours)
+     * - `admin-all` — all servers you have admin access to
      */
     listServers = async (
         opts: {
-            /**
-             * Server access type (Default: accessible)
-             *
-             * Variants:
-             * - `accessible` — your servers and servers you have access to as a subuser
-             * - `mine` — only your servers
-             * - `admin` — only servers you have admin access to (excluding yours)
-             * - `admin-all` — all servers you have admin access to
-             */
             type?: "accessible" | "mine" | "admin" | "admin-all"
             page?: number
             per_page?: number

@@ -25,6 +25,9 @@ export class Account {
     readonly language: string
     readonly image: string
     readonly admin: boolean
+    /**
+     * Has currently no significance
+     */
     readonly root_admin: boolean
     private $has2faEnabled: boolean
     get has2faEnabled() {

@@ -2,6 +2,19 @@ import type {ServerClient} from "@/api/client/server"
 import type {ServerBackup as ServerBackupT} from "@/api/common/types/server_backup"
 import type {Nullable} from "@/utils/types"
 
+/**
+ * Instance of a Humane Pelican Server Backup
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const backupData = await client.account.server(...).backups.info(...)
+ * const backup = new ServerBackup(client, backupData)
+ * ```
+ */
 export class ServerBackup {
     private readonly client: ServerClient
     readonly bytes: number

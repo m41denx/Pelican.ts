@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.4.15",
+  "version": "0.4.16-next.3",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -54,6 +54,8 @@
     "husky": "^9.1.7",
     "tsc-alias": "^1.8.16",
     "tsup": "^8.5.0",
+    "typedoc": "^0.28.15",
+    "typedoc-github-theme": "^0.3.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {

@@ -1,6 +1,19 @@
 import type {ServerClient} from "@/api/client/server"
 import type {ServerDatabase as ServerDatabaseT} from "@/api/common/types/server_database"
 
+/**
+ * Instance of a Humane Pelican Server Database
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const dbData = await client.account.server(...).databases.info(...)
+ * const database = new ServerDatabase(client, dbData)
+ * ```
+ */
 export class ServerDatabase {
     private readonly client: ServerClient
     readonly allowConnectionsFrom: string
@@ -27,6 +40,9 @@ export class ServerDatabase {
         this.username = database.username
     }
 
+    /**
+     * Reset password to a random one, password will be updated in this ServerDatabase instance
+     */
     rotatePassword = async () => {
         const data = await this.client.databases.rotatePassword(this.id)
         this.$password = data.relationships?.password.attributes.password

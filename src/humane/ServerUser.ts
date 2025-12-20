@@ -4,6 +4,19 @@ import type {
     SubuserPermission
 } from "@/api/client/types/server_subuser"
 
+/**
+ * Instance of a Humane Pelican Server Subuser
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const userData = await client.account.server(...).users.info(...)
+ * const user = new ServerUser(client, userData)
+ * ```
+ */
 export class ServerUser {
     private readonly client: ServerClient
 
@@ -13,6 +26,10 @@ export class ServerUser {
     readonly language: string
     readonly image: string
     readonly admin: boolean
+    /**
+     * Currently unused
+     * @deprecated
+     */
     readonly root_admin: boolean
     readonly has2faEnabled: boolean
     readonly createdAt: Date

@@ -5,6 +5,7 @@ import type {Nullable} from "@/utils/types"
 export type ApplicationUser = {
     id: number
     external_id: Nullable<string>
+    is_managed_externally: boolean,
     uuid: string
     username: string
     email: string

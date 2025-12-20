@@ -2,6 +2,19 @@ import path from "node:path"
 import type {ServerClient} from "@/api/client/server"
 import type {FileObject} from "@/api/common/types/server_files"
 
+/**
+ * Instance of a Humane Pelican Server File/Folder
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const filesData = await client.account.server(...).files.list(FOLDER)
+ * const server = new ServerFile(client, filesData[0], FOLDER)
+ * ```
+ */
 export class ServerFile {
     private readonly client: ServerClient
     private readonly dir: string
@@ -18,7 +31,7 @@ export class ServerFile {
 
     constructor(client: ServerClient, file: FileObject, dir: string = "/") {
         this.client = client
-        this.dir = dir
+        this.dir = dir || "/"
         this.createdAt = new Date(file.created_at)
         this.isFile = file.is_file
         this.isSymlink = file.is_symlink
@@ -31,6 +44,12 @@ export class ServerFile {
         this.path = path.join(dir, this.name)
     }
 
+    /**
+     * Is this file an archive
+     *
+     * @remarks
+     * It uses extension check instead of mimetype as Pelican currently has some issue with mimetypes
+     */
     get isArchive() {
         // Maybe mimetype is better
         return [

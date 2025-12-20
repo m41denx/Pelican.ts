@@ -109,8 +109,7 @@ export const CreateServerSchema = z.object({
         .object({
             default: z.string(),
             additional: z.array(z.string()).optional()
-        })
-        .optional(),
+        }),
     deploy: z
         .object({
             tags: z.array(z.string()).optional(),

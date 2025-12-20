@@ -2,6 +2,19 @@ import type {ServerClient} from "@/api/client/server"
 import type {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
 import type {Nullable, PartialBy} from "@/utils/types"
 
+/**
+ * Instance of a Humane Pelican Server Schedule
+ *
+ * @class
+ * @example
+ * You can create account from a raw client
+ * ```ts
+ * import {PelicanAPIClient} from "@pelican.ts/sdk/api"
+ * const client = new PelicanAPIClient(...)
+ * const schedData = await client.account.server(...).schedules.list()
+ * const server = new ServerSchedule(client, schedData[0])
+ * ```
+ */
 export class ServerSchedule {
     private readonly client: ServerClient
     readonly createdAt: Date
@@ -11,15 +24,27 @@ export class ServerSchedule {
         hour: string
         minute: string
     }
+
+    /**
+     * CRON representation of schedule
+     */
     get cron() {
         return {...this.$cron}
     }
     readonly id: number
     private $isActive: boolean
+
+    /**
+     * Is this schedule enabled
+     */
     get isActive() {
         return this.$isActive
     }
     private $isProcessing: boolean
+
+    /**
+     * Is this schedule currently running
+     */
     get isProcessing() {
         return this.$isProcessing
     }
@@ -30,6 +55,10 @@ export class ServerSchedule {
     }
     readonly nextRunAt: Date
     private $onlyWhenOnline: boolean
+
+    /**
+     * Should schedule run only if server is online
+     */
     get onlyWhenOnline() {
         return this.$onlyWhenOnline
     }
@@ -86,28 +115,52 @@ export class ServerScheduleTask {
     private readonly client: ServerClient
     private readonly scheduleId: number
     private $action: "command" | "power" | "backup" | "delete_files"
+
+    /**
+     * Task action (command would likely need server to be online)
+     */
     get action() {
         return this.$action
     }
     private $continueOnFailure: boolean
+
+    /**
+     * Should we fail on error or continue with other tasks?
+     */
     get continueOnFailure() {
         return this.$continueOnFailure
     }
     readonly createdAt: Date
     readonly id: number
     private $isQueued: boolean
+
+    /**
+     * Is this task queued right now?
+     */
     get isQueued() {
         return this.$isQueued
     }
     private $payload: string
+
+    /**
+     * Whatever task should do: command to execute, power action or list of files to backup
+     */
     get payload() {
         return this.$payload
     }
     private $sequenceId: number
+
+    /**
+     * Order of this task in defined schedule
+     */
     get sequenceId() {
         return this.$sequenceId
     }
     private $timeOffset: number
+
+    /**
+     * Time offset in seconds relative to schedule start time
+     */
     get timeOffset() {
         return this.$timeOffset
     }

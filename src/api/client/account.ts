@@ -21,9 +21,10 @@ export class Account {
         await this.r.put("/account/email", {email: newEmail, password})
     }
 
-    updatePassword = async (newPassword: string): Promise<void> => {
+    updatePassword = async (currentPassword: string, newPassword: string): Promise<void> => {
         newPassword = z.string().min(8).parse(newPassword)
         await this.r.put("/account/password", {
+            current_password: currentPassword,
             password: newPassword,
             password_confirmation: newPassword
         })

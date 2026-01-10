@@ -55,8 +55,8 @@ export class Account {
         this.$email = newEmail
     }
 
-    updatePassword = async (newPassword: string) =>
-        this.client.account.updatePassword(newPassword)
+    updatePassword = async (currentPassword: string, newPassword: string) =>
+        this.client.account.updatePassword(currentPassword, newPassword)
 
     listApiKeys = async () => this.client.account.apiKeys.list()
 

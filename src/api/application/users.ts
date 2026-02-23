@@ -74,9 +74,9 @@ export class Users {
 
     update = async (
         id: number,
-        user: z.infer<typeof CreateSchema>
+        user: z.infer<typeof UpdateSchema>
     ): Promise<ApplicationUser> => {
-        user = CreateSchema.parse(user)
+        user = UpdateSchema.parse(user)
         const {data} = await this.r.patch<
             GenericResponse<ApplicationUser, "user">
         >(`/users/${id}`, user)
@@ -145,4 +145,9 @@ const CreateSchema = z.object({
     password: z.string().optional(),
     language: languagesSchema,
     timezone: timezonesSchema
+})
+
+const UpdateSchema = CreateSchema.extend({
+    language: languagesSchema.optional(),
+    timezone: timezonesSchema.optional()
 })

@@ -11,7 +11,8 @@ export class Agent {
         url: string,
         token: string,
         type: "client" | "application",
-        suffix: string = "/api"
+        suffix: string = "/api",
+        timeout?: number
     ) {
         this.base_url = z
             .url("Invalid URL Schema")
@@ -24,7 +25,7 @@ export class Agent {
 
         this.requester = axios.create({
             baseURL: this.base_url.replace(/\/+$/, "") + `${suffix}/${type}`,
-            timeout: 3000,
+            timeout: timeout ?? 3000,
             headers: {Authorization: `Bearer ${this.token}`}
         })
 

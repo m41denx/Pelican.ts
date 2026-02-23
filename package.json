@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.5.1",
+  "version": "0.5.2-next.7",
   "description": "Pelican panel SDK for TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -44,7 +44,7 @@
   "author": "M41den",
   "license": "MIT",
   "repository": {
-    "url": "git+https://github.com/m41denx/Pelican.ts"
+    "url": "git+https://github.com/m41denx/Pelican.ts.git"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",

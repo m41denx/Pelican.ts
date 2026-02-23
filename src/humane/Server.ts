@@ -112,14 +112,14 @@ export class Server {
         this.isSuspended = server.is_suspended
         this.isInstalling = server.is_installing
         this.isTransferring = server.is_transferring
-        this.allocations = server.relationships.allocations.data.map(
+        this.allocations = server.relationships.allocations?.data?.map(
             d => new ServerAllocation(this.client, d.attributes)
         )
-        this.variables = server.relationships.variables.data.map(
+        this.variables = server.relationships.variables?.data?.map(
             d => d.attributes
         )
         this.egg = server.relationships.egg?.attributes
-        this.subusers = server.relationships.subusers?.data.map(
+        this.subusers = server.relationships.subusers?.data?.map(
             d => new ServerUser(this.client, d.attributes)
         )
     }

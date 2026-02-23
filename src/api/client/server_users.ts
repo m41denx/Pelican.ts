@@ -42,7 +42,7 @@ export class ServerUsers {
         user_uuid: string,
         permissions: SubuserPermission[] | string[]
     ): Promise<ServerSubuser> => {
-        const {data} = await this.r.put<GenericResponse<ServerSubuser, "user">>(
+        const {data} = await this.r.post<GenericResponse<ServerSubuser, "user">>(
             `/servers/${this.id}/users/${user_uuid}`,
             {permissions}
         )

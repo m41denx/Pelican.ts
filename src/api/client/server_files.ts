@@ -1,4 +1,4 @@
-import axios, {type AxiosInstance} from "axios"
+import axios, {type AxiosInstance, AxiosProgressEvent} from "axios"
 import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 import type {FileObject} from "@/api/common/types/server_files"
 
@@ -132,14 +132,27 @@ export class ServerFiles {
         return data.attributes.url
     }
 
-    upload = async (file: File, root: string = "/"): Promise<void> => {
+    upload = async (
+        file: File,
+        root: string = "/",
+        opts?: {
+            onUploadProgressRaw?: (progressEvent: AxiosProgressEvent) => void
+            onUploadProgressPercent?: (percent: number) => void
+        }
+    ): Promise<void> => {
         const url = await this.uploadGetUrl()
         await axios.post(
             url,
             {files: file},
             {
                 headers: {"Content-Type": "multipart/form-data"},
-                params: {directory: root}
+                params: {directory: root},
+                onUploadProgress: opts?.onUploadProgressPercent
+                    ? evt => {
+                          // biome-ignore lint/style/noNonNullAssertion: It has to be this way
+                          evt.lengthComputable && opts.onUploadProgressPercent!((evt.loaded / evt.total!) * 100)
+                      }
+                    : opts?.onUploadProgressRaw || undefined
             }
         )
     }

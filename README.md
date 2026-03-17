@@ -62,7 +62,7 @@ import { PelicanAPIClient } from "@pelican.ts/sdk/api"
 const client = new PelicanAPIClient("https://demo.pelican.dev", "token")
 // API client is also obtainable from Humane Client via createPelicanClient(...).$client
 
-// Create server backup and restore it
+// Get server database and rotate its password
 const main = async () => {
     const servers = await client.listServers()
     const serverID = servers[0].identifier // babcaed0 for example
@@ -103,4 +103,4 @@ of its contributors stated below. Pelican.ts is not endorsed by or affiliated wi
 
 
 ## 🧑‍💻 Contributors
-[M41den](https://github.com/m41denx) © 2024-2025
+[M41den](https://github.com/m41denx) © 2024-2026

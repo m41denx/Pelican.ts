@@ -1,6 +1,7 @@
 import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 import type {ServerAllocation} from "@/api/client/types/server_allocation"
 import type {ServerSubuser} from "@/api/client/types/server_subuser"
+import type {User} from "@/api/client/types/user";
 import type {EggVariable} from "@/api/common/types/egg"
 import type {
     FeatureLimits,
@@ -72,4 +73,7 @@ export type ServerActivityLog = {
     properties: Record<string, string>
     has_additional_metadata: boolean
     timestamp: string
+    relationships?: {
+        actor?: GenericResponse<User, "user"> | GenericResponse<null, "null_resource">
+    }
 }

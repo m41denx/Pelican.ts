@@ -142,8 +142,17 @@ export class Server {
     }
 
     getActivityLogs = async (
-        opts: {page?: number; per_page?: number} = {page: 1, per_page: 50}
-    ) => this.client.activity.list(opts.page, opts.per_page)
+        opts: {
+            page?: number;
+            per_page?: number;
+            sortByTimestamp?: "asc" | "desc";
+            includeActor?: boolean
+        } = {page: 1, per_page: 50}
+    ) => this.client.activity.list(
+        opts.page,
+        opts.per_page,
+        {includeActor: opts.includeActor, sortByTimestamp: opts.sortByTimestamp}
+    )
 
     websocket = (stripColors: boolean = false) =>
         this.client.websocket(stripColors)

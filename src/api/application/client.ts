@@ -4,6 +4,7 @@ import {DatabaseHosts} from "@/api/application/database_hosts"
 import {Eggs} from "@/api/application/eggs"
 import {Mounts} from "@/api/application/mounts"
 import {Nodes} from "@/api/application/nodes"
+import {Plugins} from "@/api/application/plugins"
 import {Roles} from "@/api/application/roles"
 import {CreateServerSchema, Servers} from "@/api/application/servers"
 import type {ApplicationServer} from "@/api/application/types/server"
@@ -18,6 +19,7 @@ export class Client {
     roles: Roles
     eggs: Eggs
     mounts: Mounts
+    plugins: Plugins
 
     constructor(requester: AxiosInstance) {
         this.r = requester
@@ -28,6 +30,7 @@ export class Client {
         this.roles = new Roles(requester)
         this.eggs = new Eggs(requester)
         this.mounts = new Mounts(requester)
+        this.plugins = new Plugins(requester)
     }
 
     get $r(): AxiosInstance {

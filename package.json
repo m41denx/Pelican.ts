@@ -1,7 +1,11 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.5.2-next.8",
+  "version": "0.6.0",
   "description": "Pelican panel SDK for TypeScript",
+  "workspaces": [
+    ".",
+    "packages/*"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -25,6 +29,8 @@
     "build:humane": "tsup src/index.ts --format esm,cjs --dts --target esnext",
     "build:types": "tsup src/types.ts --dts-only --target esnext",
     "build": "rm -rf ./dist && npm run build:api && npm run build:humane && npm run build:types",
+    "build:ai": "cd packages/ai && bun run build",
+    "generate-ai-tools": "cd packages/ai && bun run generate",
     "pub": "npm publish --access=public",
     "pub:next": "npm publish --access=public --tag=next",
     "generate-types": "bun run scripts/create-types.ts",
@@ -47,22 +53,21 @@
     "url": "git+https://github.com/m41denx/Pelican.ts.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.7",
-    "@types/node": "^22.19.15",
+    "@biomejs/biome": "2.4.16",
+    "@types/node": "^22.19.21",
     "@types/strip-color": "^0.1.2",
     "git-format-staged": "^4.0.1",
     "husky": "^9.1.7",
-    "tsc-alias": "^1.8.16",
+    "tsc-alias": "^1.8.17",
     "tsup": "^8.5.1",
-    "typedoc": "^0.28.17",
+    "typedoc": "^0.28.19",
     "typedoc-github-theme": "^0.4.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "ai": "^6.0.116",
-    "axios": "^1.13.6",
+    "axios": "^1.17.0",
     "isomorphic-ws": "^5.0.0",
     "strip-color": "^0.1.0",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   }
 }

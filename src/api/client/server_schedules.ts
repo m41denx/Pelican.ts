@@ -1,7 +1,21 @@
 import type {AxiosInstance} from "axios"
+import z from "zod"
 import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 import type {Schedule, ScheduleTask} from "@/api/common/types/server_schedule"
 import type {PartialBy} from "@/utils/types"
+
+export const ScheduleCreateParamsSchema = z.object({
+    name: z.string(),
+    is_active: z.boolean().optional(),
+    only_when_online: z.boolean().optional(),
+    minute: z.string(),
+    hour: z.string(),
+    day_of_week: z.string(),
+    month: z.string(),
+    day_of_month: z.string()
+})
+
+export type ScheduleCreateParams = z.infer<typeof ScheduleCreateParamsSchema>
 
 export class ServerSchedules {
     private readonly r: AxiosInstance
@@ -28,17 +42,6 @@ export class ServerSchedules {
 
     control = (sched_id: number) =>
         new ScheduleControl(this.r, this.id, sched_id)
-}
-
-type ScheduleCreateParams = {
-    name: string
-    is_active?: boolean
-    only_when_online?: boolean
-    minute: string
-    hour: string
-    day_of_week: string
-    month: string
-    day_of_month: string
 }
 
 class ScheduleControl {

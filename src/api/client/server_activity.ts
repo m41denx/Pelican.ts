@@ -13,13 +13,31 @@ export class ServerActivity {
 
     list = async (
         page: number = 1,
-        per_page: number = 25
+        per_page: number = 25,
+        opts?: {
+            sortByTimestamp?: "asc" | "desc",
+            includeActor?: boolean
+        }
     ): Promise<ServerActivityLog[]> => {
         const {data} = await this.r.get<
             GenericListResponse<
                 GenericResponse<ServerActivityLog, "activity_log">
             >
-        >(`/server/${this.id}/activity`, {params: {page, per_page}})
+        >(`/servers/${this.id}/activity`, {
+            params: {
+                page, per_page,
+                ...(
+                    opts?.sortByTimestamp
+                        ? {sort: `${opts.sortByTimestamp === "desc" ? "-" : ""}timestamp`}
+                        : {}
+                ),
+                ...(
+                    opts?.includeActor
+                        ? {include: "actor"}
+                        : {}
+                )
+            }
+        })
         return data.data.map(log => log.attributes)
     }
 }

@@ -4,5 +4,6 @@
 .idea
 docs
 node_modules
+packages
 scripts
 src

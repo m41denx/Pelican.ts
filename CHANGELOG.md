@@ -1,3 +1,23 @@
+## 0.5.3
+
+0.5.1 and 0.5.2 were sacrificed to release gods
+
+### `@pelican.ts/ai` (new package)
+- AI SDK v6 tools for the full Client API (`PelicanAPIClient`)
+- `createPelicanClientTools` and `createPelicanServerTools` factories with include/exclude filters
+- Exported `ScheduleCreateParamsSchema` from Client API schedules module
+
+## What's Changed
+### ✨ New Features
+- (feat) Application API: Added support for plugins API
+- (feat) User API: support for `onUploadProgress` callback when uploading files
+
+### 📦 Other changes
+- (fix) Fixed reading JSON files (axios was deserializing them automatically)
+- (fix) Fixed issue when ServerFile had no root by default
+- (chore) Bump deps
+- (feat) BREAKING: Removed deprecation `location` from types
+
 ## 0.5.0
 ## What's Changed
 ### ✨ New Features

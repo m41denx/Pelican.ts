@@ -84,6 +84,14 @@ const backup: ServerBackup = {
 }
 ```
 
+### 🤖 AI tools `@pelican.ts/ai`
+Wraps every **Client API** method as [Vercel AI SDK](https://sdk.vercel.ai/) v6 tools for agents and `generateText` / `ToolLoopAgent`.
+
+```shell
+npm install @pelican.ts/ai @pelican.ts/sdk ai
+```
+
+See [packages/ai/README.md](packages/ai/README.md) for usage, filters, and server-scoped tool sets.
 
 **What's done:**
 - [X] Client API
@@ -92,6 +100,7 @@ const backup: ServerBackup = {
 - [ ] Tests
 - [X] Documentation
 - [X] Humane wrapper
+- [X] AI SDK tools package (`@pelican.ts/ai`)
 
 ## 🧐 Copyright Notice
 [Pterodactyl®](https://github.com/pterodactyl) is a registered trademark of Dane Everitt and contributors.

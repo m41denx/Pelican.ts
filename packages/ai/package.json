@@ -1,0 +1,51 @@
+{
+  "name": "@pelican.ts/ai",
+  "version": "0.1.0",
+  "description": "Vercel AI SDK tools for the Pelican panel Client API",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate": "bun run scripts/generate-client-tools.ts",
+    "prebuild": "cd ../.. && bun run build:api",
+    "build": "bun run generate && tsup src/index.ts --format esm,cjs --dts --target esnext",
+    "test": "bun test",
+    "pub": "npm publish --access=public"
+  },
+  "keywords": [
+    "pelican",
+    "pelican.ts",
+    "ai-sdk",
+    "tools"
+  ],
+  "author": "M41den",
+  "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/m41denx/Pelican.ts.git",
+    "directory": "packages/ai"
+  },
+  "peerDependencies": {
+    "@pelican.ts/sdk": "^0.6.0",
+    "ai": "^6.0.202"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "ai": "^6.0.202",
+    "ts-morph": "^28.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}

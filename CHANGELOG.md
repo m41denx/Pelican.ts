@@ -1,3 +1,15 @@
+## 0.6.0
+## What's Changed
+### ✨ New Features
+- (feat) Client API: Server activity supports `sortByTimestamp` and `includeActor` options
+- (feat) Humane: `getActivityLogs` supports sorting by timestamp and including actor
+
+### 📦 Other changes
+- (fix) Client API: Fixed server activity endpoint path (`/server/` → `/servers/`)
+- (feat) Types: `ServerActivityLog` optional `actor` relationship
+- (chore) Monorepo workspace setup for `packages/*`
+- (chore) Moved `ai` out of main SDK dependencies (peer dependency of `@pelican.ts/ai`)
+
 ## 0.5.3
 
 0.5.1 and 0.5.2 were sacrificed to release gods

@@ -586,24 +586,38 @@ function validateSchemas() {
     }
 }
 
+function emitInvokeHelpers(scope: ToolScope): string {
+    const lines: string[] = []
+    if (scope === "server") {
+        lines.push(
+            "            const server = (inp: Record<string, unknown>) =>",
+            "                client.server(inp.serverUuid as string)"
+        )
+    }
+    if (scope === "schedule") {
+        lines.push(
+            "            const schedule = (inp: Record<string, unknown>) =>",
+            "                client",
+            "                    .server(inp.serverUuid as string)",
+            "                    .schedules.control(inp.scheduleId as number)"
+        )
+    }
+    return lines.length > 0 ? `${lines.join("\n")}\n` : ""
+}
+
 function emitGeneratedFile() {
     const bindings = TOOL_SPECS.map(spec => {
         const invokeLines = spec.invokeBody.includes("\n")
             ? spec.invokeBody
             : `            ${spec.invokeBody}`
+        const helpers = emitInvokeHelpers(spec.scope)
 
         return `    {
         id: "${spec.id}",
         description: ${JSON.stringify(spec.description)},
         scope: "${spec.scope}",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
-${invokeLines.startsWith("            ") ? invokeLines : `            ${invokeLines}`}
+${helpers}${invokeLines.startsWith("            ") ? invokeLines : `            ${invokeLines}`}
         }
     }`
     }).join(",\n")

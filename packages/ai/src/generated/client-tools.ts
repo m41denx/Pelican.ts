@@ -11,12 +11,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "List all client API permission keys and descriptions.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.listPermissions()
         }
     },
@@ -25,12 +19,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "List servers visible to the authenticated client.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.listServers(input.type as never, input.page as number | undefined, input.per_page as number | undefined, input.include as never)
         }
     },
@@ -39,12 +27,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Get the authenticated account profile.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.info()
         }
     },
@@ -53,12 +35,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Update the account email address.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.updateEmail(input.newEmail as string, input.password as string)
         }
     },
@@ -67,12 +43,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Update the account password.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.updatePassword(input.currentPassword as string, input.newPassword as string)
         }
     },
@@ -81,12 +51,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "List API keys for the authenticated account.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.apiKeys.list()
         }
     },
@@ -95,12 +59,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Create a new client API key.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.apiKeys.create(input.description as string, input.allowed_ips as string[] | undefined)
         }
     },
@@ -109,12 +67,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Delete a client API key by identifier.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.apiKeys.delete(input.identifier as string)
         }
     },
@@ -123,12 +75,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "List SSH keys for the authenticated account.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.sshKeys.list()
         }
     },
@@ -137,12 +83,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Add an SSH public key to the account.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.sshKeys.create(input.name as string, input.public_key as string)
         }
     },
@@ -151,12 +91,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Remove an SSH key by fingerprint.",
         scope: "root",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return client.account.sshKeys.delete(input.fingerprint as string)
         }
     },
@@ -167,10 +101,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).info(input.include as never)
         }
     },
@@ -181,10 +111,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).resources()
         }
     },
@@ -195,10 +121,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).command(input.command as string)
         }
     },
@@ -209,10 +131,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).power(input.signal as never)
         }
     },
@@ -223,10 +141,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).activity.list(input.page as number | undefined, input.per_page as number | undefined, { sortByTimestamp: input.sortByTimestamp as never, includeActor: input.includeActor as boolean | undefined })
         }
     },
@@ -237,10 +151,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).databases.list(input.include as never, input.page as number | undefined)
         }
     },
@@ -251,10 +161,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).databases.create(input.database as string, input.remote as string)
         }
     },
@@ -265,10 +171,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).databases.rotatePassword(input.database_id as string)
         }
     },
@@ -279,10 +181,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).databases.delete(input.database_id as string)
         }
     },
@@ -293,10 +191,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.list(input.path as string | undefined)
         }
     },
@@ -307,10 +201,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.contents(input.path as string)
         }
     },
@@ -321,10 +211,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.downloadGetUrl(input.path as string)
         }
     },
@@ -335,10 +221,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.download(input.path as string)
         }
     },
@@ -349,10 +231,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.rename(input.root as string | undefined, input.files as { from: string; to: string }[])
         }
     },
@@ -363,10 +241,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.copy(input.location as string)
         }
     },
@@ -377,10 +251,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.write(input.path as string, input.content as string)
         }
     },
@@ -391,10 +261,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.compress(input.root as string | undefined, input.files as string[], input.archive_name as string | undefined, input.extension as never)
         }
     },
@@ -405,10 +271,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.decompress(input.root as string | undefined, input.file as string)
         }
     },
@@ -419,10 +281,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.delete(input.root as string | undefined, input.files as string[])
         }
     },
@@ -433,10 +291,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.createFolder(input.root as string | undefined, input.name as string)
         }
     },
@@ -447,10 +301,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.chmod(input.root as string | undefined, input.files as { file: string; mode: number }[])
         }
     },
@@ -461,10 +311,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.pullFromRemote(input.url as string, input.directory as string | undefined, input.filename as string | undefined, input.use_header as boolean | undefined, input.foreground as boolean | undefined)
         }
     },
@@ -475,10 +321,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).files.uploadGetUrl()
         }
     },
@@ -489,10 +331,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             {
             const file = base64ToFile(input.contentBase64 as string, input.filename as string)
             return server(input).files.upload(file, input.root as string | undefined)
@@ -506,10 +344,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).schedules.list()
         }
     },
@@ -520,10 +354,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).schedules.create(input.params as never)
         }
     },
@@ -532,8 +362,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Get details for a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -546,8 +374,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Update a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -560,8 +386,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Delete a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -574,8 +398,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Execute a server schedule immediately.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -588,8 +410,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Create a task on a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -602,8 +422,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Update a task on a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -616,8 +434,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         description: "Delete a task from a server schedule.",
         scope: "schedule",
         invoke: async (client, input) => {
-            const server = (inp: Record<string, unknown>) =>
-                client.server(inp.serverUuid as string)
             const schedule = (inp: Record<string, unknown>) =>
                 client
                     .server(inp.serverUuid as string)
@@ -632,10 +448,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).allocations.list()
         }
     },
@@ -646,10 +458,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).allocations.autoAssign()
         }
     },
@@ -660,10 +468,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).allocations.setNotes(input.alloc_id as number, input.notes as string)
         }
     },
@@ -674,10 +478,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).allocations.setPrimary(input.alloc_id as number)
         }
     },
@@ -688,10 +488,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).allocations.unassign(input.alloc_id as number)
         }
     },
@@ -702,10 +498,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).users.list()
         }
     },
@@ -716,10 +508,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).users.create(input.email as string, input.permissions as string[])
         }
     },
@@ -730,10 +518,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).users.info(input.user_uuid as string)
         }
     },
@@ -744,10 +528,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).users.update(input.user_uuid as string, input.permissions as string[])
         }
     },
@@ -758,10 +538,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).users.delete(input.user_uuid as string)
         }
     },
@@ -772,10 +548,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.list(input.page as number | undefined)
         }
     },
@@ -786,10 +558,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.create({ name: input.name as string | undefined, is_locked: input.is_locked as boolean, ignored_files: input.ignored_files as string[] })
         }
     },
@@ -800,10 +568,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.info(input.backup_uuid as string)
         }
     },
@@ -814,10 +578,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.downloadGetUrl(input.backup_uuid as string)
         }
     },
@@ -828,10 +588,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.download(input.backup_uuid as string)
         }
     },
@@ -842,10 +598,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.delete(input.backup_uuid as string)
         }
     },
@@ -856,10 +608,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.rename(input.backup_uuid as string, input.name as string)
         }
     },
@@ -870,10 +618,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.toggleLock(input.backup_uuid as string)
         }
     },
@@ -884,10 +628,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).backups.restore(input.backup_uuid as string, input.truncate as boolean)
         }
     },
@@ -898,10 +638,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).startup.list()
         }
     },
@@ -912,10 +648,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).startup.set(input.key as string, input.value as string)
         }
     },
@@ -926,10 +658,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).settings.rename(input.name as string)
         }
     },
@@ -940,10 +668,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).settings.updateDescription(input.description as string | null)
         }
     },
@@ -954,10 +678,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).settings.reinstall()
         }
     },
@@ -968,10 +688,6 @@ export const CLIENT_TOOL_BINDINGS: ToolBinding[] = [
         invoke: async (client, input) => {
             const server = (inp: Record<string, unknown>) =>
                 client.server(inp.serverUuid as string)
-            const schedule = (inp: Record<string, unknown>) =>
-                client
-                    .server(inp.serverUuid as string)
-                    .schedules.control(inp.scheduleId as number)
             return server(input).settings.changeDockerImage(input.image as string)
         }
     }

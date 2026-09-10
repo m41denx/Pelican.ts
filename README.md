@@ -6,6 +6,15 @@
 
 ![](https://flat.badgen.net/npm/v/@pelican.ts/sdk) ![](https://flat.badgen.net/bundlephobia/minzip/@pelican.ts/sdk)
 
+
+> [!WARNING]  
+> As of v1.0, Pelican.ts contains unsupported methods that are not in upstream pelican (i.e global backups, docker labels management, fetching user api keys via admin, etc.).
+> Pelican developers refused to have full feature parity via API (even rejecting our pull requests as "unsafe functionality") and considered Filament UI the priority, which
+> is bad news for [us as a hosting company](https://github.com/hyprrspace).
+> 
+> Also beta.36 breaking ALL of our and official plugins broke our faith in project stability and usability outside of single-server/homelab usage. Thus we are developing our
+> own internal solution and have no need or interest in supporting Pelican.ts
+
 ## 🧭 Installation
 ```shell
 npm install @pelican.ts/sdk

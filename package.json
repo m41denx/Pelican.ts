@@ -1,6 +1,6 @@
 {
   "name": "@pelican.ts/sdk",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Pelican panel SDK for TypeScript",
   "workspaces": [
     ".",
@@ -53,21 +53,21 @@
     "url": "git+https://github.com/m41denx/Pelican.ts.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
-    "@types/node": "^22.19.21",
+    "@biomejs/biome": "2.5.13",
+    "@types/node": "^22.20.2",
     "@types/strip-color": "^0.1.2",
-    "git-format-staged": "^4.0.1",
+    "git-format-staged": "^4.0.2",
     "husky": "^9.1.7",
-    "tsc-alias": "^1.8.17",
+    "tsc-alias": "^1.9.4",
     "tsup": "^8.5.1",
-    "typedoc": "^0.28.19",
+    "typedoc": "^0.28.20",
     "typedoc-github-theme": "^0.4.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.17.0",
+    "axios": "^1.20.0",
     "isomorphic-ws": "^5.0.0",
     "strip-color": "^0.1.0",
-    "zod": "^4.4.3"
+    "zod": "^4.6.1"
   }
 }

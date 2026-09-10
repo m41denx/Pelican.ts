@@ -1,5 +1,6 @@
 import type {AxiosInstance} from "axios"
 import type z from "zod"
+import {Backups} from "@/api/application/backups"
 import {DatabaseHosts} from "@/api/application/database_hosts"
 import {Eggs} from "@/api/application/eggs"
 import {Mounts} from "@/api/application/mounts"
@@ -20,6 +21,7 @@ export class Client {
     eggs: Eggs
     mounts: Mounts
     plugins: Plugins
+    backups: Backups
 
     constructor(requester: AxiosInstance) {
         this.r = requester
@@ -31,6 +33,7 @@ export class Client {
         this.eggs = new Eggs(requester)
         this.mounts = new Mounts(requester)
         this.plugins = new Plugins(requester)
+        this.backups = new Backups(requester)
     }
 
     get $r(): AxiosInstance {

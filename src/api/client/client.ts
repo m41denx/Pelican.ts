@@ -1,5 +1,10 @@
 import type {AxiosInstance} from "axios"
 import z from "zod"
+import {
+    type APIExtension,
+    type Extended,
+    mountExtension
+} from "@/api/base/extend"
 import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 import {Account} from "@/api/client/account"
 import {ServerClient} from "@/api/client/server"
@@ -18,6 +23,27 @@ export class Client {
 
     get $r(): AxiosInstance {
         return this.r
+    }
+
+    /**
+     * Mount a custom API on the client. The extension class is constructed
+     * with this client's requester and exposed under `key`.
+     *
+     * @example
+     * class Notes {
+     *     constructor(private readonly r: AxiosInstance) {}
+     *     list = async () => (await this.r.get("/notes")).data
+     * }
+     *
+     * const client = new PelicanAPIClient(url, token).$extend("notes", Notes)
+     * await client.notes.list()
+     */
+    $extend<K extends string, T extends APIExtension>(
+        key: K extends keyof this ? never : K,
+        extension: T
+    ): Extended<this, K, T> {
+        mountExtension(this, this.r, key, extension)
+        return this as Extended<this, K, T>
     }
 
     listPermissions = async (): Promise<Record<string, Permission>> => {

@@ -10,6 +10,11 @@ import {Roles} from "@/api/application/roles"
 import {CreateServerSchema, Servers} from "@/api/application/servers"
 import type {ApplicationServer} from "@/api/application/types/server"
 import {Users} from "@/api/application/users"
+import {
+    type APIExtension,
+    type Extended,
+    mountExtension
+} from "@/api/base/extend"
 import type {GenericListResponse, GenericResponse} from "@/api/base/types"
 
 export class Client {
@@ -38,6 +43,28 @@ export class Client {
 
     get $r(): AxiosInstance {
         return this.r
+    }
+
+    /**
+     * Mount a custom API on the client. The extension class is constructed
+     * with this client's requester and exposed under `key`.
+     *
+     * @example
+     * class GlobalBackups {
+     *     constructor(private readonly r: AxiosInstance) {}
+     *     list = async () => (await this.r.get("/backups")).data
+     * }
+     *
+     * const app = new PelicanAPIApplication(url, token)
+     *     .$extend("globalBackups", GlobalBackups)
+     * await app.globalBackups.list()
+     */
+    $extend<K extends string, T extends APIExtension>(
+        key: K extends keyof this ? never : K,
+        extension: T
+    ): Extended<this, K, T> {
+        mountExtension(this, this.r, key, extension)
+        return this as Extended<this, K, T>
     }
 
     listServers = async (

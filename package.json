@@ -53,13 +53,13 @@
     "url": "git+https://github.com/m41denx/Pelican.ts.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.13",
-    "@types/node": "^22.20.2",
+    "@biomejs/biome": "2.6.3",
+    "@types/node": "^22.20.5",
     "@types/strip-color": "^0.1.2",
     "git-format-staged": "^4.0.2",
     "husky": "^9.1.7",
-    "tsc-alias": "^1.9.4",
-    "tsup": "^8.5.1",
+    "tsc-alias": "^1.9.9",
+    "tsup": "^9.0.0",
     "typedoc": "^0.28.20",
     "typedoc-github-theme": "^0.4.0",
     "typescript": "^5.9.3"
@@ -68,6 +68,6 @@
     "axios": "^1.20.0",
     "isomorphic-ws": "^5.0.0",
     "strip-color": "^0.1.0",
-    "zod": "^4.6.1"
+    "zod": "^4.6.7"
   }
 }

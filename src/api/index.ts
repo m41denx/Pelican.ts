@@ -2,6 +2,8 @@ import {Client as AppClient} from "@/api/application/client"
 import {Agent} from "@/api/base/request"
 import {Client as UserClient} from "@/api/client/client"
 
+export type {APIExtension, Extended} from "@/api/base/extend"
+
 export class PelicanAPIClient extends UserClient {
     constructor(url: string, token: string, suffix: string = "/api", timeout?: number) {
         const ax = new Agent(url, token, "client", suffix, timeout)
